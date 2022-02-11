@@ -25,7 +25,7 @@ module.exports = {
       },
       {
         text: "数据结构和算法",
-        link: "/dataStructure/",
+        link: "/dataStructure/algorithm/",
       },
       {
         text: "项目",
@@ -63,6 +63,12 @@ module.exports = {
         {
           text: "Mvvm",
           children: ["/frontEnd/frame/mvvm/"],
+        },
+      ],
+      "/dataStructure/algorithm/": [
+        {
+          text: "算法",
+          children: ["/dataStructure/algorithm/"],
         },
       ],
     },
