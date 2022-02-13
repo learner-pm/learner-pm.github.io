@@ -18,7 +18,7 @@ features:
     details: 学习框架内核，打造属于自己的框架。实现工程化过程。
   - title: 记录和学习
     details: 记录前端学习和深入前端之路，记录造轮子过程。提升自我。
-footer: "MIT Licensed | Copyright © 2021-present PengMao "
+footer: "MIT Licensed | Copyright © 2021-now • Wrote and built by PengMao "
 ---
 
 <Home/>

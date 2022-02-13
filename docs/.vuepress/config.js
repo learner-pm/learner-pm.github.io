@@ -1,10 +1,16 @@
 const { path } = require("@vuepress/utils");
 
 module.exports = {
-  lang: "zh-CN",
+  host: 'localhost',
+  port: '8080',
   title: "Learning Blog",
-  description: "这是我的第一个 VuePress 站点",
-  head: [["link", { rel: "icon", href: "/images/logo.png" }]],
+  base: '/',
+  description: "PM的个人学习博客",
+  lang: "zh-CN",
+  head: [
+    ["link", { rel: "icon", href: "/images/logo.png" }],
+    ["link", { rel: "icon", href: "/images/favicon.ico" }],
+  ],
   theme: "@vuepress/theme-default",
   themeConfig: {
     navbar: [
@@ -42,13 +48,24 @@ module.exports = {
         {
           text: "ECMAScript",
           children: [
-            "/frontEnd/basic/ecmaScript/",
-            "/frontEnd/basic/ecmaScript/one",
+            "/frontEnd/basic/ecmaScript/type",
+            "/frontEnd/basic/ecmaScript/function",
+            "/frontEnd/basic/ecmaScript/proto",
+            "/frontEnd/basic/ecmaScript/this",
+            "/frontEnd/basic/ecmaScript/async",
+            "/frontEnd/basic/ecmaScript/module",
           ],
         },
         {
           text: "浏览器",
-          link: "/frontEnd/basic/borwser",
+          children: [
+            "/frontEnd/basic/borwser/draw",
+            "/frontEnd/basic/borwser/storage",
+            "/frontEnd/basic/borwser/network",
+            "/frontEnd/basic/borwser/across",
+            "/frontEnd/basic/borwser/security",
+            "/frontEnd/basic/borwser/performance"
+          ]
         },
       ],
       "/frontEnd/frame/": [
