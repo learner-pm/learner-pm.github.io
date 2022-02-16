@@ -1,70 +1,152 @@
-# 排序算法
+# 小题目
 
-交换排序分为冒泡和快速,希尔排序是插入排序的一种优化后的排序方法。
+收集一些小题目。
 
-测试数组：
+## 水仙花数
+
+什么是水仙花数：水仙花数是指一个 3 位数，它的每个位上的数字的 3 次幂之和等于它本身。例如：1^3 + 5^3+ 3^3 = 153。
+
+**The problem**：求出 100-1000 内的所有水仙花数。
 
 ```js
-const arr = [1, 45, -45, 1, 10, 111, 0, 121, 33, 3, 0];
+const narcissisticNumber = () => {
+  let bit, ten, hundred;
+  for (let i = 100; i < 1000; i++) {
+    bit = i % 10;
+    ten = ((i - bit) / 10) % 10; //js/运算有余
+    hundred = (i - ten * 10 - bit) / 100;
+    if (hundred * hundred * hundred + ten * ten * ten + bit * bit * bit === i)
+      console.log(i);
+  }
+};
+narcissisticNumber(); // 153 370 371 407
 ```
 
-## 冒泡排序
+## 杨辉三角
 
-核心：比较相邻元素，两两交换。
+经典问题，直接说重点：从第二行开始，非首列的值是当前列得`上一行`和`上一行前一列`两者值得和。
 
-外层循环控制次数，内层循环进行交换找出最值。时间复杂度：`O（n*n）`。
+**The problem**：给出 n 的杨辉三角。
 
 ```js
-const sort = (arr = [], type = 0) => {
-  if (!Array.isArray(arr)) throw "Only Array";
-  let sym = undefined;
-  for (let i = 1; i < arr.length - 1; i++) {
-    //只需要比较n-1次
-    for (let j = 0; j < arr.length - i; j++) {
-      if (type === 0 ? arr[j] >= arr[j + 1] : arr[j] <= arr[j + 1]) {
-        sym = arr[j];
-        arr[j] = arr[j + 1];
-        arr[j + 1] = sym;
-      }
+const triangle = (n) => {
+  const arr = [];
+  let i, j;
+  let str = "";
+  for (i = 0; i < n; i++) {
+    arr[i] = [];
+    for (j = 0; j < n; j++) {
+      arr[i][j] = 0;
+    }
+    arr[i][0] = 1; //生成基于n的二维数组
+  }
+  for (i = 1; i < n; i++) {
+    for (j = 1; j <= i; j++) {
+      arr[i][j] = arr[i - 1][j] + arr[i - 1][j - 1]; //规程填充
     }
   }
-};
-sort(arr);
-console.log(arr);
-```
-
-## 快速排序
-
-核心：对于数组`[1, 45, -45, 1, 10, 111, 0, 121, 33, 3, 0]`,选取某一数组元素作为基数来划分数组，如选取元素`111`作为基数。
-
-做一次划分得到数组`[0, 45, -45, 1, 10, 1, 0, 3, 33, 111, 121]`,然后对子数组`[0, 45, -45, 1, 10, 1, 0, 3, 33]`和`[121]`在进行划分，以此类推直到每个子数组里面只有一个元素即可，这个过程采用递归的形式。
-
-划分函数:
-
-```js
-const par = (arr, low, high) => {
-  const mid = arr[low]; //以数组的第一个元素作为基数
-  while (low < high) {
-    while (low < high && arr[high] >= mid) --high;
-    arr[low] = arr[high];
-    while (low < high && arr[low] <= mid) ++low;
-    arr[high] = arr[low];
-  }
-  arr[low] = mid;
-  return low;
-};
-```
-
-递归直到子数组只有一个元素
-
-```js
-const sort = (arr, low, high) => {
-  if (low < high) {
-    let num = par(arr, low, high);
-    sort(arr, low, num - 1);
-    sort(arr, num + 1, high);
+  for (i = 0; i < n; i++) {
+    for (j = 0; j <= i; j++) {
+      str += arr[i][j] + " ";
+    }
+    console.log(str); //打印
+    str = "";
   }
 };
-sort(arr, 0, arr.length - 1);
-console.log(arr);
+triangle(10);
 ```
+
+## 斐波拉契
+
+斐波那契数列指的是这样一个数列 :1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89........
+
+**重点**:这个数列从第 3 项开始，每一项都等于前两项之和。
+
+**The problem**：求给定 n 下的斐波拉契数列，或给出 n 位下的值。
+
+首先使用递归，下方法能求出 n 位下的斐波拉契的值。
+
+```js
+const fib = (n) => {
+  if (n <= 2) return 1;
+  else return fib(n - 1) + fib(n - 2);
+};
+console.log(fib(7));
+```
+
+若要打印 n 位下的斐波拉契数列，加个循环即可：
+
+```js
+for (let i = 1; i < 7; i++) {
+  console.log(fib(i));
+}
+```
+
+递归会占据大量内存空间，这对于算法中`空间复杂度`要求不是很好。
+
+同时回看重点:**这个数列从第 3 项开始，每一项都等于前两项之和**。也就是说每次求第 n 项时只需要知道`n-1`和`n-2`项就行了，而递归每次都是从第一项开始计算，浪费了时间，所以可以采用循环来求解。
+
+以下函数能打印出给定 n 下的数列：
+
+```js
+const fibF = (n) => {
+  let last1 = undefined; //记录
+  let last2 = undefined;
+  let nowNumber = 1;
+  for (let i = 0; i < n; i++) {
+    if (i < 2) {
+      nowNumber = last2 = last1 = 1;
+    } else {
+      nowNumber = last2 + last1;
+      last2 = last1;
+      last1 = nowNumber;
+    }
+    console.log(nowNumber);
+  }
+};
+fibF(7);
+```
+
+## 回文字符串
+
+定义：回文字符串是一个正读和反读都一样的字符串。
+
+**重点**：正读和反读都一样。
+
+首先采用 for 循环遍历判断，字符串长度为偶数只需要比较长度一半即可，为奇数除开中间字符：
+
+```js
+const isPalindromeString = (str) => {
+  if (str.length === 1) return true;
+  let num = str.length % 2 !== 0 ? str.length / 2 + 0.5 : str.length / 2; //js没有整除，需要处理一下
+  for (let i = 0; i < num; i++) {
+    if (str[i] !== str[str.length - 1 - i]) return false;
+  }
+  return true;
+};
+const str = "aassaa";
+console.log(isPalindromeString(str));
+```
+
+也可以采用双指针来进行判断，就不需要计算中间位置：
+
+```js
+const isPalindromeString = (str) => {
+  let low = 0;
+  let high = str.length - 1;
+  while (low <= high) {
+    if (str[low] !== str[high]) return false;
+    low++;
+    high--;
+  }
+  return true;
+};
+const str = "vassav";
+console.log(isPalindromeString(str));
+```
+
+对于类似的回文数也是一样的思路：前后同时遍历是否相同。
+
+::: tip 提示
+未完待续
+:::

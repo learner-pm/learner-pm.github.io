@@ -137,6 +137,24 @@ const f = {
 f.fnc([1, 2, 3]);
 ```
 
+对于对象，无论嵌套多深都是指向最外层对象。
+
+```js
+var a = -1;
+const obj = {
+  a: 0,
+  b: {
+    a: 1,
+    fnc: () => {
+      return this.a;
+    },
+  },
+};
+obj.b.fnc(); //-1
+const test = obj.b.fnc;
+test(); //-1
+```
+
 ## 手写 call 等
 
 `call`和`apply`一类。`bind`一类。所有写法都基于`es6`。

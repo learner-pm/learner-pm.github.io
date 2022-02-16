@@ -1,10 +1,10 @@
 const { path } = require("@vuepress/utils");
 
 module.exports = {
-  host: 'localhost',
-  port: '8080',
+  host: "localhost",
+  port: "8080",
   title: "Learning Blog",
-  base: '/',
+  base: "/",
   description: "PM的个人学习博客",
   lang: "zh-CN",
   head: [
@@ -64,8 +64,8 @@ module.exports = {
             "/frontEnd/basic/borwser/network",
             "/frontEnd/basic/borwser/across",
             "/frontEnd/basic/borwser/security",
-            "/frontEnd/basic/borwser/performance"
-          ]
+            "/frontEnd/basic/borwser/performance",
+          ],
         },
       ],
       "/frontEnd/frame/": [
@@ -85,7 +85,16 @@ module.exports = {
       "/dataStructure/algorithm/": [
         {
           text: "算法",
-          children: ["/dataStructure/algorithm/"],
+          children: [
+            "/dataStructure/algorithm/",
+            "/dataStructure/algorithm/commonType.md",
+          ],
+        },
+      ],
+      "/project/": [
+        {
+          text: "项目",
+          children: ["/project/", "/project/one.md"],
         },
       ],
     },
