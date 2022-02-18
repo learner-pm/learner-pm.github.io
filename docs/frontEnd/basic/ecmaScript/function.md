@@ -1,8 +1,37 @@
 # 函数
 
+js 里面函数是**一等公民**,声明关键字`function`。使用箭头函数可以不使用该关键字。
+
+```js
+console.log(fun()); //1 ，
+function fun() {
+  return 1;
+}
+function a() {}
+const b = function () {};
+const c = () => {};
+```
+
 ## 普通函数
 
-参数的默认值，rest 参数。
+每一个函数有一个`arguments`属性，可以直接使用，它用来获取函数的参数值。
+
+```js
+const demo = function (a, b, c) {
+  console.log(arguments); //[1,2,3]
+};
+demo(1, 2, 3);
+```
+
+该属性能使用数组的使用方式来操作，但它不是一个数组，是类数组。可以使用`Array.form()`来转换
+
+```js
+console.log(Array.isArray(arguments)); //false
+console.log(arguments[1]); //2
+console.log(Array.isArray(Array.from(arguments))); //true
+```
+
+es6 新增函数参数的默认值，rest 参数等。
 
 ```js
 const f = ({ a, b } = {}, ...res) => {
@@ -11,6 +40,46 @@ const f = ({ a, b } = {}, ...res) => {
 };
 f({ a: 1, b: 1 }, 1, 2, 3);
 ```
+
+## 构造函数
+
+作为构造函数的函数其函数名一般大写来和普通函数区分。
+
+```js
+function Animal() {}
+```
+
+构造函数可看作面向对象语言中的`类`。
+
+```js
+function Animal(type) {
+  this._type = type.toUpperCase();
+  this.get = function () {
+    console.log(`you creat a ${this._type}`);
+  };
+}
+const cat = new Animal("cat");
+cat.get(); //you creat a CAT
+```
+
+### class
+
+es6 新增`class`关键字来更加靠近`类`。
+
+```js
+class Animal {
+  constructor(type) {
+    this.type = type;
+  }
+  get() {
+    console.log(`you creat a ${this.type}`);
+  }
+}
+const cat = new Animal("cat");
+cat.get(); //you creat a cat
+```
+
+同时还有关键字`static`,来声明静态属性，静态方法。`#`来声明私有属性。
 
 ## 箭头函数
 
