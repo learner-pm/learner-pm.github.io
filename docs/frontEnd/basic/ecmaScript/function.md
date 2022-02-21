@@ -1,14 +1,19 @@
 # 函数
 
-js 里面函数是**一等公民**,声明关键字`function`。使用箭头函数可以不使用该关键字。
+js 里面函数是**一等公民**,声明关键字`function`。
 
 ```js
 console.log(fun()); //1 ，
 function fun() {
   return 1;
 }
-function a() {}
+var a = function A() {};
 const b = function () {};
+```
+
+箭头函数能使得创建函数更加简洁，而且解决了[`this`](/frontEnd/basic/ecmaScript/this) 的问题。
+
+```js
 const c = () => {};
 ```
 
@@ -62,9 +67,9 @@ const cat = new Animal("cat");
 cat.get(); //you creat a CAT
 ```
 
-### class
+### Class
 
-es6 新增`class`关键字来更加靠近`类`。
+es6 新增`class`关键字来让 js 更加靠近`类`。
 
 ```js
 class Animal {
@@ -81,9 +86,14 @@ cat.get(); //you creat a cat
 
 同时还有关键字`static`,来声明静态属性，静态方法。`#`来声明私有属性。
 
+```js
+static ins = null;
+# privte = null
+```
+
 ## 箭头函数
 
-es6 新增箭头函数。`=>`。简化函数写法。
+ES6 新增箭头函数。`=>`。简化函数写法。
 
 使用注意：
 
@@ -96,6 +106,7 @@ var o = 1;
 const obj = {
   o: 0,
   fnc: () => {
+    //无论嵌套多深，都指向obj所在的外层上下文。
     console.log(this.o);
   },
 };
@@ -124,6 +135,8 @@ A 函数会保存 demo 函数得变量，所以滥用闭包可能会造成内存
 ## 函数科里化
 
 什么是科里化:把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下的参数而且返回结果的新函数的技术。
+
+可应用于多惨函数分段传入需求。
 
 具体函数如下形式：
 

@@ -100,10 +100,17 @@ console.log("H");
 
 ## 手写 promise
 
+定义状态
+
 ```js
 const PENDING = "PENDING";
 const FULFILED = "FULFILED";
 const REJECTED = "REJECT";
+```
+
+定义`MyPromise`类
+
+```js
 class MyPromise {
   constructor(fun) {
     if (typeof fun !== "function") throw new Error("it need a function");

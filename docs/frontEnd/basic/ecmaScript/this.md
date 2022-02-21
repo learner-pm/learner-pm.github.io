@@ -1,10 +1,11 @@
-# this
+# This
 
-JavaScript 得`this`指向是动态得，只有当你调用得时候才确定`this`得指向。
+JavaScript 得`this`指向是动态得，只有当你调用得时候才确定`this`得指向，这有时候很苦恼。
 
 ## this
 
 一句话：`this`指向调用它所处环境得上下文空间，也是指向最近调用它得对象。
+
 在事件中，this 表示接收事件的元素。
 
 如下：调用`obj.fnc()`时，`fnc`函数所处得环境为`obj`对象，`this`就指向`obj`，函数执行打印`0`，执行`fnc()`时，由于`fnc = obj.fnc`操作，此时`fnc`变量指向函数本身，调用函数`this`就指向此时得环境即`window`，指向函数打印`1`。
@@ -165,6 +166,7 @@ test(); //-1
 
 ```js
 Function.prototype.myCall = function (context = window, ...res) {
+  //参数传入模拟
   if (context === null) context = window;
   else if (typeof context === "number") context = new Number(context);
   else if (typeof context === "string") context = new String(context);
@@ -175,6 +177,11 @@ Function.prototype.myCall = function (context = window, ...res) {
   delete context[symbol];
   return result;
 };
+```
+
+使用:
+
+```js
 const demo = {
   a: 1,
   fnc(...res) {
@@ -214,6 +221,11 @@ Function.prototype.myBind = function (context, ...res) {
     return fnc.call(context, ...res, ...args);
   };
 };
+```
+
+使用：
+
+```js
 const demo = {
   a: 1,
   fnc(...res) {

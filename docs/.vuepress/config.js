@@ -22,7 +22,7 @@ module.exports = {
             link: "/frontEnd/basic/",
             children: [
               {
-                text: "框架",
+                text: "面试",
                 link: "/frontEnd/frame/",
               },
             ],
