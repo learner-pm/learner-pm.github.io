@@ -1,52 +1,34 @@
-# 排序
+js 类型和强类型语言区分 number 的 bigint 深入
+深拷贝包含 js 内置对象 变量命名
+普通函数相关知识，函数一等公民，es6 函数增加 箭头函数的 this
+原型链和继承，方法来源，js 内置对象来源
+this 指向，js 没有编译，只有运行时
+异步，浏览器内置线程，线程和进程，一个页面相关，出发异步方式。时间片
+模块，面向未来的前端开发
+前端工程化开发，单 html 页面 解耦 探索打包写写插件
 
-测试用例
+页面渲染机制 -> 优化策略 -> vue react 框架优化
+前端储存机制，tkoen cookie 身份令牌
+网络请求 tcp 模型 -> 现代浏览器对于网络请求的流程 ipv6 https http2.0 http1.0
+跨域 和 代理
+数据安全，脚本安全
+性能优化和合并到渲染，+网络请求优化
 
-```js
-const arr = [1, 45, -45, 1, 10, 111, 0, 121, 33, 3, 0];
-```
+基础数据结构，和前端相关重点学习
+各种算法 + 实例 leetcode
+设计模式使用 + 实习遇到使用 + 自己框架使用
 
-blog
-react
-vue
+项目 blog loginReact 毕业设计 0-1 简历在线 vue
+响应式模板框架 minVue？
+封装 ajax 发送请求 -> 发布到 npm GitHub
+模拟 promise
 
-```js
-const sort = (arr = [], type = 0) => {
-  if (!Array.isArray(arr)) throw "Only Array";
-  let sym = undefined;
-  for (let i = 1; i < arr.length; i++) {
-    for (let j = 0; j < arr.length - i; j++) {
-      if (type === 0 ? arr[j] >= arr[j + 1] : arr[j] <= arr[j + 1]) {
-        sym = arr[j];
-        arr[j] = arr[j + 1];
-        arr[j + 1] = sym;
-      }
-    }
-  }
-};
-sort(arr);
-console.log(arr);
-```
+使用行业新技术 vite 体验
 
-```js
-const quic = (arr, low, high) => {
-  const mid = arr[low];
-  while (low < high) {
-    while (low < high && arr[high] >= mid) --high;
-    arr[low] = arr[high];
-    while (low < high && arr[low] <= mid) ++low;
-    arr[high] = arr[low];
-  }
-  arr[low] = mid;
-  return low;
-};
-const sort = (arr, low, high) => {
-  if (low < high) {
-    let num = quic(arr, low, high);
-    sort(arr, low, num - 1);
-    sort(arr, num + 1, high);
-  }
-};
-sort(arr, 0, arr.length - 1);
-console.log(arr);
-```
+各种想法 写法 体验
+
+vaios router ajax 作为第一项目开源
+blog 作为基础知识储备
+毕业项目
+
+实习经历
