@@ -13,11 +13,11 @@ actions:
     type: secondary
 features:
   - title: 基础性内容
-    details: 程序员所需掌握的基础性内容，前端所需学习的基础知识，以及浏览器等方面。
+    details: 计算机系统的基础性内容，以及前端和浏览器等方面知识。
   - title: 框架和轮子
-    details: 学习框架内核，打造一个框架，深入理解其核心。学习现代前端开发工程化过程。
+    details: 学习框架内核，深入理解其核心。学习现代前端开发工程化过程。
   - title: 记录和学习
-    details: 记录前端学习和深入前端之路，记录造轮子过程。提升自我。
+    details: 记录个人学习进度，记录造轮子过程，搜集面试题。
 footer: "MIT Licensed | Copyright © 2021-now • Wrote and built by PengMao "
 ---
 

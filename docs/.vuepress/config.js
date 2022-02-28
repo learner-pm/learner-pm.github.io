@@ -20,13 +20,11 @@ module.exports = {
           {
             text: "基础",
             link: "/frontEnd/basic/",
-            children: [
-              {
-                text: "面试",
-                link: "/frontEnd/frame/",
-              },
-            ],
           },
+          {
+            text: "面试",
+            link: "/frontEnd/frame/vueReact/",
+          }
         ],
       },
       {
@@ -71,7 +69,6 @@ module.exports = {
       "/frontEnd/frame/": [
         {
           text: "Frame",
-          link: "/frontEnd/frame/",
           children: [
             "/frontEnd/frame/vueReact/",
             "/frontEnd/frame/vueReact/one",
