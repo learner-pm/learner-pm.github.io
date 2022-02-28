@@ -3,7 +3,7 @@
 js 里面函数是**一等公民**,声明关键字`function`。
 
 ```js
-console.log(fun()); //1 ，
+console.log(fun()); //1 ，变量提升了~
 function fun() {
   return 1;
 }
@@ -11,7 +11,7 @@ var a = function A() {};
 const b = function () {};
 ```
 
-箭头函数能使得创建函数更加简洁，而且解决了[`this`](/frontEnd/basic/ecmaScript/this) 的问题。
+箭头函数能使得创建函数更加简洁，而且解决了复杂的[`this`](/frontEnd/basic/ecmaScript/this) 指向问题。
 
 ```js
 const c = () => {};
@@ -115,7 +115,7 @@ obj.fnc(); //1
 
 ## 闭包
 
-什么是闭包：返回得函数使用了调用函数得变量，那么返回得函数就是闭包
+什么是闭包：返回得函数使用了调用函数得变量，那么返回得函数就是闭包。
 
 ```js
 function demo() {
@@ -128,15 +128,29 @@ const b = demo();
 b(); //0
 ```
 
-A 函数会保存 demo 函数得变量，所以滥用闭包可能会造成内存泄漏。同时闭包会形成伪作用域。`console.dir(b)`打印如下：
+**A 函数会保存 引用了 demo 函数里面声明的变量**，所以滥用闭包可能会造成内存泄漏。
 
-<img src="./img/fn_fnc.png" width="100%">
+`console.dir(b)`打印如下：
+
+<img src="./img/fn_fnc_001.jpg" width="100%">
+
+同时闭包会形成伪作用域。`let`没出现前`for`里面使用`setTimeout()`问题可以这样解决。
+
+```js
+for (var i = 0; i < 10; i++) {
+  ((i) => {
+    setTimeout(() => {
+      console.log(i);
+    }, 1000);
+  })(i);
+} //0 1 2 3 4 5 6 7 8 9
+```
 
 ## 函数科里化
 
 什么是科里化:把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下的参数而且返回结果的新函数的技术。
 
-可应用于多惨函数分段传入需求。
+可应用于多参函数分段传入参数需求。
 
 具体函数如下形式：
 
