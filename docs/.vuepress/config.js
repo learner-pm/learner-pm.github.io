@@ -24,7 +24,7 @@ module.exports = {
           {
             text: "面试",
             link: "/frontEnd/frame/vueReact/",
-          }
+          },
         ],
       },
       {
@@ -85,6 +85,13 @@ module.exports = {
           children: [
             "/dataStructure/algorithm/",
             "/dataStructure/algorithm/commonType.md",
+          ],
+        },
+        {
+          text: "设计模式",
+          children: [
+            "/dataStructure/algorithm/designPatterns/factory.md",
+            "/dataStructure/algorithm/designPatterns/singleton.md",
           ],
         },
       ],
