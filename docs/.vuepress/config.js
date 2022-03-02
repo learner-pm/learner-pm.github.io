@@ -85,6 +85,7 @@ module.exports = {
           children: [
             "/dataStructure/algorithm/",
             "/dataStructure/algorithm/commonType.md",
+            "/dataStructure/algorithm/tree.md",
           ],
         },
         {

@@ -147,6 +147,8 @@ console.log(isPalindromeString(str));
 
 对于类似的回文数也是一样的思路：前后同时遍历是否相同。
 
+### 最长回文字串
+
 ::: tip 提示
 未完待续
 :::
