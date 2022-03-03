@@ -149,6 +149,44 @@ console.log(isPalindromeString(str));
 
 ### 最长回文字串
 
+leetcode 真题
+
+分析：对比于判断是否回文字符串，此题是找出字符串中为回文串中长度最长得字符串。因为需要找出最长得，所以就从大到小去判断，找到就 return，对于长度为 n 得字符串，它有(n \* (n + 1)) / 2 个子组合。第一层循环需要循环当前这个次数，紧接得问题就是找出从大到小得字符串。如：`abba`,按从大到小有：`abba`,`abb`,`bba`,`ab`,`bb`,`ba`,`a`,`b`,`b`,`a`。
+
+```js
+
+```
+
+```js
+const isPalindromeString = (str) => {
+  let low = 0;
+  let high = str.length - 1;
+  while (low <= high) {
+    if (str[low] !== str[high]) return false;
+    low++;
+    high--;
+  }
+  return true;
+};
+var longestPalindrome = function (s) {
+  let result = null;
+  let left = undefined;
+  let right = undefined;
+  let number = 1;
+  for (let i = 0; i < s.length; i++) {
+    for (let j = 0; j <= i; j++) {
+      (left = j), (right = s.length - i + j + 1);
+      result = s.substring(left, right);
+      if (isPalindromeString(result)) return result;
+    }
+  }
+};
+```
+
+这种方法，空间复杂度为`O(n*n*n)`,复杂度太高。
+
+可在判断是否为回文和获取子组合得时候同时进行
+
 ::: tip 提示
 未完待续
 :::
