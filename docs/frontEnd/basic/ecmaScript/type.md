@@ -114,11 +114,11 @@ console.log(Array.prototype); //[[Prototype]]: Object
 ```js
 const myInstanceof = (object, constructor) => {
   const prototype = constructor.prototype;
-  object = object.__proto__;
+  object = Object.getPrototypeOf(object);
   while (true) {
     if (object === null) return false;
     if (object === prototype) return true;
-    object = object.__proto__;
+    object = Object.getPrototypeOf(object);
   }
 };
 ```
@@ -325,4 +325,19 @@ const obj1 = deepCopy(obj);
 obj.e.a = 100;
 obj1.b(); //0
 console.log(obj.e.a); // 0
+```
+
+## 操作符
+
+es6 新增的`?.` 链判断运算符让判断是否存在更加简单
+
+```js
+const name = join?.name;
+const eat = join?.eat(); //函数也可以用
+```
+
+es6 新增的`?? `NUll 判断运算符，只针对`null`和`undefined`
+
+```js
+const type = getAn() ?? "cat";
 ```

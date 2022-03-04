@@ -15,21 +15,13 @@ HTML5 新增`loalStorage`和`sessionStorage`储存。
 通用
 
 ```js
-function isObject(object) {
-  return Object.prototype.toString.call(object) === "[object Object]";
-}
-function isJSON(string) {
-  if (typeof string == "string") {
-    const obj = JSON.parse(string);
-    if (typeof obj == "object" && obj) return true;
-    else return false;
-  } else {
-    console.error(new Error("传参错误"));
-  }
-}
-function isArray(array) {
-  return Array.isArray(array);
-}
+const isObject = (object) =>
+  Object.prototype.toString.call(object) === "[object Object]";
+
+const isJSON = (str) =>
+  typeof str === "string" && typeof JSON.parse(str) === "object";
+
+const isArray = (array) => Array.isArray(array);
 ```
 
 #### 增
@@ -62,9 +54,7 @@ const loaclSet = (key, value, expire = null) => {
 #### 删
 
 ```js
-const removeLocal = (keyname) => {
-  return localStorage.removeItem(keyname) === undefined;
-};
+const removeLocal = (keyname) => localStorage.removeItem(keyname) === undefined;
 ```
 
 #### 查

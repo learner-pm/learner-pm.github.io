@@ -67,6 +67,15 @@ const cat = new Animal("cat");
 cat.get(); //you creat a CAT
 ```
 
+es6 新增`new.target`,在普通函数中，该属性得值指向`undefined`,在构造函数中，指向被调用得构造函数。
+
+```js
+function Constr() {
+  if (new.target === undefined) throw new Error("--------------");
+  //code
+}
+```
+
 ### Class
 
 es6 新增`class`关键字来让 js 更加靠近`类`。
