@@ -32,3 +32,58 @@ blog 作为基础知识储备
 毕业项目
 
 实习经历
+
+定义`MyPromise`类
+
+```js
+class MyPromise {
+  constructor(fun) {
+    if (typeof fun !== "function") throw new Error("it need a function");
+    fun(this.resolve, this.reject);
+  }
+  state = PENDING;
+  value = undefined;
+  errResion = undefined;
+  callBackReject = undefined;
+  callBackResolve = undefined;
+  cache = undefined;
+  resolve = (value) => {
+    this.state = FULFILED;
+    this.value = value;
+    this.cache = this.callBackResolve && this.callBackResolve(value);
+  };
+  reject = (errResion) => {
+    this.state = REJECTED;
+    this.errResion = errResion;
+  };
+  then(callResolve, callReject) {
+    if (this.state === FULFILED) {
+      callResolve(this.value);
+    }
+    if (this.state === REJECTED) {
+      callReject(this.errResion);
+    }
+    if (this.state === PENDING) {
+      this.callBackResolve = callResolve;
+      this.callBackReject = callReject;
+    }
+    // const _promise = new MyPromise((resolve, reject) => {
+    //     return
+    // });
+    return new MyPromise((resolve, reject) => {
+      if ((this.state = FULFILED)) {
+        const x = callResolve(this.value);
+        if (x instanceof MyPromise) {
+          x.then(resolve);
+        } else {
+          resolve(x);
+        }
+      }
+    });
+  }
+  test() {
+    console.log(this.fun);
+    console.log("11");
+  }
+}
+```

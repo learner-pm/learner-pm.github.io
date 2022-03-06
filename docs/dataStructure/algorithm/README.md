@@ -69,7 +69,8 @@ triangle(10);
 ```js
 const fib = (n) => {
   if (n <= 2) return 1;
-  else return fib(n - 1) + fib(n - 2);
+  //结束条件
+  else return fib(n - 1) + fib(n - 2); //规则就是 通项公式
 };
 console.log(fib(7));
 ```
@@ -113,7 +114,9 @@ fibF(7);
 
 **重点**：正读和反读都一样。
 
-首先采用 for 循环遍历判断，字符串长度为偶数只需要比较长度一半即可，为奇数除开中间字符：
+**The problem**:给定一个输入字符串，判断是否为回文字符串
+
+采用 for 循环遍历判断，字符串长度为偶数只需要比较长度一半即可，为奇数除开中间字符：
 
 ```js
 const isPalindromeString = (str) => {
@@ -151,33 +154,33 @@ console.log(isPalindromeString(str));
 
 leetcode 真题
 
-分析：对比于判断是否回文字符串，此题是找出字符串中为回文串中长度最长得字符串。因为需要找出最长得，所以就从大到小去判断，找到就 return，对于长度为 n 得字符串，它有(n \* (n + 1)) / 2 个子组合。第一层循环需要循环当前这个次数，紧接得问题就是找出从大到小得字符串。如：`abba`,按从大到小有：`abba`,`abb`,`bba`,`ab`,`bb`,`ba`,`a`,`b`,`b`,`a`。
+分析：对比于判断是否回文字符串，此题是找出字符串中为回文串中长度最长得字符串。难度在于要去找到输入字符串的子串，并且找到符合的最大长度的字串。
+
+因为需要找出最长得，所以就从大到小去判断，找到就 return，对于长度为 n 得字符串，它有(n \* (n + 1)) / 2 个子组合。紧接得问题就是找出从大到小得字符串。如：`abba`,按从大到小有：`abba`,`abb`,`bba`,`ab`,`bb`,`ba`,`a`,`b`,`b`,`a`。
+
+第一种方式，直接暴力求解，第一层循环意为循环子字符串的长度，第二层为找出字符串长度为 i 时候的所以子字符串，最里面循环来进行比较判断当前字符串是否符合回文的要求。
 
 ```js
-
-```
-
-```js
-const isPalindromeString = (str) => {
-  let low = 0;
-  let high = str.length - 1;
-  while (low <= high) {
-    if (str[low] !== str[high]) return false;
-    low++;
-    high--;
-  }
-  return true;
-};
-var longestPalindrome = function (s) {
-  let result = null;
+const longestPalindrome = (s) => {
   let left = undefined;
   let right = undefined;
-  let number = 1;
+  let isPal = false;
   for (let i = 0; i < s.length; i++) {
+    //i: 0 1 2 ...
     for (let j = 0; j <= i; j++) {
-      (left = j), (right = s.length - i + j + 1);
-      result = s.substring(left, right);
-      if (isPalindromeString(result)) return result;
+      //j: s.length -1  s.length - 2 ...
+      (left = j), (right = s.length - i + j - 1);
+      let str = s.substring(left, right + 1); //js截取字符串的方法，左闭右开，right+1;
+      while (left <= right) {
+        if (s[left] !== s[right]) {
+          isPal = false;
+          break;
+        }
+        isPal = true;
+        left++;
+        right--;
+      }
+      if (isPal) return str;
     }
   }
 };
@@ -185,7 +188,7 @@ var longestPalindrome = function (s) {
 
 这种方法，空间复杂度为`O(n*n*n)`,复杂度太高。
 
-可在判断是否为回文和获取子组合得时候同时进行
+**优化**：可在判断是否为回文和获取子组合得时候同时进行，减少一层循环
 
 ::: tip 提示
 未完待续

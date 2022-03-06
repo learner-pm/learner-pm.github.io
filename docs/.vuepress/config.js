@@ -86,15 +86,21 @@ module.exports = {
             "/dataStructure/algorithm/",
             "/dataStructure/algorithm/commonType.md",
             "/dataStructure/algorithm/tree.md",
+            "/dataStructure/algorithm/designPatterns.md",
           ],
         },
-        {
-          text: "设计模式",
-          children: [
-            "/dataStructure/algorithm/designPatterns/factory.md",
-            "/dataStructure/algorithm/designPatterns/singleton.md",
-          ],
-        },
+        // {
+        //   text: "设计模式",
+        //   children: [
+        //     "/dataStructure/algorithm/designPatterns/factory.md",
+        //     "/dataStructure/algorithm/designPatterns/singleton.md",
+        //     "/dataStructure/algorithm/designPatterns/observer.md",
+        //     "/dataStructure/algorithm/designPatterns/strategy.md",
+        //     "/dataStructure/algorithm/designPatterns/decorate.md",
+        //     "/dataStructure/algorithm/designPatterns/proxy.md",
+        //     "/dataStructure/algorithm/designPatterns/adaptation.md",
+        //   ],
+        // },
       ],
       "/project/": [
         {
