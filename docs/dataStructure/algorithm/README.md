@@ -185,7 +185,87 @@ var longestPalindrome = function (s) {
 
 这种方法，空间复杂度为`O(n*n*n)`,复杂度太高。
 
-可在判断是否为回文和获取子组合得时候同时进行
+**优化**：可在判断是否为回文和获取子组合得时候同时进行
+
+```js
+const longestPalindrome = function (s) {
+  let left = undefined;
+  let right = undefined;
+  let isPal = false;
+  let number = [0]; //维护一个判断数组
+  let i = 0;
+  let j = 0;
+  while (i <= number.length) {
+    if (i > number.length - 1) {
+      number.push(number.length);
+      i = 0;
+      j++;
+    }
+    if (number.length - 1 >= s.length) {
+      break;
+    }
+    left = i;
+    right = s.length - 1 - j + i;
+    let str = s.substring(left, right + 1);
+    console.log(str);
+    while (left <= right) {
+      if (s[left] !== s[right]) {
+        isPal = false;
+        break;
+      }
+      isPal = true;
+      left++;
+      right--;
+    }
+    if (isPal) return str;
+    i++;
+  }
+};
+```
+
+外层循环控制次数，内层循环来进行比较。外层循环的 i 就是子字符串的长度固定时候需要的次数，j 为当前字符串的长度补值。
+
+不过这种方法好像也很费时间，和内存，在 leetcode 上效率好像不高。
+
+**动态规划**：采用动态规划来求解。
+
+如果 arr[i][j] = true 表示字符串 s{i,j}为回文串的话，如果 s[i-1]===s[j+1],那么 arr[i-1][j+1]也是一个回文字符串，依次类推。最终方程为：P{i,j} = P{i-1,j+1}^(S_i === S_j),其中 j-i 差值最大的值就是题解。
+
+```js
+const longestPalindrome = function (s) {
+  let start = 0;
+  let end = 0;
+  let length = 1;
+  let sLength = s.length;
+  const arr = [];
+  for (i = 0; i < sLength; i++) {
+    arr[i] = [];
+    for (j = 0; j < sLength; j++) {
+      if (i === j) arr[i][j] = true;
+      else arr[i][j] = false;
+    }
+  }
+  // 00
+  for (let i = 1; i <= sLength; i++) {
+    //  1 2 3 4 5
+    for (let j = 0; j < sLength; j++) {
+      // 0  1 2 3 4
+      if (s[i] === s[j] && arr[j + 1][i - 1]) {
+        arr[j][i] = true;
+        if (length < i + j - 1) {
+          start = j;
+          end = i;
+          length = i + j - 1;
+        }
+        console.log(1);
+      }
+    }
+  }
+  console.log(arr);
+  return s.substring(start, end + 1);
+};
+console.log(longestPalindrome("daaaa"));
+```
 
 ::: tip 提示
 未完待续
