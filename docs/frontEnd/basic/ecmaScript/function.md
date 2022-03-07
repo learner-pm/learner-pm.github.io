@@ -93,11 +93,22 @@ const cat = new Animal("cat");
 cat.get(); //you creat a cat
 ```
 
-同时还有关键字`static`,来声明静态属性，静态方法。`#`来声明私有属性。
+有提案提出使用关键字`static`,来声明静态属性，静态方法，`#`来声明私有属性。
 
 ```js
-static ins = null;
-# privte = null
+class Pri {
+  #pri = 0;
+  constructor() {
+    console.log(this.#pri);
+    this.pri = 1;
+  }
+  static getNumber() {
+    return 1;
+  }
+}
+console.log(Pri.getNumber()); //1
+const dos = new Pri(); //0
+console.log(dos.pri); //1
 ```
 
 ## 箭头函数
