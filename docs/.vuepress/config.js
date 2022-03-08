@@ -22,7 +22,7 @@ module.exports = {
             link: "/frontEnd/basic/",
           },
           {
-            text: "面试",
+            text: "提升",
             link: "/frontEnd/frame/vueReact/",
           },
         ],
