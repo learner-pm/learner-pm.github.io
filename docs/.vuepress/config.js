@@ -2,7 +2,7 @@ const { path } = require("@vuepress/utils");
 
 module.exports = {
   host: "localhost",
-  port: "8080",
+  port: "8888",
   title: "Learning Blog",
   base: "/",
   description: "PM的个人学习博客",
@@ -10,6 +10,7 @@ module.exports = {
   head: [
     ["link", { rel: "icon", href: "/images/logo.png" }],
     ["link", { rel: "icon", href: "/images/favicon.ico" }],
+    ["link", { rel: "stylesheet", href: "/css/index.css" }],
   ],
   theme: "@vuepress/theme-default",
   themeConfig: {
@@ -105,7 +106,7 @@ module.exports = {
       "/project/": [
         {
           text: "项目",
-          children: ["/project/", "/project/one.md"],
+          children: ["/project/", "/project/one.md", "/project/vaios.md"],
         },
       ],
     },

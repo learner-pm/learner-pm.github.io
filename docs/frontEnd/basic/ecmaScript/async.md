@@ -108,6 +108,16 @@ const FULFILED = "FULFILED";
 const REJECTED = "REJECT";
 ```
 
+定义类
+
+```js
+class MyPromise {
+  then() {
+    return this;
+  }
+}
+```
+
 ::: tip 提示
 未完待续
 :::
