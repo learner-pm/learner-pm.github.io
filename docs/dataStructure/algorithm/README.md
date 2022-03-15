@@ -232,13 +232,54 @@ const longestPalindrome = function (s) {
 
 **动态规划**：采用动态规划来求解。
 
-如果 arr[i][j] = true 表示字符串 s{i,j}为回文串的话，如果 s[i-1]===s[j+1],那么 arr[i-1][j+1]也是一个回文字符串，依次类推。最终方程为：P{i,j} = P{i-1,j+1}^(S_i === S_j),其中 j-i 差值最大的值就是题解。
+如果 arr[i][j] = true 表示字符串 s{i,j}为回文串的话，如果 s[i-1]===s[j+1],那么 arr[i-1][j+1]也是一个回文字符串，依次类推。最终方程为：P{i,j} = P{i-1,j+1}^(S_i === S_j),其中 j-i 差值最大的值对应得字符串就是题解。
+
+每一个 arr[i][j]得值保存使用，如果满足条件就置为 arr[i][j] = true,初始条件显然为 i=j 得时候，本身就是回文字符串。例如字符串`saaaa`，它得所以情况如下图所示：
+
+<img src="./img/palindromeLongest.png" width="100%" height="400px">
+
+初始化一个二维数组，将当个字符得情况全部置为 true。其余为 false。
+
+```js
+for (i = 0; i < sLength; i++) {
+  arr[i] = [];
+  for (j = 0; j < sLength; j++) {
+    if (i === j) arr[i][j] = true;
+    else arr[i][j] = false;
+  }
+}
+```
+
+双重循环进行遍历二维数组，如果 s[i] ===s[j],那么就去比较当前索引得插值，如果小于二，例如上图中得`arr[1][3]对应得字符串`aaa`，中间只有一个字符得情况下，那么当前字符肯定是一个回文字符串。
+
+如果不是这个情况，就进行缩减比较，如果 arr[i-1][j+1]为 true，就满足情况，再去比较 length 进行替换。最后得 start 和 end 得值就是题解所求得字符串起始位置。
+
+```js
+for (let i = 0; i < sLength; i++) {
+  for (let j = 0; j < sLength; j++) {
+    if (s[i] === s[j]) {
+      if (j - i < 2 || arr[i - 1][j + 1] == true) {
+        arr[i][j] = true;
+        if (length < j - i) {
+          start = i;
+          end = j;
+          length = j - i;
+        }
+      }
+    }
+  }
+}
+```
+
+如上代码待 leetcode 运行会导致测试用例通过不完全。例如在求解字符串`aaaa`得时候，它本身就是一个回文字符串，然而在判断`arr[0][3]`得时候，按照代码逻辑，s[0]和 s[3]相等，差值大于二，就去判断 arr[1][2]得布尔值，由于循环得问题，此时 arr[1][2]还未进行比较，就导致判断为 false，求解错误。
+
+所以上面代码得循环有问题，arr[i][j]得值是依赖于 arr[i-1][j+1]得值，也就是长字符串依赖于短字符串。之前得循环导致短字符串还没有求值，就去判断长字符串，所以测试用例不通过。
 
 ```js
 const longestPalindrome = function (s) {
   let start = 0;
   let end = 0;
-  let length = 1;
+  let length = 0;
   let sLength = s.length;
   const arr = [];
   for (i = 0; i < sLength; i++) {
@@ -248,23 +289,21 @@ const longestPalindrome = function (s) {
       else arr[i][j] = false;
     }
   }
-  // 00
-  for (let i = 1; i <= sLength; i++) {
-    //  1 2 3 4 5
+  let index = 0;
+  for (let i = 0; i < sLength; i++) {
     for (let j = 0; j < sLength; j++) {
-      // 0  1 2 3 4
-      if (s[i] === s[j] && arr[j + 1][i - 1]) {
-        arr[j][i] = true;
-        if (length < i + j - 1) {
-          start = j;
-          end = i;
-          length = i + j - 1;
+      if (s[i] === s[j]) {
+        if (i - j < 2 || arr[i - 1][j + 1] == true) {
+          arr[i][j] = true;
+          if (length < i - j) {
+            start = j;
+            end = i;
+            length = i - j;
+          }
         }
-        console.log(1);
       }
     }
   }
-  console.log(arr);
   return s.substring(start, end + 1);
 };
 console.log(longestPalindrome("daaaa"));

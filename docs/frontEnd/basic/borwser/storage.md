@@ -6,7 +6,7 @@ HTML5 新增`loalStorage`和`sessionStorage`储存。
 
 `localStorage`和`sessionStorage`均允许用户在浏览器保存数据，数据格式为键值对，且储存空间为`5mb`。
 
-两者区别为`sessionStorage`为`会话`级别储存，当会话结束时会清空`sessionStorage`空间中的键值对。而`loalStorage`只要不手动清除则永久存在。其中`loaclStorage`是遵循`同源`策略。
+两者区别为`sessionStorage`是`会话`级别储存，当会话结束时会清空`sessionStorage`空间中的键值对。而`loalStorage`只要不手动清除则永久存在。其中`loaclStorage`是遵循`同源`策略。
 
 ### 增删查
 

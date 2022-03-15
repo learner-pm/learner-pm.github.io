@@ -158,7 +158,7 @@ test(); //-1
 
 ## 手写 call 等
 
-`call`和`apply`一类。`bind`一类。所有写法都基于`es6`。
+`call`和`apply`一类。`bind`一类。
 
 ### call 和 apply
 

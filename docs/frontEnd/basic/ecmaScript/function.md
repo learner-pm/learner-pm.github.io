@@ -3,7 +3,7 @@
 js 里面函数是**一等公民**,声明关键字`function`。
 
 ```js
-console.log(fun()); //1 ，变量提升了~
+console.log(fun()); //1 ，变量fun可在声明之前使用，类似于var效果。
 function fun() {
   return 1;
 }
@@ -93,7 +93,7 @@ const cat = new Animal("cat");
 cat.get(); //you creat a cat
 ```
 
-有提案提出使用关键字`static`,来声明静态属性，静态方法，`#`来声明私有属性。
+有提案提出使用关键字`static`,来声明静态属性，静态方法，`#`来声明私有属性，`Chrome`已支持。
 
 ```js
 class Pri {

@@ -4,7 +4,7 @@
 
 ---
 
-**Vaios**: mvvm 框架，数据驱动模式
+**Vaios**: mvvm 模式得库，数据驱动模式
 
 - es6
 - webpack
