@@ -200,18 +200,20 @@ const longestPalindrome = function (s) {
   let j = 0;
   while (i <= number.length) {
     if (i > number.length - 1) {
+      //增加循环次数0; 0 1; ...
       number.push(number.length);
       i = 0;
       j++;
     }
     if (number.length - 1 >= s.length) {
+      //超出输入字符最大长度就结束循环
       break;
     }
     left = i;
     right = s.length - 1 - j + i;
     let str = s.substring(left, right + 1);
-    console.log(str);
     while (left <= right) {
+      //判断当前字符串
       if (s[left] !== s[right]) {
         isPal = false;
         break;
@@ -220,7 +222,7 @@ const longestPalindrome = function (s) {
       left++;
       right--;
     }
-    if (isPal) return str;
+    if (isPal) return str; //从大到小判断，找到就return
     i++;
   }
 };
