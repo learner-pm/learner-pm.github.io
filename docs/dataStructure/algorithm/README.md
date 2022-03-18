@@ -290,12 +290,12 @@ const longestPalindrome = function (s) {
       if (i === j) arr[i][j] = true;
       else arr[i][j] = false;
     }
-  }
-  let index = 0;
+  } // 生成二维数组
   for (let i = 0; i < sLength; i++) {
     for (let j = 0; j < sLength; j++) {
       if (s[i] === s[j]) {
         if (i - j < 2 || arr[i - 1][j + 1] == true) {
+          // i -j,j-> start
           arr[i][j] = true;
           if (length < i - j) {
             start = j;
