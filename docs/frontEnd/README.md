@@ -10,3 +10,6 @@ ohter 0%
 项目 0%
 通信 0%
 ohter 0%
+
+am jira
+pm my

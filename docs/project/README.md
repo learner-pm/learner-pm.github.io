@@ -4,21 +4,21 @@
 
 ---
 
-**Vaios**: mvvm 模式得库，数据驱动模式
+**Vaios**: Mvvm
 
 - es6
 - webpack
 
 ---
 
-**Request**: 模拟 axios，前端网络请求
+**Request**: 模拟 Axios
 
 - es6
 - webpack
 
 ---
 
-**Runing App** ：毕业设计，实现多端
+**Runing App** ：毕业设计
 
 - React Umi
 - Vue
