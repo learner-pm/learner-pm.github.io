@@ -113,27 +113,27 @@ module.exports = {
   },
   plugins: [
     [
+      "@vuepress/register-components",
+      {
+        componentsDir: path.resolve(__dirname, "./components"),
+      },
+    ],
+    [
       "@vuepress/docsearch",
       {
         appId: "UWD3TP0HJ3",
         apiKey: "648fdc4c61e72866f6f638b7dacfd0bf",
-        indexName: " pmthank",
+        indexName: "pmthank",
         locales: {
           "/": {
-            placeholder: "Search Documentation",
+            placeholder: "Search",
             translations: {
               button: {
-                buttonText: "Search Documentation",
+                buttonText: "Search",
               },
             },
           },
         },
-      },
-    ],
-    [
-      "@vuepress/register-components",
-      {
-        componentsDir: path.resolve(__dirname, "./components"),
       },
     ],
   ],
