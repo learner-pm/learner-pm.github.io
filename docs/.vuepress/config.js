@@ -37,6 +37,10 @@ module.exports = {
         link: "/project/",
       },
       {
+        text: "CICD",
+        link: "/cicd/",
+      },
+      {
         text: "记录",
         link: "/learn/",
       },
@@ -120,6 +124,14 @@ module.exports = {
           ],
         },
       ],
+      "/cicd/": [
+        {
+          text: "自动构建",
+          children: [
+            "/cicd/"
+          ]
+        }
+      ]
     },
   },
   plugins: [
