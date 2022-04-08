@@ -213,3 +213,11 @@ const isDom = (dom, component, methods) => {
 const compile = new Compile(this.el, this.data, methods);
 compile.addComponent(this.proxy);
 ```
+
+## 双向绑定
+
+绑定与 input 上的双向绑定，即 input 的 value 绑定 data 里面的值，data 的值改变就去改变 value，监听 input 输入事件去修改 value。
+
+```js
+
+```
