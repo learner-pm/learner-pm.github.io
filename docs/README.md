@@ -3,7 +3,7 @@ home: true
 heroImage: /images/hero.jpg
 heroAlt: 风景
 heroText: Learing
-tagline: 学习 | 博客
+tagline: 记录 | 博客
 actions:
   - text: FrontEnd
     link: /frontEnd/basic/
