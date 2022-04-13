@@ -66,26 +66,70 @@ list 部分需要滚动条，自适应高度
 
 ## 后台管理页面
 
-采用 React 进行前后端分离开发。
+使用 React 技术来进行前端开发。
 
 ### 登录
 
-登录密码使用`sha256`进行加密，避免明文传输。
+密码使用`sha256`进行加密，避免明文传输。返回一个 token 来进行身份验证。
 
-### 主体功能划分
+### home
 
-- Home 页，使用统计表格进行数据展示，
-- App app 各项数据数据
-  - 信息 迭代情况，下载量，星级打分，用户反馈，搜索热词
-  - 新闻文章 list 列表，添加新闻
-  - 圈子 发布趋势，按日统计 list 列表
-- User 用户数据统计，->用户详情 （收藏量，关注列表）
-- Data
+登录成功后的首页主要用来展示数据。按照从上往下梳理：
 
-  - 修改入参的 form，-> 标准 list， 整体用户数据分析。图表展示年龄分布。 活跃度列表，
-  - 跑步数据分析 -> 展示 map
+- 数据统计，总访问量，app 下载量，活跃度等
+- app 下载统计，按照时间流程
+- app 数据（后期考虑去掉）
+
+首页的作用是，提供数据的可视化展示。
+
+### app
+
+app_basic 页面主要展示 app 相关数据，和 app 本身相关。
+
+- app 基础信息，如发布时间，版本号，等
+- app 下载量，用户打分情况
+- app 搜索热词
+- app 迭代情况
+- 用户反馈情况 （拆分为反馈和文章热词）
+
+app_artic
+
+- artic 文章列表，可添加视频。
+- 提供搜索情况，时间等搜索
+
+app_tlak
+
+- app 用户发言数据统计，可发布官方情况，是否顶置等。
+- 提供搜索情况，按类型，时间等搜索
+
+### user
+
+User 用户数据统计
+
+- app 注册用户 list 列表展示，可对数据进行操作，封禁等
+- 具体页面包含基础的用户情况，详情页面展示基础和 run 数据
+
+### data
+
+所有用户跑步数据和其他数据
+
+- 判断用户健康的模板参数和已经存在的模板参数
+- 对所有用户数据的健康度的判断
+- 使用 app 的年龄段的分布
+- run 数据的 list
+- run 数据页面包含 run 数据的基础信息和轨迹情况
+
+### set
+
+admin，管理员页面
 
 - Set 系统设置页面
+- 当前管理员的基础信息
+- 管理员列表
+- 添加，删除管理员
+
+**未完成**：用户详情下的 run 数据具体展示页面，用户反馈下的具体内容，视频文章-> 单独文章，视频作为文章的附属内容。添加文章的操作，
+用户发言列表的具体展示。
 
 ## web 展示页面
 
@@ -136,6 +180,7 @@ list 部分需要滚动条，自适应高度
   - getUserInformation：获取某个用户具体信息
   - getUserList：获取用户 list
   - disableUser：禁用用户
+  - userLiked: 用户关注情况
 
 ### app
 
@@ -157,6 +202,7 @@ list 部分需要滚动条，自适应高度
 - run
   - endRun:结束跑步发送数据
   - getUserRunsList：获取用户历史跑步数据
+  - getRunsByUserId:通过 userid 来获取用户下的所有 run 数据
 - user
   - loginApi：登录
   - registerApi：注册
@@ -166,6 +212,7 @@ list 部分需要滚动条，自适应高度
   - getRunInformation：获取用户跑步记录
   - searchCode：二维码
   - getHistory：获取历史数据
+  - userBody:用户身体数据情况
 
 ## 数据库
 
@@ -173,50 +220,67 @@ list 部分需要滚动条，自适应高度
 
 管理员表，储存 pc 端管理员的信息情况
 
-- admin
+- admin true
+
+  - uuid
   - userName
   - password
+
+- admin_information
+
+  - adminId
   - token
   - lastLoginTime
-  - adminId
   - imgUrl
   - release
 
-app 表主要包含 app 的信息情况，以及平台提供的服务和信息。文章，搜索，等。会和 user 模块进行交互
+pp 表主要包含 app 的信息情况，以及平台提供的服务和信息。文章，搜索，等。会和 user 模块进行交互
 
-- app
+- app true
   - version
   - appName
-- app_hosts
+- app_hosts true
   - uuid
   - content
   - link
   - numbers
-- app_artic
+- app_artic true
   - uuid
   - content
   - creatTime
   - adminName
   - lastUpdateTime
-- app_artuc_infroamtion
+- app_artuc_infroamtion true
   - uuid
   - articId
   - likes
-- app_toady_artic
+- app_toady_artic true
   - uuid
   - content
+- app_body_data true
+  - uuid
+  - creatTime
+  - auther
+  - data
 
 run 表，记录跑步进行情况，保存所有跑步记录
 
-- run
+- run true
   - uuid
   - userId
-  - data
+  - data //经纬度数据
+  - dataCenter
+  - creatTime
+  - endTime
+  - minSpeed
+  - maxSpeed
+  - speed
+  - numners
+  - result
 
 speech 表
 
-- speech
-
+- speech true
   - uuid
   - creatTime
   - lookPeples
@@ -225,14 +289,31 @@ speech 表
   - likes
   - commects
   - collects
-    user 表，包含用户账号密码，第三方登录等情况，
+
+user 表，包含用户账号密码，第三方登录等情况，
 
 - user
   - uuid
   - userName
   - password
-  - ohers
-    user_information 基础的信息情况，
+  - oherLogins
+
+user_body 用户身体数据
+
+- user_body
+  - uuid
+  - data
+
+user_liked 用户关注列表
+
+- user_liked
+  - uuid
+  - userId
+  - likedUserId
+  - creatTime
+
+user_information 基础的信息情况，
+
 - user_information
   - imgUrl
   - lastLoginTime
@@ -250,25 +331,88 @@ user_speech 用户的发言情况，和 run、app 模块交互
 user_history 用户的历史情况，看过什么文章等等时间
 
 - user_history
+
   - uuid
   - userId
   - time
   - content
-    user_runs 用户的运动情况
+
+user_runs 用户的运动情况
+
 - user_runs
+
   - uuid
   - userId
-  - runId
-    user_comment 用户的评论 list
+  - runId // array
+
+user_comment 用户的评论 list
+
 - user_comment
+
   - uuid
   - userid
   - articId
-    user_collect 收藏
+
+user_collect 收藏
+
 - user_collect
   - uuid
   - articId
   - userId
+
+## 地图轨迹
+
+### pc 上用户展示用户的跑步轨迹。
+
+使用高德 api 进行开发，
+
+```js
+const polyline = new AMap.Polyline({
+  //绘制轨迹
+  map: map,
+  path: lineArr, //经纬度列表
+  showDir: true,
+  strokeColor: "#28F",
+  strokeWeight: 6,
+});
+map.setFitView(); //缩放视野级别
+
+setInterval(() => {
+  // 使用定时器进行绘制
+  lineArr.push(path[lineArr.length]); //更改经纬度数组
+  var polyline = new AMap.Polyline({
+    //重新绘制
+    map: map,
+    path: lineArr,
+    showDir: true,
+    strokeColor: "#28F",
+    strokeWeight: 6,
+  });
+  map.setFitView();
+}, 1000);
+```
+
+### app 绘制和实时记录
+
+实时获取地理位置：
+
+```js
+setInterval(() => {
+  uni.getLocation({
+    type: "wgs84",
+    success: function (res) {
+      console.log("当前位置的经度：" + res.longitude);
+      console.log("当前位置的纬度：" + res.latitude);
+    },
+  });
+}, 1000);
+```
+
+实时绘制，map 组件的一个属性：`polyline`，经纬度数组。和 pc 端同理，定时改变改属性并且进行渲染即可。
+
+## app 端图表
+
+app 端采用 renderjs 来进行图表构建，主要用于展示跑步数据，频率，身体数据等的可视化展示。
 
 ::: tip 提示
 未完待续
