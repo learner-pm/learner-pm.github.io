@@ -73,6 +73,7 @@ module.exports = {
           children: [
             "/frontEnd/frame/vueReact/",
             "/frontEnd/frame/vueReact/one",
+            "/frontEnd/frame/vueReact/react",
           ],
         },
         {

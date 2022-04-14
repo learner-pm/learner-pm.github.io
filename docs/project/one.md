@@ -64,6 +64,10 @@ list 部分需要滚动条，自适应高度
 - 修改密码
 - 系统设置功能
 
+文章和其他用户的发言，如果当前用户评论了其中一条数据，如果其他用户评论这条这个用户评论的发言，应该通知用户。
+
+用户关注了某个其他用户的时候，被关注用户有了新的发言的时候，应该通知到这个用户。
+
 ## 后台管理页面
 
 使用 React 技术来进行前端开发。
@@ -160,6 +164,7 @@ admin，管理员页面
 - app
   - getAppInformation：获取 app 基础信息情况
   - getAppHostWords：获取 app 搜索热词
+  - getAppVersion: 获取 app 的版本信息
   - feedBackList：获取反馈集合
   - feedBackInformation：获取具体反馈信息
   - getAllArtic：获取 app 所有文章
@@ -213,6 +218,7 @@ admin，管理员页面
   - searchCode：二维码
   - getHistory：获取历史数据
   - userBody:用户身体数据情况
+  - userLikes：用户关注列表
 
 ## 数据库
 
@@ -239,6 +245,11 @@ pp 表主要包含 app 的信息情况，以及平台提供的服务和信息。
 - app true
   - version
   - appName
+- app_version
+  - uuid
+  - version
+  - content
+  - creatTime
 - app_hosts true
   - uuid
   - content
@@ -297,6 +308,22 @@ user 表，包含用户账号密码，第三方登录等情况，
   - userName
   - password
   - oherLogins
+- qq
+
+  - uuid
+  - userId
+  - qqId
+
+- wx
+  - uuid
+  - userId
+  - wxId
+
+likedUsers
+
+- user_liedad
+  - uud
+  - userId
 
 user_body 用户身体数据
 
@@ -413,6 +440,46 @@ setInterval(() => {
 ## app 端图表
 
 app 端采用 renderjs 来进行图表构建，主要用于展示跑步数据，频率，身体数据等的可视化展示。
+
+app 网络请求 promise 化封装，api 封装。
+
+第三方登录，注册开发者，手机号登录（腾讯云开发）
+
+## 储存
+
+pc 端储存在 localstorage token
+app 储存在手机，进入 app 的时候需要进行本地数据读取。
+
+```js
+uni.setStorage({
+  key: "storage_key",
+  data: "hello",
+  success: function () {
+    console.log("success");
+  },
+});
+```
+
+相机扫描（考虑中）
+
+```js
+uni.scanCode({
+  success: function (res) {
+    console.log("条码类型：" + res.scanType);
+    console.log("条码内容：" + res.result);
+  },
+});
+```
+
+## springBoot
+
+mysql,sqagger-ui,
+
+### controller
+
+### service
+
+### dao
 
 ::: tip 提示
 未完待续
