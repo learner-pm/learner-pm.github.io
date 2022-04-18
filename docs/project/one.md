@@ -475,6 +475,17 @@ uni.scanCode({
 
 mysql,sqagger-ui,
 
+### table 分页
+
+后端接口参数
+
+```js
+const listParameter = {
+  pageNo: 1,
+  pageSize: 10,
+};
+```
+
 ### controller
 
 ### service

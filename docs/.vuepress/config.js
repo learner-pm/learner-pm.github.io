@@ -107,7 +107,12 @@ module.exports = {
       "/project/": [
         {
           text: "项目",
-          children: ["/project/", "/project/one.md", "/project/vaios.md"],
+          children: [
+            "/project/",
+            "/project/one.md",
+            "/project/thesis.md",
+            "/project/vaios.md",
+          ],
         },
       ],
     },
