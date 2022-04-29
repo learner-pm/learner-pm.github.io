@@ -81,6 +81,11 @@ module.exports = {
           children: ["/frontEnd/frame/mvvm/"],
         },
       ],
+      "/learn/": [
+        {
+          children: ["/learn/result.md"],
+        },
+      ],
       "/dataStructure/algorithm/": [
         {
           text: "算法",
