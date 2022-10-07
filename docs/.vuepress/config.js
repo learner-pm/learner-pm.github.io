@@ -3,7 +3,7 @@ const { path } = require("@vuepress/utils");
 module.exports = {
   host: "localhost",
   port: "8888",
-  title: "Pm's Blog",
+  title: "One&Only",
   base: "/",
   description: "PM的个人学习博客",
   lang: "zh-CN",
