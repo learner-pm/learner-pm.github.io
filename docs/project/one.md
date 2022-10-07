@@ -238,7 +238,7 @@ admin，管理员页面
   - token
   - lastLoginTime
   - imgUrl
-  - release
+  - creatTime
 
 pp 表主要包含 app 的信息情况，以及平台提供的服务和信息。文章，搜索，等。会和 user 模块进行交互
 

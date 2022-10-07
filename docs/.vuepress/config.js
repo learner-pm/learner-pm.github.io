@@ -3,7 +3,7 @@ const { path } = require("@vuepress/utils");
 module.exports = {
   host: "localhost",
   port: "8888",
-  title: "Pm's Blog",
+  title: "One&Only",
   base: "/",
   description: "PM的个人学习博客",
   lang: "zh-CN",
@@ -35,6 +35,10 @@ module.exports = {
       {
         text: "项目",
         link: "/project/",
+      },
+      {
+        text: "CICD",
+        link: "/cicd/",
       },
       {
         text: "记录",
@@ -120,6 +124,14 @@ module.exports = {
           ],
         },
       ],
+      "/cicd/": [
+        {
+          text: "自动构建",
+          children: [
+            "/cicd/"
+          ]
+        }
+      ]
     },
   },
   plugins: [
