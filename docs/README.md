@@ -2,7 +2,7 @@
 home: true
 heroImage: /images/hero.jpg
 heroAlt: 风景
-heroText: Blog
+heroText: 网站学习
 tagline: 学习 & 记录
 actions:
   - text: 开始浏览
