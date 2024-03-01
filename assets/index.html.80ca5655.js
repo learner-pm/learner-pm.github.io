@@ -1,1 +1,0 @@
-const t={key:"v-9e551da2",path:"/dataStructure/algorithm/designPatterns/",title:"\u8BBE\u8BA1\u6A21\u5F0F",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:1709289558e3,contributors:[{name:"l_pm",email:"54015459+learner-pm@users.noreply.github.com",commits:1}]},filePathRelative:"dataStructure/algorithm/designPatterns/README.md"};export{t as data};
