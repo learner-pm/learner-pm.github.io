@@ -32,13 +32,10 @@ jobs:
         run: npm install
       - name: build app
         run: npm run docs:build
-      - name: Deploy to GitHub Pages
-        uses: crazy-max/ghaction-github-pages@v4
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          # 部署到 gh-pages 分支
-          target_branch: gh-pages
-          # 部署目录为 VuePress 的默认输出目录
-          build_dir: docs/.vuepress/dist
-        env:
-          # @see https://docs.github.com/cn/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
-          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
+          publish_dir: docs/.vuepress/dist
+          github_token: ${{ secrets.ACTION_TOKEN }}
+          commit_message: 自动部署 # 5.部署时的 git 提交信息，自由填写
+
