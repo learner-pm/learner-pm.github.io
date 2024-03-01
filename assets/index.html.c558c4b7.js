@@ -1,1 +1,0 @@
-const e={key:"v-11cc91f4",path:"/frontEnd/frame/",title:"Learn",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:1709288986e3,contributors:[{name:"l_pm",email:"54015459+learner-pm@users.noreply.github.com",commits:1}]},filePathRelative:"frontEnd/frame/README.md"};export{e as data};
