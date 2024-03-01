@@ -26,10 +26,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
+      - uses: actions/checkout@v2
+      - name: install nodejs
+        uses: actions/setup-node@v3.5.0
+        with: 
+          node-version: "16.X"
+      - name: install deps
+        run: npm install
+      - name: build app
+        run: npm run docs:build
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
