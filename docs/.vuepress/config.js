@@ -3,7 +3,7 @@ const { path } = require("@vuepress/utils");
 module.exports = {
   host: "localhost",
   port: "8888",
-  title: "网站学习",
+  title: "个人博客",
   base: "/",
   description: "PM的个人学习博客",
   lang: "zh-CN",
@@ -23,14 +23,14 @@ module.exports = {
             link: "/frontEnd/basic/",
           },
           {
-            text: "提升",
-            link: "/frontEnd/frame/vueReact/",
+            text: "进阶",
+            link: "/frontEnd/frame/",
           },
         ],
       },
       {
-        text: "数据结构和算法",
-        link: "/dataStructure/algorithm/",
+        text: "编程",
+        link: "/program/",
       },
       {
         text: "项目",
@@ -73,31 +73,48 @@ module.exports = {
       ],
       "/frontEnd/frame/": [
         {
-          text: "Frame",
+          text: "React",
           children: [
-            "/frontEnd/frame/vueReact/",
-            "/frontEnd/frame/vueReact/one",
-            "/frontEnd/frame/vueReact/react",
+            "/frontEnd/frame/React/",
           ],
         },
         {
-          text: "Mvvm",
-          children: ["/frontEnd/frame/mvvm/"],
+          text: "Vue",
+          children: [
+            "/frontEnd/frame/Vue/"
+          ],
         },
-      ],
-      "/learn/": [
         {
-          children: ["/learn/result.md"],
+          text: "其他",
+          children: [
+            "/frontEnd/frame/Other/"
+          ],
         },
       ],
-      "/dataStructure/algorithm/": [
+      // "/learn/": [
+      //   {
+      //     children: ["/learn/result.md"],
+      //   },
+      // ],
+      "/program/": [
+        {
+          text: "数据结构",
+          children: [
+            "/program/dataStructure/",
+            "/program/dataStructure/tree.md",
+          ],
+        },
         {
           text: "算法",
           children: [
-            "/dataStructure/algorithm/",
-            "/dataStructure/algorithm/commonType.md",
-            "/dataStructure/algorithm/tree.md",
-            "/dataStructure/algorithm/designPatterns.md",
+            "/program/algorithm/",
+            "/program/algorithm/commonType.md",
+          ],
+        },
+        {
+          text: "设计模式",
+          children: [
+            "/program/designPatterns/",
           ],
         },
         // {
