@@ -22,7 +22,8 @@ const setFooter = ()=>{
 }
 onMounted(() => {
   setFooter()
-  url()
+  // 部署在GitHub上后无备案号
+  // url()
   setText()
 })
 
