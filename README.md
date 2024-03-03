@@ -1,8 +1,5 @@
-# new_blog_docs
+# 记录文章项目
 
-个人博客。
+采用[VuePress](https://v2.vuepress.vuejs.org/zh/)来构建静态网站。
 
-- 前端内容
-
-- 其他
-- 项目
+内容全属平常记录，如果不合理的方面，欢迎指出以及提 PR。
