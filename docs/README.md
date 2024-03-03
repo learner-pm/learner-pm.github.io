@@ -2,7 +2,7 @@
 home: true
 heroImage: /images/hero.jpg
 heroAlt: 风景
-heroText: 网站学习
+heroText: 个人博客
 tagline: 学习 & 记录
 actions:
   - text: 开始浏览
@@ -19,7 +19,7 @@ features:
     details: 学习框架内核，深入理解其核心。学习现代前端开发工程化过程。
   - title: 记录和学习
     details: 记录个人学习进度，记录造轮子过程，搜集面试题。
-footer: Copyright © 2021-now • Wrote and built by PengMao
+footer: Copyright © 2021-now • Wrote by PengM
 ---
 
 <Home/>
