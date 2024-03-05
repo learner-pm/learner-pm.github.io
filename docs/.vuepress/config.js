@@ -3,9 +3,9 @@ const { path } = require("@vuepress/utils");
 module.exports = {
   host: "localhost",
   port: "8888",
-  title: "个人博客",
+  title: "Blog",
   base: "/",
-  description: "PM的个人学习博客",
+  description: "PengM的个人学习博客",
   lang: "zh-CN",
   head: [
     ["link", { rel: "icon", href: "/images/logo.png" }],
