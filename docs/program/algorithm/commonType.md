@@ -39,35 +39,33 @@ console.log(arr);
 
 做一次划分得到数组`[0, 45, -45, 1, 10, 1, 0, 3, 33, 111, 121]`,然后对子数组`[0, 45, -45, 1, 10, 1, 0, 3, 33]`和`[121]`在进行划分，以此类推直到每个子数组里面只有一个元素即可，这个过程采用递归的形式。
 
-划分函数:
-
-```js
-const par = (arr, low, high) => {
-  const mid = arr[low]; //以数组的第一个元素作为基数
-  while (low < high) {
-    while (low < high && arr[high] >= mid) --high; //筛选左侧数组的元素
-    arr[low] = arr[high];
-    while (low < high && arr[low] <= mid) ++low; //筛选右侧数组的元素
-    arr[high] = arr[low];
-  }
-  arr[low] = mid;
-  return low;
-};
-```
-
 递归直到子数组只有一个元素为止。
 
 ```js
-const sort = (arr, low, high) => {
-  if (low < high) {
-    //递归
-    let num = par(arr, low, high);
-    sort(arr, low, num - 1);
-    sort(arr, num + 1, high);
+const qSortArray = (arr, start, last) => {
+  let low = start;
+  let high = last;
+  if (start < last) {
+    // 使用了start作为第一指针，所以优先考虑last指针
+    const mid = arr[start];
+    while (start < last) {
+      // 数组右侧小于中间值的
+      while (mid <= arr[last] && start < last) {
+        last--;
+      }
+      arr[start] = arr[last];
+      // 数组左侧侧大于中间值的
+      while (mid >= arr[start] && start < last) {
+        start++;
+      }
+      arr[last] = arr[start];
+    }
+    arr[start] = mid;
+    // 剩余的继续递归
+    qSortArray(arr, start + 1, high);
+    qSortArray(arr, low, start - 1);
   }
 };
-sort(arr, 0, arr.length - 1);
-console.log(arr);
 ```
 
 ### 优化
