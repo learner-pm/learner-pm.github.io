@@ -85,6 +85,12 @@ module.exports = {
           ],
         },
         {
+          text: "Webpack",
+          children: [
+            '/frontEnd/frame/Webpack/'
+          ]
+        },
+        {
           text: "其他",
           children: [
             "/frontEnd/frame/Other/"
@@ -108,7 +114,7 @@ module.exports = {
           text: "算法",
           children: [
             "/program/algorithm/",
-            "/program/algorithm/commonType.md",
+            "/program/algorithm/sort.md",
           ],
         },
         {

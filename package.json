@@ -18,9 +18,9 @@
   "author": "PM",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/learner-pm//pengm.github.io/issues"
+    "url": "https://github.com/learner-pm/pengm.github.io/issues"
   },
-  "homepage": "https://github.com/learner-pm//pengm.github.io#readme",
+  "homepage": "https://github.com/learner-pm/pengm.github.io#readme",
   "devDependencies": {
     "@vuepress/plugin-docsearch": "^2.0.0-beta.35",
     "@vuepress/plugin-register-components": "^2.0.0-beta.35",
