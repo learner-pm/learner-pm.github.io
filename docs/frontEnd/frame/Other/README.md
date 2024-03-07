@@ -145,3 +145,16 @@ const copyChildren = useMemo(() => {
 <img src="./img/form_one_1.png" width="100%" height="400px">
 
 这样数据的收集就算完成了
+
+## 注入数据
+
+上面的操作我们实现了数据从输入框到 Store，但一般表单还需要实现数据从 Store 到输入框。也就是填充数据的过程。
+
+注入可以同收集数据一样，劫持 input 组件的即可，将 value 值通过 props 注入。
+
+```jsx
+const newProps = {
+  ...children.props,
+  value: xxx,
+};
+```

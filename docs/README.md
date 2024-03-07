@@ -5,7 +5,7 @@ heroAlt: 风景
 heroText: Blog
 tagline: 学习 & 记录
 actions:
-  - text: 开始浏览
+  - text: Go ->
     link: /frontEnd/basic/
     type: secondary
   # type: primary
