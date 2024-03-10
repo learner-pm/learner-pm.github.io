@@ -93,7 +93,7 @@ module.exports = {
         {
           text: "其他",
           children: [
-            "/frontEnd/frame/Other/"
+            "/frontEnd/frame/Other/form.md"
           ],
         },
       ],
