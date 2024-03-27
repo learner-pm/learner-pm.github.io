@@ -154,6 +154,16 @@ module.exports = {
             "/cicd/"
           ]
         }
+      ],
+      "/learn":[
+        {
+          text: "学习",
+          children: [
+            "/learn/",
+            "/learn/result.md",
+            "/learn/notes.md",
+          ],
+        }
       ]
     },
   },
