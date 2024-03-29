@@ -104,6 +104,12 @@ module.exports = {
       // ],
       "/program/": [
         {
+          text:'Python',
+          children: [
+            '/program/python/'
+          ]
+        },
+        {
           text: "数据结构",
           children: [
             "/program/dataStructure/",
