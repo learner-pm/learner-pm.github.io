@@ -63,7 +63,7 @@ const post = _ajax.post(api, {});
 
 <img src="./img/three_02.png" width="100%">
 
-还有其他字段如：`Access-Control-Allow-Credentials`字段表示是否允许发送`Cookie`，默认不被包含在请求中，设置为`true`允许[跨域发送 Cookie](/frontEnd/basic/borwser/storage.html#跨域时的-cookie)。
+还有其他字段如：`Access-Control-Allow-Credentials`字段表示是否允许发送`Cookie`，默认不被包含在请求中，设置为`true`允许[跨域发送 Cookie](/frontEnd/basic/browser/storage.html)。
 
 `Access-Control-Expose-Headers`字段解除`XMLHttpRequest`对象的`getResponseHeader()`方法的限制。`getResponseHeader()`默认可拿到字段：
 

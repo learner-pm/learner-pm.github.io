@@ -69,6 +69,6 @@ CSRF（Cross-site request forgery）跨站请求伪造，也被称为 one-click 
 
 ### 防范
 
-- [服务端设置](/frontEnd/other/one.html#服务端)`Cookie`避免脚本拿到 Cookie。
+- [服务端设置](/frontEnd/basic/browser/storage.html#服务端)`Cookie`避免脚本拿到 Cookie。
 - 请求携带验证信息，token
 - 源域名限制
