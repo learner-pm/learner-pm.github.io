@@ -1,5 +1,5 @@
 node_modules
 .temp
-.cache
+cache
 dist
 package-lock.json
