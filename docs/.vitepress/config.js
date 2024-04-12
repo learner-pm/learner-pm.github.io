@@ -99,6 +99,10 @@ export default {
           items: [{ text: "Webpack", link: "/frontEnd/frame/Webpack/" }],
         },
         {
+          text: "WebSocket",
+          items: [{ text: "WebSocket", link: "/frontEnd/frame/WebSocket/" }],
+        },
+        {
           text: "其他",
           items: [{ text: "其他", link: "/frontEnd/frame/Other/form" }],
         },
@@ -140,6 +144,7 @@ export default {
           items: [
             { text: "总结", link: "/learn/result.md" },
             { text: "笔记", link: "/learn/notes.md" },
+            { text: '杂类', link: "/learn/miscellaneous.md" }
           ],
         },
       ],
