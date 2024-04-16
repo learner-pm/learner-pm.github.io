@@ -103,6 +103,10 @@ export default {
           items: [{ text: "WebSocket", link: "/frontEnd/frame/WebSocket/" }],
         },
         {
+          text: "Git",
+          items: [{ text: "Git", link: "/frontEnd/frame/Git/" }],
+        },
+        {
           text: "其他",
           items: [{ text: "其他", link: "/frontEnd/frame/Other/form" }],
         },
