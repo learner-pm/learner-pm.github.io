@@ -39,7 +39,7 @@ export default {
         ],
       },
       {
-        text: "编程",
+        text: "工具和技术",
         link: "/program/",
       },
       {
@@ -95,20 +95,8 @@ export default {
           items: [{ text: "Vue", link: "/frontEnd/frame/Vue/" }],
         },
         {
-          text: "Webpack",
-          items: [{ text: "Webpack", link: "/frontEnd/frame/Webpack/" }],
-        },
-        {
-          text: "WebSocket",
-          items: [{ text: "WebSocket", link: "/frontEnd/frame/WebSocket/" }],
-        },
-        {
-          text: "Git",
-          items: [{ text: "Git", link: "/frontEnd/frame/Git/" }],
-        },
-        {
           text: "其他",
-          items: [{ text: "其他", link: "/frontEnd/frame/Other/form" }],
+          items: [{ text: "表单", link: "/frontEnd/frame/Other/form" }],
         },
       ],
 
@@ -131,6 +119,27 @@ export default {
           text: "设计模式",
           items: [{ text: "设计模式", link: "/program/designPatterns/" }],
         },
+        {
+          text: "Git",
+          items: [{ text: "Git", link: "/program/Git/" }],
+        },
+        {
+          text: "Webpack",
+          items: [{ text: "Webpack", link: "/program/Webpack/" }],
+        },
+        {
+          text: "WebSocket",
+          items: [{ text: "WebSocket", link: "/program/WebSocket/" }],
+        },
+        {
+          text: "Vite",
+          items: [{ text: "Vite", link: "/program/Vite/" }],
+        },
+        {
+          text: "Docker",
+          items: [{ text: "Docker", link: "/program/Docker/" }],
+        },
+
       ],
       "/project/": [
         {
@@ -144,10 +153,9 @@ export default {
       ],
       "/learn": [
         {
-          text: "学习",
+          text: "记录",
           items: [
             { text: "总结", link: "/learn/result.md" },
-            { text: "笔记", link: "/learn/notes.md" },
             { text: '杂类', link: "/learn/miscellaneous.md" }
           ],
         },
