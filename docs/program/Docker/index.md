@@ -22,6 +22,77 @@ Docker 容器是从镜像中创建的运行实例。当启动容器时，会从�
 
 去[官网](https://www.docker.com/)安装即可
 
+## 实例
+
+### 构建镜像
+
+首先在项目根目录下创建`Dockerfile`文件。表明要构建得得内容。
+
+当前 docs 项目得文件如下，先使用 node 镜像构建项目，在使用 nginx 来提供 web 服务器
+
+```dockerfile
+# 使用 Node.js 官方提供的 Node 镜像作为基础镜像来构建项目
+FROM node:14-alpine AS build
+
+# 设置工作目录
+WORKDIR /app
+
+# 复制 package.json 和 package-lock.json 文件到工作目录
+COPY package*.json ./
+
+# 安装依赖
+RUN npm install
+
+# 复制所有文件到工作目录
+COPY . .
+
+# 构建项目
+RUN npm run docs:build
+
+# 使用 Nginx 官方提供的 Nginx 镜像作为基础镜像
+FROM nginx:alpine
+
+# 将构建后的项目文件复制到 Nginx 默认的静态文件目录
+COPY --from=build /app/docs/.vitepress/dist /usr/share/nginx/html
+
+# 暴露 Nginx 的默认端口
+EXPOSE 80
+
+# 启动 Nginx
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+在当前目录下执行如下命令，-t docs-1 指定镜像名为 `docs-1`，`.` 表示 Dockerfile 得路径，当前就是根目录。执行后 docker 会按照 Dockerfile 文件构建镜像
+
+```bash
+docker build -t docs-1 .
+```
+
+### 容器
+
+拥有镜像后就可以启动一个容器了，执行下面命令。 `-p 8080:80` 表明将容器得`80`端口映射到主机得`8080`端口上，docs-1 即是刚刚创建得镜像。执行后就可以在浏览器输入`localhost:8080`访问项目
+
+```bash
+docker run -p 8080:80 docs-1
+```
+
+## 忽略文件
+
+`.dockerignore`文件时 docker 得忽略文件，在镜像构建可以忽略要 COPY 得文件。书写格式同`gitignore`。
+
+```git
+node_modules
+.temp
+cache
+dist
+```
+
+## 分段构建
+
+Docker 得分段构建指在 Dockerfile 文件中定义多个构建阶段，每个阶段可以使用不同得基础镜像，同时可以共享文件。这样可以减少最终镜像得大小，在构建过程中丢弃不需要得文件和依赖项。
+
+比如上面的 Dockerfile 文件就包含了两个构建阶段，第一阶段使用 node 镜像来构建本项目，第二阶段使用 nginx 镜像来作为 web 服务器。最终构建的镜像就只包含 nginx 和构建后的文件，没有 node 镜像和相关工具，减少了镜像的大小和安全性。
+
 ::: tip 提示
 未完待续
 :::
