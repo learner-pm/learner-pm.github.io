@@ -7,11 +7,18 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "docs:lint": "lint-staged",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com:learner-pm/pengm.github.io.git"
+  },
+  "lint-staged": {
+    "docs/**/*.md": [
+      "markdownlint"
+    ]
   },
   "keywords": [
     "javascript"
@@ -23,6 +30,11 @@
   },
   "homepage": "https://github.com/learner-pm/pengm.github.io#readme",
   "devDependencies": {
+    "@commitlint/cli": "^19.2.2",
+    "@commitlint/config-conventional": "^19.2.2",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "markdownlint": "^0.34.0",
     "vitepress": "^1.0.2"
   }
 }
