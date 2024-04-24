@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docs-8
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: docs-8
+  template:
+    metadata:
+      labels:
+        app: docs-8
+    spec:
+      containers:
+        - name: docs-8-test
+          image: localhost:5000/docs-8
+          ports:
+            - containerPort: 80
