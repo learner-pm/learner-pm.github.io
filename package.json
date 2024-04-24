@@ -13,7 +13,6 @@
     "commitlint": "commitlint --edit",
     "prettier": "npx prettier --write ."
   },
-  "pre-commit": ["prettier"],
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com:learner-pm/pengm.github.io.git"
