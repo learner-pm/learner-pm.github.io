@@ -99,32 +99,32 @@ npm install ws
 
 ```js
 // 引入WebSocket库
-const WebSocket = require("ws");
+const WebSocket = require('ws')
 
 // 创建WebSocket服务器
-const wss = new WebSocket.Server({ port: 3000 });
+const wss = new WebSocket.Server({ port: 3000 })
 
 // 监听连接事件
-wss.on("connection", function connection(ws) {
-  console.log("Client connected");
+wss.on('connection', function connection(ws) {
+  console.log('Client connected')
 
   // 监听消息事件
-  ws.on("message", function incoming(message) {
-    console.log("Received:", message);
+  ws.on('message', function incoming(message) {
+    console.log('Received:', message)
 
     // 广播消息给所有客户端
     wss.clients.forEach(function each(client) {
       if (client.readyState === WebSocket.OPEN) {
-        client.send(message);
+        client.send(message)
       }
-    });
-  });
+    })
+  })
 
   // 监听断开事件
-  ws.on("close", function close() {
-    console.log("Client disconnected");
-  });
-});
+  ws.on('close', function close() {
+    console.log('Client disconnected')
+  })
+})
 ```
 
 运行 server.js 文件即可。

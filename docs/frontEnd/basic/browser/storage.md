@@ -15,13 +15,13 @@ HTML5 新增`loalStorage`和`sessionStorage`储存。
 通用
 
 ```js
-const isObject = (object) =>
-  Object.prototype.toString.call(object) === "[object Object]";
+const isObject = object =>
+  Object.prototype.toString.call(object) === '[object Object]'
 
-const isJSON = (str) =>
-  typeof str === "string" && typeof JSON.parse(str) === "object";
+const isJSON = str =>
+  typeof str === 'string' && typeof JSON.parse(str) === 'object'
 
-const isArray = (array) => Array.isArray(array);
+const isArray = array => Array.isArray(array)
 ```
 
 #### 增
@@ -29,8 +29,8 @@ const isArray = (array) => Array.isArray(array);
 ```js
 const loaclSet = (key, value, expire = null) => {
   if (expire < 0) {
-    console.error(new Error("时间间隔不能为负。"));
-    return;
+    console.error(new Error('时间间隔不能为负。'))
+    return
   }
   if (expire !== null) {
     localStorage.setItem(
@@ -38,43 +38,43 @@ const loaclSet = (key, value, expire = null) => {
       JSON.stringify({
         value: value,
         time: Date.now(),
-        expire,
+        expire
       })
-    );
+    )
   } else {
     if (isObject(value) || isArray(value)) {
-      localStorage.setItem(key, JSON.stringify(value));
+      localStorage.setItem(key, JSON.stringify(value))
     } else {
-      localStorage.setItem(key, value);
+      localStorage.setItem(key, value)
     }
   }
-};
+}
 ```
 
 #### 删
 
 ```js
-const removeLocal = (keyname) => localStorage.removeItem(keyname) === undefined;
+const removeLocal = keyname => localStorage.removeItem(keyname) === undefined
 ```
 
 #### 查
 
 ```js
-const getLocal = (keyname) => {
-  const value = localStorage.getItem(keyname);
+const getLocal = keyname => {
+  const value = localStorage.getItem(keyname)
   if (isJSON(value)) {
-    const vle = JSON.parse(value);
+    const vle = JSON.parse(value)
     if (vle.expire) {
       return Date.now() - vle.time > vle.expire
         ? this.remove(keyname)
-        : vle.value;
+        : vle.value
     } else {
-      return vle;
+      return vle
     }
   } else {
-    return value;
+    return value
   }
-};
+}
 ```
 
 ## cookie
@@ -100,7 +100,7 @@ js 使用`document.cookie`来设置`cookie`。每个`cookie`有以下属性可�
 使用`document.cookie`如下格式，通过图片可以看到`domain`为`127.0.0.1`即为当前服务器主机，`path`为`"/"`,`expires`为我所设置的值。
 
 ```js
-document.cookie = "number = 0;expires = Thu,18 Dec 2021 12:00:00 GMT";
+document.cookie = 'number = 0;expires = Thu,18 Dec 2021 12:00:00 GMT'
 ```
 
 <img src="./img/one_01.png" width="100%">
@@ -108,19 +108,19 @@ document.cookie = "number = 0;expires = Thu,18 Dec 2021 12:00:00 GMT";
 使用`document.cookie`的方式需要每次手动设置，可以写一个简易函数来进行增加操作。
 
 ```js
-const setCookie = (name, value, days = 0, _path = "/", host) => {
-  const date = new Date();
-  date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-  const data = name + "=" + value;
+const setCookie = (name, value, days = 0, _path = '/', host) => {
+  const date = new Date()
+  date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000)
+  const data = name + '=' + value
   const expires =
-    days === 0 ? "expires" + "=" : "expires" + "=" + date.toGMTString();
-  const domain = host ? "domain" + "=" + host : "domain" + "=";
-  const path = "path" + "=" + _path;
-  document.cookie = data + ";" + expires + ";" + domain + ";" + path;
-};
-setCookie("number", 0, 12); //根目录下所以文件可查看
-setCookie("number1", 1, 0); //根目录下所以文件可查看
-setCookie("one", 1, 1, "/one"); // /one目录下所有文件可查看
+    days === 0 ? 'expires' + '=' : 'expires' + '=' + date.toGMTString()
+  const domain = host ? 'domain' + '=' + host : 'domain' + '='
+  const path = 'path' + '=' + _path
+  document.cookie = data + ';' + expires + ';' + domain + ';' + path
+}
+setCookie('number', 0, 12) //根目录下所以文件可查看
+setCookie('number1', 1, 0) //根目录下所以文件可查看
+setCookie('one', 1, 1, '/one') // /one目录下所有文件可查看
 ```
 
 `'/index.html'` 下
@@ -136,10 +136,10 @@ setCookie("one", 1, 1, "/one"); // /one目录下所有文件可查看
 删除时需要保证 `path` 和 `domain` 一致,原因是不同的`cookie`有各自被访问的区间值(我的理解).
 
 ```js
-const deleteCookie = (name) => {
-  setCookie(name, getCookie(name), -1);
-};
-deleteCookie("number");
+const deleteCookie = name => {
+  setCookie(name, getCookie(name), -1)
+}
+deleteCookie('number')
 ```
 
 #### 改
@@ -150,9 +150,9 @@ deleteCookie("number");
 
 ```js
 const changeCookie = (name, value) => {
-  setCookie(name, value);
-};
-changeCookie("number", 10);
+  setCookie(name, value)
+}
+changeCookie('number', 10)
 ```
 
 #### 查
@@ -160,15 +160,15 @@ changeCookie("number", 10);
 先获取全部在进行查询
 
 ```js
-const getCookie = (name) => {
-  const arr = document.cookie.split(";");
+const getCookie = name => {
+  const arr = document.cookie.split(';')
   for (let i = 0; i < arr.length; i++) {
-    const kV = arr[i].trim().split("=");
-    if (kV[0] == name) return kV[1];
+    const kV = arr[i].trim().split('=')
+    if (kV[0] == name) return kV[1]
   }
-  return `不存在${name}这个key`;
-};
-console.log(getCookie("number")); //2
+  return `不存在${name}这个key`
+}
+console.log(getCookie('number')) //2
 ```
 
 ### 服务端
@@ -184,8 +184,8 @@ console.log(getCookie("number")); //2
 - `CORS`标准规定:默认情况下,浏览器再发生跨域请求时,不能发送任何认证信息.比如:`cookie`,除非`xhr.withCredentials`为`true`.
 
 ```js
-const xmlhttp = new XMLHttpRequest();
-xmlhttp.withCredentials = true;
+const xmlhttp = new XMLHttpRequest()
+xmlhttp.withCredentials = true
 ```
 
 所有如果要在跨域情况下携带`cookie`,需要更改`xhr.withCredentials`默认值.

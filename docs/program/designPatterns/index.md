@@ -16,26 +16,26 @@
 class Pig {
   constructor() {}
   getType() {
-    console.log("you get a pig");
+    console.log('you get a pig')
   }
 }
 class Cat {
   constructor() {}
   getType() {
-    console.log("you get a cat");
+    console.log('you get a cat')
   }
 }
 class Animal {
   //动物工厂
   constructor() {}
   getAnimal(type) {
-    if (type === "cat") return new Cat();
-    else if (type === "pig") return Pig();
+    if (type === 'cat') return new Cat()
+    else if (type === 'pig') return Pig()
   }
 }
-const animal = new Animal();
-const cat = animal.getAnimal("cat");
-cat.getType(); //you get a cat
+const animal = new Animal()
+const cat = animal.getAnimal('cat')
+cat.getType() //you get a cat
 ```
 
 ### 抽象工厂
@@ -48,41 +48,41 @@ cat.getType(); //you get a cat
 class Orchid {
   constructor() {}
   getType() {
-    console.log("you get an orchid");
+    console.log('you get an orchid')
   }
 }
 class Cat {
   constructor() {}
   getType() {
-    console.log("you get a cat");
+    console.log('you get a cat')
   }
 }
 class Plant {
   constructor() {}
   getPlant(type) {
-    if (type === "orchid") return new Orchid();
+    if (type === 'orchid') return new Orchid()
   }
 }
 class Animal {
   constructor() {}
   getAnimal(type) {
-    if (type === "cat") return new Cat();
+    if (type === 'cat') return new Cat()
   }
 }
 
 class Biology {
   //更高一层的工厂
   static getBiology(type) {
-    if (type === "animal") return new Animal();
-    else return new Plant();
+    if (type === 'animal') return new Animal()
+    else return new Plant()
   }
 }
-const animal = Biology.getBiology("animal");
-const cat = animal.getAnimal("cat");
-cat.getType(); //you get a cat
-const plant = Biology.getBiology("plant");
-const orchid = plant.getPlant("orchid");
-orchid.getType(); //you get an orchid
+const animal = Biology.getBiology('animal')
+const cat = animal.getAnimal('cat')
+cat.getType() //you get a cat
+const plant = Biology.getBiology('plant')
+const orchid = plant.getPlant('orchid')
+orchid.getType() //you get an orchid
 ```
 
 ### application scenarios
@@ -101,37 +101,37 @@ orchid.getType(); //you get an orchid
 
 ```js
 class Single {
-  static #instace = null;
+  static #instace = null
   static getInstance() {
     if (!this.#instace) {
-      this.#instace = new Single();
+      this.#instace = new Single()
     }
-    return this.#instace;
+    return this.#instace
   }
   get() {
-    return "single";
+    return 'single'
   }
 }
-const obj1 = Single.getInstance();
-const obj2 = Single.getInstance();
-console.log(obj1 === obj2); //true
+const obj1 = Single.getInstance()
+const obj2 = Single.getInstance()
+console.log(obj1 === obj2) //true
 ```
 
 ### 饿汉式
 
 ```js
 class Single {
-  static #instace = new Single();
+  static #instace = new Single()
   static getInstance() {
-    return this.#instace;
+    return this.#instace
   }
   get() {
-    return "single";
+    return 'single'
   }
 }
-const obj1 = Single.getInstance();
-const obj2 = Single.getInstance();
-console.log(obj1 === obj2); //true
+const obj1 = Single.getInstance()
+const obj2 = Single.getInstance()
+console.log(obj1 === obj2) //true
 ```
 
 ### application scenarios
@@ -149,38 +149,38 @@ console.log(obj1 === obj2); //true
 ```js
 class Observer {
   constructor(name) {
-    this.name = name;
+    this.name = name
   }
   update() {
-    this.aboutMe();
+    this.aboutMe()
   }
   aboutMe() {
-    console.log(`I am ${this.name}`);
+    console.log(`I am ${this.name}`)
   }
 }
 class Publisher {
   constructor() {
-    this.observers = [];
+    this.observers = []
   }
   add(observer) {
-    this.observers.push(observer);
-    return this; //便于链式调用
+    this.observers.push(observer)
+    return this //便于链式调用
   }
   notify() {
-    this.observers.forEach((observer) => {
-      observer.update();
-    });
+    this.observers.forEach(observer => {
+      observer.update()
+    })
   }
   IntroduceObserver() {
-    console.log("Please introduce yourself");
-    this.notify();
+    console.log('Please introduce yourself')
+    this.notify()
   }
 }
-const zs = new Observer("zs");
-const ls = new Observer("ls");
-const lx = new Publisher();
-lx.add(zs).add(ls);
-lx.IntroduceObserver();
+const zs = new Observer('zs')
+const ls = new Observer('ls')
+const lx = new Publisher()
+lx.add(zs).add(ls)
+lx.IntroduceObserver()
 //Please introduce yourself
 //I am zs
 //I am ls
@@ -200,12 +200,12 @@ lx.IntroduceObserver();
 
 ```js
 const _price = (type, price) => {
-  if (type === "A") {
-    return price * 0.9;
-  } else if (type === "B") {
-    return price * 0.8;
-  } else return price * 1;
-};
+  if (type === 'A') {
+    return price * 0.9
+  } else if (type === 'B') {
+    return price * 0.8
+  } else return price * 1
+}
 ```
 
 在进行添加其他类型型式会不可避免去修改原函数，而且通常大量得`if else`会不好修改和难于修改。
@@ -215,27 +215,27 @@ const _price = (type, price) => {
 ```js
 class ActivityA {
   getMoney(price) {
-    return price * 0.9;
+    return price * 0.9
   }
 }
 class ActivityB {
   getMoney(price) {
-    return price * 0.8;
+    return price * 0.8
   }
 }
 class Context {
-  #activityType;
+  #activityType
   constructor(type) {
-    this.#activityType = type;
+    this.#activityType = type
   }
   getMoneyByType(money) {
-    console.log(`this price is ${this.#activityType.getMoney(money)}`);
+    console.log(`this price is ${this.#activityType.getMoney(money)}`)
   }
 }
-let context = new Context(new ActivityA());
-context.getMoneyByType(100); //this price is 90
-context = new Context(new ActivityB());
-context.getMoneyByType(100); //this price is 80
+let context = new Context(new ActivityA())
+context.getMoneyByType(100) //this price is 90
+context = new Context(new ActivityB())
+context.getMoneyByType(100) //this price is 80
 ```
 
 ### application scenarios
@@ -255,23 +255,23 @@ context.getMoneyByType(100); //this price is 80
 ```js
 class Div {
   about() {
-    console.log("this is a div");
+    console.log('this is a div')
   }
 }
 class BorderDecorator {
   constructor(div) {
-    this.div = div;
+    this.div = div
   }
   about() {
-    this.div.about();
-    this.setBorder();
+    this.div.about()
+    this.setBorder()
   }
   setBorder() {
-    console.log("Border");
+    console.log('Border')
   }
 }
-const borderDiv = new BorderDecorator(new Div());
-borderDiv.about();
+const borderDiv = new BorderDecorator(new Div())
+borderDiv.about()
 //this is a div
 //Border
 ```
@@ -290,36 +290,36 @@ borderDiv.about();
 class Mp4 {
   //mp4接口
   play() {
-    console.log("it is mp4");
+    console.log('it is mp4')
   }
 }
 class Video {
   //video接口
   play() {
-    console.log("is is video");
+    console.log('is is video')
   }
 }
 class Media {
   constructor(type) {
-    if (type === "mp4") this.type = new Mp4();
-    else if (type === "video") this.type = new Video();
+    if (type === 'mp4') this.type = new Mp4()
+    else if (type === 'video') this.type = new Video()
   }
   play() {
-    this.type.play();
+    this.type.play()
   }
 }
 class AudioPlayer {
   play(type) {
-    if (type === "mp3") {
+    if (type === 'mp3') {
       //原生接口
-      console.log("it is mp3");
-    } else if (type === "mp4" || type === "video") {
-      new Media(type).play();
+      console.log('it is mp3')
+    } else if (type === 'mp4' || type === 'video') {
+      new Media(type).play()
     }
   }
 }
-const audio = new AudioPlayer();
-audio.play("mp4");
+const audio = new AudioPlayer()
+audio.play('mp4')
 //it is mp4
 ```
 
@@ -338,27 +338,27 @@ audio.play("mp4");
 ```js
 class Date {
   constructor(url) {
-    this.url = url;
+    this.url = url
   }
   getDate() {
-    console.log(`这是从${this.url}请求的数据`);
+    console.log(`这是从${this.url}请求的数据`)
   }
 }
 class ProxyDate {
-  #Date;
+  #Date
   constructor(url) {
-    this.url = url;
+    this.url = url
   }
   getDate() {
     if (!this.#Date) {
-      this.#Date = new Date(this.url); //代理请求
+      this.#Date = new Date(this.url) //代理请求
     }
-    this.#Date.getDate();
+    this.#Date.getDate()
   }
 }
-const proxyD = new ProxyDate("www.xxxx.com/getDate");
-proxyD.getDate(); //这是从www.xxxx.com/getDate请求的数据
-proxyD.getDate(); //不会再次真正请求
+const proxyD = new ProxyDate('www.xxxx.com/getDate')
+proxyD.getDate() //这是从www.xxxx.com/getDate请求的数据
+proxyD.getDate() //不会再次真正请求
 ```
 
 ### application scenarios

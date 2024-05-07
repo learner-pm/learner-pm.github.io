@@ -1,35 +1,35 @@
 <script setup>
-import { onMounted } from "vue";
-const footer = document.getElementsByClassName("VPFooter");
+import { onMounted } from 'vue'
+const footer = document.getElementsByClassName('VPFooter')
 //const home = document.getElementsByClassName("Layout");
 const url = () => {
-  const a = document.createElement("A");
-  a.href = "https://beian.miit.gov.cn/#/Integrated/index";
-  a.textContent = " 蜀ICP备20004855号-1";
-  a.target = "_black";
+  const a = document.createElement('A')
+  a.href = 'https://beian.miit.gov.cn/#/Integrated/index'
+  a.textContent = ' 蜀ICP备20004855号-1'
+  a.target = '_black'
 
-  footer[0].appendChild(a);
-};
+  footer[0].appendChild(a)
+}
 const setText = () => {
-  const p = document.createElement("P");
-  p.textContent = "山不在高，有仙则灵    水不在深，有龙则灵";
-  p.setAttribute("class", "home-add-text");
-  footer[0].insertBefore(p, footer[0].getElementsByClassName('container')[0]);
-};
+  const p = document.createElement('P')
+  p.textContent = '山不在高，有仙则灵    水不在深，有龙则灵'
+  p.setAttribute('class', 'home-add-text')
+  footer[0].insertBefore(p, footer[0].getElementsByClassName('container')[0])
+}
 
 const setFooter = () => {
-  footer[0].style = "border-top:0px;padding-top:0px;";
-};
+  footer[0].style = 'border-top:0px;padding-top:0px;'
+}
 onMounted(() => {
-  const footer = document.getElementsByClassName("home-add-text");
-  if(footer.length>0){
+  const footer = document.getElementsByClassName('home-add-text')
+  if (footer.length > 0) {
     return
   }
-  setFooter();
+  setFooter()
   // 部署在GitHub上后无备案号
   // url()
-  setText();
-});
+  setText()
+})
 </script>
 
 <style>

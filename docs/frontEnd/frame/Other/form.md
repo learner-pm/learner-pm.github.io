@@ -17,8 +17,8 @@ const demo = () => {
       </Form.item>
       <Button>console</Button>
     </Form>
-  );
-};
+  )
+}
 ```
 
 逐层分析，首先要实现`Form`组件，该组件需要具备几个功能点：
@@ -126,18 +126,18 @@ const copyChildren = useMemo(() => {
   if (React.isValidElement(children)) {
     const newProps = {
       ...children.props,
-      onInput: (e) => {
-        setStore((pre) => ({
+      onInput: e => {
+        setStore(pre => ({
           ...pre,
-          [name]: e?.target?.value,
-        }));
-        children.props?.onInput?.(e);
-      },
-    };
-    return React.cloneElement(children, newProps);
+          [name]: e?.target?.value
+        }))
+        children.props?.onInput?.(e)
+      }
+    }
+    return React.cloneElement(children, newProps)
   }
-  return children;
-}, [name, children, setStore]);
+  return children
+}, [name, children, setStore])
 ```
 
 ### 效果
@@ -155,8 +155,8 @@ const copyChildren = useMemo(() => {
 ```jsx
 const newProps = {
   ...children.props,
-  value: xxx,
-};
+  value: xxx
+}
 ```
 
 ### FormStore 类
@@ -167,40 +167,40 @@ const newProps = {
 
 ```ts
 class FormStore {
-  private store: any;
+  private store: any
 
   constructor() {
-    this.store = {};
+    this.store = {}
   }
 
   private getFieldValue = (name: string) => {
-    return this.store?.[name];
-  };
+    return this.store?.[name]
+  }
 
   private getFieldValues = () => {
     return {
-      ...this.store,
-    };
-  };
+      ...this.store
+    }
+  }
 
   private setFieldValue = (name: string, value: string) => {
-    this.store[name] = value;
-  };
+    this.store[name] = value
+  }
 
-  private setFieldValues = (store) => {
+  private setFieldValues = store => {
     this.store = {
       ...this.store,
-      ...store,
-    };
-  };
+      ...store
+    }
+  }
 
   getForm() {
     return {
       getFieldValue: this.getFieldValue,
       getFieldValues: this.getFieldValues,
       setFieldValue: this.setFieldValue,
-      setFieldValues: this.setFieldValues,
-    };
+      setFieldValues: this.setFieldValues
+    }
   }
 }
 ```
@@ -213,20 +213,20 @@ class FormStore {
 
 ```ts
 const useForm = (form?: any) => {
-  const ref = useRef();
+  const ref = useRef()
   const formInstance = useMemo(() => {
     if (!ref.current) {
       if (form) {
-        ref.current = form;
+        ref.current = form
       } else {
-        const f = new FormStore();
-        ref.current = f.getForm();
+        const f = new FormStore()
+        ref.current = f.getForm()
       }
     }
-    return ref.current;
-  }, [form]);
-  return [formInstance];
-};
+    return ref.current
+  }, [form])
+  return [formInstance]
+}
 ```
 
 ### 修改例子
@@ -257,19 +257,19 @@ value: formInstance.getFieldValue(name),
 在实例组件处，我们写下如下代码。一个是渲染完成后自动填充值，一个是点击按钮手动修改字段的值。
 
 ```tsx
-const [form] = useForm();
+const [form] = useForm()
 
 const updatedInputNumber = useCallback(() => {
   form?.setFieldValues({
-    input: 11000,
-  });
-}, [form]);
+    input: 11000
+  })
+}, [form])
 
 useEffect(() => {
   form?.setFieldValues({
-    input: 1,
-  });
-}, []);
+    input: 1
+  })
+}, [])
 ```
 
 但实际上我们页面输入框里面的值没有改动，点击了按钮后也没有改动。为什么呢？实际打印 store 的值是改变了。但是由于这个值不是一个`state`，`React`并没有监听到了什么改变，从而去刷新组件。所以我们接下来需要去收集每一个`Field`，并在字段更新的时候通知需要更新的组件，这里可以使用发布订阅者模式。
@@ -281,28 +281,28 @@ useEffect(() => {
 ```ts
 class FormStore {
   // 每一个Field
-  private watchList: Field[];
+  private watchList: Field[]
 
   // 注册field
-  private reigsterField = (field) => {
-    this.watchList.push(field);
+  private reigsterField = field => {
+    this.watchList.push(field)
     return () => {
-      this.watchList = this.watchList.filter((e) => e?.name !== field?.name);
-    };
-  };
+      this.watchList = this.watchList.filter(e => e?.name !== field?.name)
+    }
+  }
 
   // 通知更新方法
   private notifyWatchList = () => {
-    this.watchList.forEach((e) => {
-      e?.onStoreChange();
-    });
-  };
+    this.watchList.forEach(e => {
+      e?.onStoreChange()
+    })
+  }
 
   // 更改值时通知
   private setFieldValue = (name: string, value: string) => {
-    this.store[name] = value;
-    this.notifyWatchList();
-  };
+    this.store[name] = value
+    this.notifyWatchList()
+  }
 }
 ```
 
@@ -310,12 +310,12 @@ class FormStore {
 
 ```tsx
 // 维护一个state
-const [updated, setUpdated] = useState(0);
+const [updated, setUpdated] = useState(0)
 
 // 增加一个依赖即可
 const copyChildren = useMemo(() => {
   // xxx
-}, [updated]);
+}, [updated])
 
 // 注册自己
 useEffect(() => {
@@ -323,13 +323,13 @@ useEffect(() => {
     name,
     // 更新方法
     onStoreChange: () => {
-      setUpdated((pre) => pre + 1);
-    },
-  });
+      setUpdated(pre => pre + 1)
+    }
+  })
   return () => {
-    unMount();
-  };
-}, [name]);
+    unMount()
+  }
+}, [name])
 ```
 
 这样的话，每当调用`setFieldValues`修改方法就会通知更新`Filed`组件，组件内部就可以拿到 Store 中的最新值，并注入子组件中。
@@ -350,13 +350,13 @@ useEffect(() => {
 
 ```tsx
 interface Rule {
-  required?: boolean;
-  validator?: (value: any) => Promise<void>;
+  required?: boolean
+  validator?: (value: any) => Promise<void>
 }
 
 interface FieldProps {
   // xxx
-  rules?: Rules[];
+  rules?: Rules[]
 }
 ```
 
@@ -368,41 +368,41 @@ interface FieldProps {
 
 ```tsx
 // 校验rules的方法
-const validator = useCallback(async (value) => {
-  const isRequired = rules.some((e) => e?.required);
+const validator = useCallback(async value => {
+  const isRequired = rules.some(e => e?.required)
   if (isRequired && value !== undefined && !value) {
-    return Promise.reject("该字段必填");
+    return Promise.reject('该字段必填')
   }
-  await Promise.all(rules.map((e) => e?.validator?.(value)));
-  setRuleText("");
-}, []);
+  await Promise.all(rules.map(e => e?.validator?.(value)))
+  setRuleText('')
+}, [])
 
 // 校验方法
 const valid = async () => {
   try {
-    await validator(formInstance.getFieldValue(name));
+    await validator(formInstance.getFieldValue(name))
   } catch (error) {
-    setRuleText(error || "");
+    setRuleText(error || '')
   }
-};
+}
 
 // 监听字段
 useEffect(() => {
-  valid();
-}, [formInstance.getFieldValue(name)]);
+  valid()
+}, [formInstance.getFieldValue(name)])
 
 // 设置默认值
 useEffect(() => {
-  formInstance?.setFieldValue(name, undefined);
-}, [formInstance, name]);
+  formInstance?.setFieldValue(name, undefined)
+}, [formInstance, name])
 
 return (
   <>
     {copyChildren}
     <br />
-    {ruleText || ""}
+    {ruleText || ''}
   </>
-);
+)
 ```
 
 ### 收集校验方法
@@ -414,18 +414,18 @@ return (
 ```tsx
 const valid = async (isStore?: boolean) => {
   try {
-    await validator(formInstance.getFieldValue(name));
+    await validator(formInstance.getFieldValue(name))
   } catch (error) {
-    setRuleText(error || "");
+    setRuleText(error || '')
     if (isStore) {
-      return Promise.reject(name);
+      return Promise.reject(name)
     }
   }
-};
+}
 
 const unMount = formInstance?.reigsterField({
-  validator: valid,
-});
+  validator: valid
+})
 ```
 
 接下来在 Store 中添加对应的校验字段方法
@@ -434,22 +434,22 @@ const unMount = formInstance?.reigsterField({
 class FormStore {
   private validatorVlaues = async () => {
     const res = await Promise.allSettled(
-      this.watchList.map((e) => e.validator(true))
-    );
-    const errArr = res.filter((e) => e.status === "rejected");
+      this.watchList.map(e => e.validator(true))
+    )
+    const errArr = res.filter(e => e.status === 'rejected')
     // 这里可以拿到有问题的字段时那部分
     if (errArr?.length) {
-      return Promise.reject(`${errArr[0]?.reason} 字段出问题了`);
+      return Promise.reject(`${errArr[0]?.reason} 字段出问题了`)
     }
-    return this.getFieldValues();
-  };
+    return this.getFieldValues()
+  }
 
   private sumbit = () => {
     this.validatorVlaues()
       // 调用Form组件的回调函数
-      .then((res) => onFinish(res))
-      .catch((err) => onFinishFailed(err));
-  };
+      .then(res => onFinish(res))
+      .catch(err => onFinishFailed(err))
+  }
 }
 ```
 
@@ -463,13 +463,13 @@ class FormStore {
   rules={[
     {
       required: true,
-      validator: (value) => {
-        if (value === "5") {
-          return Promise.reject("不需要5");
+      validator: value => {
+        if (value === '5') {
+          return Promise.reject('不需要5')
         }
-        return Promise.resolve();
-      },
-    },
+        return Promise.resolve()
+      }
+    }
   ]}
 >
   <input />

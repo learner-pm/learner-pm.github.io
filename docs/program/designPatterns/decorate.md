@@ -7,23 +7,23 @@
 ```js
 class Div {
   about() {
-    console.log("this is a div");
+    console.log('this is a div')
   }
 }
 class BorderDecorator {
   constructor(div) {
-    this.div = div;
+    this.div = div
   }
   about() {
-    this.div.about();
-    this.setBorder();
+    this.div.about()
+    this.setBorder()
   }
   setBorder() {
-    console.log("Border");
+    console.log('Border')
   }
 }
-const borderDiv = new BorderDecorator(new Div());
-borderDiv.about();
+const borderDiv = new BorderDecorator(new Div())
+borderDiv.about()
 //this is a div
 //Border
 ```

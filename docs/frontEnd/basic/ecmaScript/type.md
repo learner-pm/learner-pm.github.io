@@ -17,12 +17,12 @@ JavaScript 使用`const`,`let`,`var`来声明一个变量。使用优先级`cosn
 当赋值给`const`变量的为一个对象时，`const`声明的变量储存的是一个`指针`，这个指针指向对象所处得`堆`位置，**指针不能修改，但可修改对象内部属性**。
 
 ```js
-const PI = "3.14";
+const PI = '3.14'
 const obj = {
-  a: 0,
-};
-obj.a = 1;
-console.log(obj); //{a: 1}
+  a: 0
+}
+obj.a = 1
+console.log(obj) //{a: 1}
 ```
 
 `let`需要先声明，再赋值（保持先声明，再赋值的习惯利于写出含有更少的 bug 的代码）,同时使用`let`声明的变量会形成块级作用域。`const`同理。
@@ -30,34 +30,34 @@ console.log(obj); //{a: 1}
 同时在浏览器环境中，`let`声明得变量不会挂载到全局。`let`和`const`均不允许重复声明。
 
 ```js
-let a;
-a = 10;
-console.log(window.a); //undefined
+let a
+a = 10
+console.log(window.a) //undefined
 ```
 
 `var`声明的变量具有提升机制,所以可以在变量声明前使用变量，显得很不好，会产生意想不到的`BUG`。
 
 ```js
-console.log(a); //undefined ,很不合理
-var a = 10;
-console.log(a); //10
+console.log(a) //undefined ,很不合理
+var a = 10
+console.log(a) //10
 ```
 
 `let`其实也有这个机制，不过它存在**暂时性死区**,会导致在声明这个变量前使用变量会报错。
 
 ```js
-console.log(a); //Uncaught ReferenceError: Cannot access 'a' before initialization
-let a = 10;
+console.log(a) //Uncaught ReferenceError: Cannot access 'a' before initialization
+let a = 10
 ```
 
 基本类型中，这些字面量使用`toString()`等方法得时候会转变为其对应包装对象,然后来执行对应方法。
 对象转换基本类型会调用`valueOf()`，`toString()`。这两个方法可重写。
 
 ```js
-const number = 1;
-const _number = number.toString();
-console.log(_number); //1
-console.log(typeof _number); //string
+const number = 1
+const _number = number.toString()
+console.log(_number) //1
+console.log(typeof _number) //string
 ```
 
 ## 类型判断
@@ -69,19 +69,19 @@ console.log(typeof _number); //string
 `typeof` 能正确显示出`基本类型`的类型，返回对应类型的字符串,其中`null`比较特性，`typeof null`会放回字符串 `object`，这算是一个 bug，和最初 js 的设计有关。
 
 ```js
-console.log(typeof 0); //number
-console.log(typeof "0"); //string;
-console.log(typeof false); //boolean;
-console.log(typeof Symbol("0")); //symbol;
-console.log(typeof undefined); //undefined;
-console.log(typeof null); //object;
+console.log(typeof 0) //number
+console.log(typeof '0') //string;
+console.log(typeof false) //boolean;
+console.log(typeof Symbol('0')) //symbol;
+console.log(typeof undefined) //undefined;
+console.log(typeof null) //object;
 ```
 
 当右操作符为对象类型时，无论其变量是什么，`typeof`都会显示为`object`。
 
 ```js
-console.log(typeof []); //object;
-console.log(typeof {}); //object;
+console.log(typeof []) //object;
+console.log(typeof {}) //object;
 ```
 
 综上：`typeof`能精确区分除了基本类型中的`null`部分，对于对象和`null`无法精确区分。
@@ -93,17 +93,17 @@ console.log(typeof {}); //object;
 该方法内部通过使用`prototype`来进行检测，`prototype`是可以认为修改的，如果修改了`prototype`，该方法则会返回`false`。
 
 ```js
-const a = {};
-console.log(a instanceof Object); //true
-const b = [];
-console.log(b instanceof Array); //true
+const a = {}
+console.log(a instanceof Object) //true
+const b = []
+console.log(b instanceof Array) //true
 ```
 
 ::: tip 提示
 
 ```js
-console.log(b instanceof Object); //true
-console.log(Array.prototype); //[[Prototype]]: Object
+console.log(b instanceof Object) //true
+console.log(Array.prototype) //[[Prototype]]: Object
 ```
 
 因为 array.prototype 继承自 object.prototype
@@ -113,14 +113,14 @@ console.log(Array.prototype); //[[Prototype]]: Object
 
 ```js
 const myInstanceof = (object, constructor) => {
-  const prototype = constructor.prototype;
-  object = Object.getPrototypeOf(object);
+  const prototype = constructor.prototype
+  object = Object.getPrototypeOf(object)
   while (true) {
-    if (object === null) return false;
-    if (object === prototype) return true;
-    object = Object.getPrototypeOf(object);
+    if (object === null) return false
+    if (object === prototype) return true
+    object = Object.getPrototypeOf(object)
   }
-};
+}
 ```
 
 ### 其他
@@ -128,16 +128,16 @@ const myInstanceof = (object, constructor) => {
 对于对象类型的判断目前最好的办法是：`Object.prototype.toString.call()`,同时也能判断基本类型。
 
 ```js
-console.log(Object.prototype.toString.call(1)); //[object Number]
-console.log(Object.prototype.toString.call([])); //[object Array]
-console.log(Object.prototype.toString.call({})); //[object Object]
-console.log(Object.prototype.toString.call(/^1/)); //[object RegExp]
+console.log(Object.prototype.toString.call(1)) //[object Number]
+console.log(Object.prototype.toString.call([])) //[object Array]
+console.log(Object.prototype.toString.call({})) //[object Object]
+console.log(Object.prototype.toString.call(/^1/)) //[object RegExp]
 ```
 
 es6 新增数组判断`Array.isArray()`
 
 ```js
-console.log(Array.isArray([])); //true
+console.log(Array.isArray([])) //true
 ```
 
 ## Number
@@ -156,10 +156,10 @@ ES2020 引入了一种新的数据类型`bigInt`,解决精度和大数据运算�
 
 ```js
 function a() {
-  const arr = [];
+  const arr = []
 }
 
-let arr = [];
+let arr = []
 ```
 
 `let`形成的`块级作用域`可解决以下经典问题。
@@ -167,15 +167,15 @@ let arr = [];
 ```js
 for (var i = 0; i < 10; i++) {
   setTimeout(() => {
-    console.log(i);
-  }, 1000);
+    console.log(i)
+  }, 1000)
 } //10个10
 
 //现在使用let,形成作用域绑定i的值
 for (let i = 0; i < 10; i++) {
   setTimeout(() => {
-    console.log(i);
-  }, 1000);
+    console.log(i)
+  }, 1000)
 } //0 1 2 3 4 5 6 7 8 9
 ```
 
@@ -184,23 +184,23 @@ for (let i = 0; i < 10; i++) {
 对于`基本类型`，赋值操作会重新开辟空间，并且进行值得复制。
 
 ```js
-let a = 10;
-let b = a;
-a = 1;
-console.log(a); //1
-console.log(b); //10
+let a = 10
+let b = a
+a = 1
+console.log(a) //1
+console.log(b) //10
 ```
 
 对于`引用类型`,变量储存得是对象的`指针`，因此赋值操作传递的是`指针`地址，修改一个变量，影响所有指向这个对象的变量。
 
 ```js
 const obj = {
-  a: 1,
-};
-const b = obj;
-console.log(b === obj); //true，不是值相等，是地址相等
-b.a = 0;
-console.log(obj.a); //0
+  a: 1
+}
+const b = obj
+console.log(b === obj) //true，不是值相等，是地址相等
+b.a = 0
+console.log(obj.a) //0
 ```
 
 拷贝对象可用方法`Object.assign();`,展开运算符`...`。数组的`Array.from()`。
@@ -209,30 +209,30 @@ console.log(obj.a); //0
 
 ```js
 const obj = {
-  a: 0,
-};
-const b = Object.assign({}, obj);
-console.log(obj === b); //fasle
+  a: 0
+}
+const b = Object.assign({}, obj)
+console.log(obj === b) //fasle
 ```
 
 ### 展开运算符
 
 ```js
 const obj = {
-  a: 0,
-};
-const c = { ...obj };
-console.log(obj === c); //fasle
+  a: 0
+}
+const c = { ...obj }
+console.log(obj === c) //fasle
 ```
 
 ### Array.from()
 
 ```js
-let a = [1, 0, 1, 2];
-let b = Array.from(a);
-b[0] = 100;
-console.log(b); //[100, 0, 1, 2]
-console.log(a === b); //false
+let a = [1, 0, 1, 2]
+let b = Array.from(a)
+b[0] = 100
+console.log(b) //[100, 0, 1, 2]
+console.log(a === b) //false
 ```
 
 不过这种拷贝只能解决一层对象复制问题。在值是`引用类型`时无法深层次拷贝，依旧存在引用问题。不能解决循环引用的对象。
@@ -241,12 +241,12 @@ console.log(a === b); //false
 const obj = {
   a: 0,
   b: {
-    c: 0,
-  },
-};
-const b = Object.assign({}, obj);
-obj.b.c = 100;
-console.log(b.b.c); //100
+    c: 0
+  }
+}
+const b = Object.assign({}, obj)
+obj.b.c = 100
+console.log(b.b.c) //100
 ```
 
 ## 深拷贝
@@ -261,12 +261,12 @@ console.log(b.b.c); //100
 const obj = {
   a: 0,
   b: {
-    c: 1,
-  },
-};
-const obj1 = JSON.parse(JSON.stringify(obj));
-obj.b.c = 1000;
-console.log(obj1.b.c); //1
+    c: 1
+  }
+}
+const obj1 = JSON.parse(JSON.stringify(obj))
+obj.b.c = 1000
+console.log(obj1.b.c) //1
 ```
 
 不过该方法会有以下局限性：
@@ -280,13 +280,13 @@ console.log(obj1.b.c); //1
 const obj = {
   a: undefined,
   b: () => {
-    console.log(0);
+    console.log(0)
   },
-  c: Symbol("0"),
-  d: 0,
-};
-const obj1 = JSON.parse(JSON.stringify(obj));
-console.log(obj1); //{d: 0}
+  c: Symbol('0'),
+  d: 0
+}
+const obj1 = JSON.parse(JSON.stringify(obj))
+console.log(obj1) //{d: 0}
 ```
 
 ### 自定义
@@ -296,15 +296,15 @@ console.log(obj1); //{d: 0}
 ```js
 const deepCopy = (v, obj = {}) => {
   for (let [key, value] of Object.entries(v)) {
-    if (Object.prototype.toString.call(value) === "[object Object]") {
-      obj[key] = {};
-      deepCopy(value, obj[key]);
+    if (Object.prototype.toString.call(value) === '[object Object]') {
+      obj[key] = {}
+      deepCopy(value, obj[key])
     } else {
-      obj[key] = value;
+      obj[key] = value
     }
   }
-  return obj;
-};
+  return obj
+}
 ```
 
 使用
@@ -313,18 +313,18 @@ const deepCopy = (v, obj = {}) => {
 const obj = {
   a: undefined,
   b: () => {
-    console.log(0);
+    console.log(0)
   },
-  c: Symbol("0"),
+  c: Symbol('0'),
   d: 0,
   e: {
-    a: 0,
-  },
-};
-const obj1 = deepCopy(obj);
-obj.e.a = 100;
-obj1.b(); //0
-console.log(obj.e.a); // 0
+    a: 0
+  }
+}
+const obj1 = deepCopy(obj)
+obj.e.a = 100
+obj1.b() //0
+console.log(obj.e.a) // 0
 ```
 
 ## 操作符
@@ -332,12 +332,12 @@ console.log(obj.e.a); // 0
 es6 新增的`?.` 链判断运算符让判断是否存在更加简单
 
 ```js
-const name = join?.name;
-const eat = join?.eat(); //函数也可以用
+const name = join?.name
+const eat = join?.eat() //函数也可以用
 ```
 
-es6 新增的`?? `NUll 判断运算符，只针对`null`和`undefined`
+es6 新增的`??`NUll 判断运算符，只针对`null`和`undefined`
 
 ```js
-const type = getAn() ?? "cat";
+const type = getAn() ?? 'cat'
 ```

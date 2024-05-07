@@ -8,37 +8,37 @@
 
 ```js
 class Single {
-  static #instace = null;
+  static #instace = null
   static getInstance() {
     if (!this.#instace) {
-      this.#instace = new Single();
+      this.#instace = new Single()
     }
-    return this.#instace;
+    return this.#instace
   }
   get() {
-    return "single";
+    return 'single'
   }
 }
-const obj1 = Single.getInstance();
-const obj2 = Single.getInstance();
-console.log(obj1 === obj2); //true
+const obj1 = Single.getInstance()
+const obj2 = Single.getInstance()
+console.log(obj1 === obj2) //true
 ```
 
 ## 饿汉式
 
 ```js
 class Single {
-  static #instace = new Single();
+  static #instace = new Single()
   static getInstance() {
-    return this.#instace;
+    return this.#instace
   }
   get() {
-    return "single";
+    return 'single'
   }
 }
-const obj1 = Single.getInstance();
-const obj2 = Single.getInstance();
-console.log(obj1 === obj2); //true
+const obj1 = Single.getInstance()
+const obj2 = Single.getInstance()
+console.log(obj1 === obj2) //true
 ```
 
 ## 应用场景

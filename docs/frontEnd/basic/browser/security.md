@@ -23,13 +23,13 @@ DOM-based 基于 dom 来执行恶意脚本来进行攻击
 ```js
 function escape(str) {
   return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quto;")
-    .replace(/'/g, "&#39;")
-    .replace(/`/g, "&#96;")
-    .replace(/\//g, "&#x2F;");
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quto;')
+    .replace(/'/g, '&#39;')
+    .replace(/`/g, '&#96;')
+    .replace(/\//g, '&#x2F;')
 }
 ```
 

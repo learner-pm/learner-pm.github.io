@@ -5,27 +5,27 @@
 ```js
 class ActivityA {
   getMoney(price) {
-    return price * 0.9;
+    return price * 0.9
   }
 }
 class ActivityB {
   getMoney(price) {
-    return price * 0.8;
+    return price * 0.8
   }
 }
 class Context {
-  #activityType;
+  #activityType
   constructor(type) {
-    this.#activityType = type;
+    this.#activityType = type
   }
   getMoneyByType(money) {
-    console.log(`this price is ${this.#activityType.getMoney(money)}`);
+    console.log(`this price is ${this.#activityType.getMoney(money)}`)
   }
 }
-let context = new Context(new ActivityA());
-context.getMoneyByType(100); //this price is 90
-context = new Context(new ActivityB());
-context.getMoneyByType(100); //this price is 80
+let context = new Context(new ActivityA())
+context.getMoneyByType(100) //this price is 90
+context = new Context(new ActivityB())
+context.getMoneyByType(100) //this price is 80
 ```
 
 ## application scenarios

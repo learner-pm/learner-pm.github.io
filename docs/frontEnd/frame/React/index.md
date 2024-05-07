@@ -41,10 +41,10 @@ const [a,setA] = useState(0)
 可以看出这个 hook 的作用时用来做缓存，避免性能开销。需要注意的是，如果被缓存的函数中存有`state`变量，需要将其设置为依赖数组中的一员，否则函数内拿不到最新的值。
 
 ```jsx
-const [a, setA] = useState(1);
+const [a, setA] = useState(1)
 const fn = useCallbak(() => {
-  console.log(a);
-}, [a]);
+  console.log(a)
+}, [a])
 ```
 
 ### useMemo
@@ -52,11 +52,11 @@ const fn = useCallbak(() => {
 该 hook 用来缓存一个`结果`，用法同`useCallback`，如下
 
 ```jsx
-const [a, setA] = useState(0);
+const [a, setA] = useState(0)
 const cacheNumber = useMemo(() => {
   // xxx
-  return a * 100;
-}, [a]);
+  return a * 100
+}, [a])
 ```
 
 之前工作中遇到了一个相关的问题，在 ant design 中使用`useMemo`包裹`Table`组件的 data 数据时，作为 action 的模块中的点击函数获取的 page 不正确,大致代码如下

@@ -87,6 +87,26 @@ cache
 dist
 ```
 
+## Action
+
+查看镜像
+
+```bash
+docker images
+```
+
+查看容器
+
+```bash
+docker ps
+```
+
+登录仓库
+
+```bash
+docker login api
+```
+
 ## 分段构建
 
 Docker 得分段构建指在 Dockerfile 文件中定义多个构建阶段，每个阶段可以使用不同得基础镜像，同时可以共享文件。这样可以减少最终镜像得大小，在构建过程中丢弃不需要得文件和依赖项。
