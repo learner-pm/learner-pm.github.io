@@ -12,26 +12,26 @@
 class Pig {
   constructor() {}
   getType() {
-    console.log("you get a pig");
+    console.log('you get a pig')
   }
 }
 class Cat {
   constructor() {}
   getType() {
-    console.log("you get a cat");
+    console.log('you get a cat')
   }
 }
 class Animal {
   //动物工厂
   constructor() {}
   getAnimal(type) {
-    if (type === "cat") return new Cat();
-    else if (type === "pig") return Pig();
+    if (type === 'cat') return new Cat()
+    else if (type === 'pig') return Pig()
   }
 }
-const animal = new Animal();
-const cat = animal.getAnimal("cat");
-cat.getType(); //you get a cat
+const animal = new Animal()
+const cat = animal.getAnimal('cat')
+cat.getType() //you get a cat
 ```
 
 ## 抽象工厂
@@ -44,41 +44,41 @@ cat.getType(); //you get a cat
 class Orchid {
   constructor() {}
   getType() {
-    console.log("you get an orchid");
+    console.log('you get an orchid')
   }
 }
 class Cat {
   constructor() {}
   getType() {
-    console.log("you get a cat");
+    console.log('you get a cat')
   }
 }
 class Plant {
   constructor() {}
   getPlant(type) {
-    if (type === "orchid") return new Orchid();
+    if (type === 'orchid') return new Orchid()
   }
 }
 class Animal {
   constructor() {}
   getAnimal(type) {
-    if (type === "cat") return new Cat();
+    if (type === 'cat') return new Cat()
   }
 }
 
 class Biology {
   //更高一层的工厂
   static getBiology(type) {
-    if (type === "animal") return new Animal();
-    else return new Plant();
+    if (type === 'animal') return new Animal()
+    else return new Plant()
   }
 }
-const animal = Biology.getBiology("animal");
-const cat = animal.getAnimal("cat");
-cat.getType(); //you get a cat
-const plant = Biology.getBiology("plant");
-const orchid = plant.getPlant("orchid");
-orchid.getType(); //you get an orchid
+const animal = Biology.getBiology('animal')
+const cat = animal.getAnimal('cat')
+cat.getType() //you get a cat
+const plant = Biology.getBiology('plant')
+const orchid = plant.getPlant('orchid')
+orchid.getType() //you get an orchid
 ```
 
 ## 应用场景

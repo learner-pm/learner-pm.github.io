@@ -8,11 +8,11 @@
 
 ```js
 setTimeout(() => {
-  console.log(0);
-}, 0); //虽然写得0，但最低为4ms
+  console.log(0)
+}, 0) //虽然写得0，但最低为4ms
 setInterval(() => {
-  console.log(0);
-}, 1000);
+  console.log(0)
+}, 1000)
 ```
 
 ## Event Loop
@@ -49,14 +49,14 @@ js 是单线程的语言。js 任务分为同步任务和异步任务，如何�
 因为`script`属于宏任务，也可以这样理解：开始执行代码，遇到微任务就放到本次事件循环队尾，宏任务放到下次事件循环开头，那么最开始的`script`代码也就是第一次执行的开头部分，后续依次循环执行。
 
 ```js
-console.log(0);
+console.log(0)
 setTimeout(() => {
-  console.log(3);
-}, 0);
+  console.log(3)
+}, 0)
 Promise.resolve().then(() => {
-  console.log(2);
-});
-console.log(1);
+  console.log(2)
+})
+console.log(1)
 // 0 1 2 3
 ```
 
@@ -64,27 +64,27 @@ console.log(1);
 
 ```js
 async function async1() {
-  console.log("A");
-  await async2();
-  console.log("B");
+  console.log('A')
+  await async2()
+  console.log('B')
 }
 async function async2() {
-  console.log("C");
+  console.log('C')
 }
-console.log("D");
+console.log('D')
 setTimeout(() => {
-  console.log("E");
-}, 0);
+  console.log('E')
+}, 0)
 
-async1();
+async1()
 
 new Promise(function (resolve) {
-  console.log("F");
-  resolve();
+  console.log('F')
+  resolve()
 }).then(function () {
-  console.log("G");
-});
-console.log("H");
+  console.log('G')
+})
+console.log('H')
 // D A C F H B G E
 ```
 
@@ -103,9 +103,9 @@ console.log("H");
 定义状态
 
 ```js
-const PENDING = "PENDING";
-const FULFILED = "FULFILED";
-const REJECTED = "REJECT";
+const PENDING = 'PENDING'
+const FULFILED = 'FULFILED'
+const REJECTED = 'REJECT'
 ```
 
 定义类
@@ -113,7 +113,7 @@ const REJECTED = "REJECT";
 ```js
 class MyPromise {
   then() {
-    return this;
+    return this
   }
 }
 ```

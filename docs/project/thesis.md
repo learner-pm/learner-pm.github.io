@@ -28,8 +28,8 @@ run 跑步需求：提供跑步机制，实时记录数据，提供历史跑步�
 圈子：提供发言，用户可在里面进行发言，提供发布言论按钮，提供对言论的点赞，收藏，评论功能，提供热评展示，对用户的关注。
 
 用户：展示用户数据，头像，姓名等。展示收藏，评论列表。点击头像进去详情情况，包含被关注数量，今日跑步次数等，点击头像修改修改，点击姓名修改姓名。
-https://www.tooopen.com/art/view/601b6b76656affb39cd7ea5a.html
-https://www.uibaba.com/shows/308.html
+<https://www.tooopen.com/art/view/601b6b76656affb39cd7ea5a.html>
+<https://www.uibaba.com/shows/308.html>
 
 设置：app 本身设置情况，用户推出，推送用户消息（收藏的信息变化推送等），清楚缓存，修改密码。
 
@@ -175,8 +175,8 @@ App 控制模块：该模块作用于 App 系统级别上面，对 App 本身信
 const par = {
   pageNo: 1,
   pageSize: 10,
-  total: 0,
-};
+  total: 0
+}
 ```
 
 ```sql

@@ -12,7 +12,7 @@ Chrome 和 Firefox 不允许从 HTTPS 跨域访问 HTTP。
 <script src="http://api.pmthank.cn/#/?id=a&name=b&callback=getData"></script>
 <script>
   function getData(e) {
-    console.log(e);
+    console.log(e)
   }
 </script>
 ```
@@ -39,9 +39,9 @@ Chrome 和 Firefox 不允许从 HTTPS 跨域访问 HTTP。
 浏览器发现这次请求是简单请求后，浏览器就会在头信息中增加`Origin`字段
 
 ```js
-import _ajax from "./_ajax.js";
-const api = "http://127.0.0.1:8800/user/login";
-const post = _ajax.post(api, {});
+import _ajax from './_ajax.js'
+const api = 'http://127.0.0.1:8800/user/login'
+const post = _ajax.post(api, {})
 ```
 
 <img src="./img/three_01.png" width="100%">

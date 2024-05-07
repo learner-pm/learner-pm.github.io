@@ -389,7 +389,7 @@ user_collect 收藏
 
 ## 地图轨迹
 
-### pc 上用户展示用户的跑步轨迹。
+### pc 上用户展示用户的跑步轨迹
 
 使用高德 api 进行开发，
 
@@ -399,24 +399,24 @@ const polyline = new AMap.Polyline({
   map: map,
   path: lineArr, //经纬度列表
   showDir: true,
-  strokeColor: "#28F",
-  strokeWeight: 6,
-});
-map.setFitView(); //缩放视野级别
+  strokeColor: '#28F',
+  strokeWeight: 6
+})
+map.setFitView() //缩放视野级别
 
 setInterval(() => {
   // 使用定时器进行绘制
-  lineArr.push(path[lineArr.length]); //更改经纬度数组
+  lineArr.push(path[lineArr.length]) //更改经纬度数组
   var polyline = new AMap.Polyline({
     //重新绘制
     map: map,
     path: lineArr,
     showDir: true,
-    strokeColor: "#28F",
-    strokeWeight: 6,
-  });
-  map.setFitView();
-}, 1000);
+    strokeColor: '#28F',
+    strokeWeight: 6
+  })
+  map.setFitView()
+}, 1000)
 ```
 
 ### app 绘制和实时记录
@@ -426,13 +426,13 @@ setInterval(() => {
 ```js
 setInterval(() => {
   uni.getLocation({
-    type: "wgs84",
+    type: 'wgs84',
     success: function (res) {
-      console.log("当前位置的经度：" + res.longitude);
-      console.log("当前位置的纬度：" + res.latitude);
-    },
-  });
-}, 1000);
+      console.log('当前位置的经度：' + res.longitude)
+      console.log('当前位置的纬度：' + res.latitude)
+    }
+  })
+}, 1000)
 ```
 
 实时绘制，map 组件的一个属性：`polyline`，经纬度数组。和 pc 端同理，定时改变改属性并且进行渲染即可。
@@ -452,12 +452,12 @@ app 储存在手机，进入 app 的时候需要进行本地数据读取。
 
 ```js
 uni.setStorage({
-  key: "storage_key",
-  data: "hello",
+  key: 'storage_key',
+  data: 'hello',
   success: function () {
-    console.log("success");
-  },
-});
+    console.log('success')
+  }
+})
 ```
 
 相机扫描（考虑中）
@@ -465,10 +465,10 @@ uni.setStorage({
 ```js
 uni.scanCode({
   success: function (res) {
-    console.log("条码类型：" + res.scanType);
-    console.log("条码内容：" + res.result);
-  },
-});
+    console.log('条码类型：' + res.scanType)
+    console.log('条码内容：' + res.result)
+  }
+})
 ```
 
 ## springBoot
@@ -482,8 +482,8 @@ mysql,sqagger-ui,
 ```js
 const listParameter = {
   pageNo: 1,
-  pageSize: 10,
-};
+  pageSize: 10
+}
 ```
 
 ### controller

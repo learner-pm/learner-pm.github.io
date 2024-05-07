@@ -25,7 +25,7 @@ name: deploy-docs-website
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: ["main"]
+    branches: ['main']
   #   pull_request:
   #     branches: [ "main" ]
 
@@ -46,7 +46,7 @@ jobs:
       - name: install nodejs
         uses: actions/setup-node@v3.5.0
         with:
-          node-version: "16.X"
+          node-version: '16.X'
       - name: install deps
         run: npm install
       - name: build app

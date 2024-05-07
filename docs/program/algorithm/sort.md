@@ -5,7 +5,7 @@
 测试数组：
 
 ```js
-const arr = [1, 45, -45, 1, 10, 111, 0, 121, 33, 3, 0];
+const arr = [1, 45, -45, 1, 10, 111, 0, 121, 33, 3, 0]
 ```
 
 ## 冒泡排序
@@ -16,21 +16,21 @@ const arr = [1, 45, -45, 1, 10, 111, 0, 121, 33, 3, 0];
 
 ```js
 const sort = (arr = [], type = 0) => {
-  if (!Array.isArray(arr)) throw "Only Array";
-  let sym = undefined;
+  if (!Array.isArray(arr)) throw 'Only Array'
+  let sym = undefined
   for (let i = 1; i < arr.length - 1; i++) {
     //只需要比较n-1次
     for (let j = 0; j < arr.length - i; j++) {
       if (type === 0 ? arr[j] >= arr[j + 1] : arr[j] <= arr[j + 1]) {
-        sym = arr[j];
-        arr[j] = arr[j + 1];
-        arr[j + 1] = sym;
+        sym = arr[j]
+        arr[j] = arr[j + 1]
+        arr[j + 1] = sym
       }
     }
   }
-};
-sort(arr);
-console.log(arr);
+}
+sort(arr)
+console.log(arr)
 ```
 
 ## 快速排序
@@ -43,29 +43,29 @@ console.log(arr);
 
 ```js
 const qSortArray = (arr, start, last) => {
-  let low = start;
-  let high = last;
+  let low = start
+  let high = last
   if (start < last) {
     // 使用了start作为第一指针，所以优先考虑last指针
-    const mid = arr[start];
+    const mid = arr[start]
     while (start < last) {
       // 数组右侧小于中间值的
       while (mid <= arr[last] && start < last) {
-        last--;
+        last--
       }
-      arr[start] = arr[last];
+      arr[start] = arr[last]
       // 数组左侧侧大于中间值的
       while (mid >= arr[start] && start < last) {
-        start++;
+        start++
       }
-      arr[last] = arr[start];
+      arr[last] = arr[start]
     }
-    arr[start] = mid;
+    arr[start] = mid
     // 剩余的继续递归
-    qSortArray(arr, start + 1, high);
-    qSortArray(arr, low, start - 1);
+    qSortArray(arr, start + 1, high)
+    qSortArray(arr, low, start - 1)
   }
-};
+}
 ```
 
 ### 优化
@@ -73,7 +73,7 @@ const qSortArray = (arr, start, last) => {
 生成一个随机基数来进行优化。
 
 ```js
-let num = Math.floor(Math.random() * (high - low) + low); //随机基数位置
+let num = Math.floor(Math.random() * (high - low) + low) //随机基数位置
 ```
 
 ::: tip 提示

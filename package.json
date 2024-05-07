@@ -11,16 +11,20 @@
     "docs:lint": "lint-staged",
     "prepare": "husky",
     "commitlint": "commitlint --edit",
-    "prettier": "npx prettier --write ."
+    "prettier:markdown": "prettier --write ./**/*.md && markdownlint .",
+    "markdownlint": "npx markdownlint . --fix",
+    "prettier": "npx prettier --write .",
+    "deploy": "scripts/deploy.sh",
+    "deploy:local": "node scripts/deployLocal.js"
   },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com:learner-pm/pengm.github.io.git"
   },
+  "type": "module",
   "lint-staged": {
     "docs/**/*.md": [
-      "prettier --write",
-      "markdownlint"
+      "prettier --write"
     ]
   },
   "keywords": [
@@ -38,6 +42,7 @@
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
     "markdownlint": "^0.34.0",
+    "markdownlint-cli": "^0.40.0",
     "prettier": "^3.2.5",
     "vitepress": "^1.0.2"
   }

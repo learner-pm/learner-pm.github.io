@@ -7,38 +7,38 @@
 ```js
 class Observer {
   constructor(name) {
-    this.name = name;
+    this.name = name
   }
   update() {
-    this.aboutMe();
+    this.aboutMe()
   }
   aboutMe() {
-    console.log(`I am ${this.name}`);
+    console.log(`I am ${this.name}`)
   }
 }
 class Publisher {
   constructor() {
-    this.observers = [];
+    this.observers = []
   }
   add(observer) {
-    this.observers.push(observer);
-    return this;
+    this.observers.push(observer)
+    return this
   }
   notify() {
-    this.observers.forEach((observer) => {
-      observer.update();
-    });
+    this.observers.forEach(observer => {
+      observer.update()
+    })
   }
   IntroduceObserver() {
-    console.log("Please introduce yourself");
-    this.notify();
+    console.log('Please introduce yourself')
+    this.notify()
   }
 }
-const zs = new Observer("zs");
-const ls = new Observer("ls");
-const lx = new Publisher();
-lx.add(zs).add(ls);
-lx.IntroduceObserver();
+const zs = new Observer('zs')
+const ls = new Observer('ls')
+const lx = new Publisher()
+lx.add(zs).add(ls)
+lx.IntroduceObserver()
 //Please introduce yourself
 //I am zs
 //I am ls

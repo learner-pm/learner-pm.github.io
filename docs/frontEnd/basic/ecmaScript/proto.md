@@ -12,10 +12,10 @@ js 是一门面向对象语言，但又不完全具有面向对象语言得特�
 
 ```js
 const b = {
-  a: 0,
-};
-console.log(b.toString());
-console.log(b.__proto__.toString());
+  a: 0
+}
+console.log(b.toString())
+console.log(b.__proto__.toString())
 ```
 
 对象`b`没有`toString()`方法，但你调用它时不报错，原因就是它会在当前对象的`__proto__`上查找这个方法。
@@ -23,8 +23,8 @@ console.log(b.__proto__.toString());
 变量`b`保存的是一个对象，在不进行修改的情况下`b.__proto__`是指向`Object.prototype`.
 
 ```js
-console.log(b.__proto__);
-console.log(b.__proto__ === Object.prototype); //true
+console.log(b.__proto__)
+console.log(b.__proto__ === Object.prototype) //true
 ```
 
 一个对象在调用一个方法时会去查找当前对象有没有这个方法，没有就去它的`__proto__`上查找，查找到即调用（会调用 call 改变 this 指向当前对象），没有则继续查找，直到查找到顶部即`null`。这样的查找过程就像是链式调用一样，因此把这个过程称作原型链。
@@ -32,22 +32,22 @@ console.log(b.__proto__ === Object.prototype); //true
 原型链顶层是`null`,同时`null`没有原型。
 
 ```js
-console.log({}.__proto__.__proto__); //null
+console.log({}.__proto__.__proto__) //null
 ```
 
 `__proto__`是可以人为修改的，原型也是一个对象。如下例子：把`b.__proto__`指向`c`对象，`c`对象中我们修改了`toString()`方法。这时调用`b.toString()`方法，就会按照原型链查找，当查找到`c`对象后就不会继续查找了。
 
 ```js
 const b = {
-  a: 0,
-};
+  a: 0
+}
 const c = {
   toString() {
-    return "c";
-  },
-};
-b.__proto__ = c;
-console.log(b.toString()); //c
+    return 'c'
+  }
+}
+b.__proto__ = c
+console.log(b.toString()) //c
 ```
 
 ### prototype
@@ -57,11 +57,11 @@ console.log(b.toString()); //c
 ```js
 function demo() {}
 demo.prototype.a = function () {
-  return "a";
-};
-const A = new demo();
-console.log(A.a()); //a
-console.log(A.__proto__ === demo.prototype); //true
+  return 'a'
+}
+const A = new demo()
+console.log(A.a()) //a
+console.log(A.__proto__ === demo.prototype) //true
 ```
 
 注意如下写法会重写整个原型。函数本身也是有原型的，指向`Object`。
@@ -70,11 +70,11 @@ console.log(A.__proto__ === demo.prototype); //true
 function demo() {}
 demo.prototype = {
   a() {
-    return "a";
-  },
-};
-const A = new demo();
-console.log(A.__proto__); //{a:f} 其他方法均无。
+    return 'a'
+  }
+}
+const A = new demo()
+console.log(A.__proto__) //{a:f} 其他方法均无。
 ```
 
 ### 原型链
@@ -102,18 +102,18 @@ es6 的继承本质时原型链的语法糖。子内必须调用`super`来建立
 ```js
 class Animal {
   constructor(type, food) {
-    this.type = type;
-    this.food = food;
+    this.type = type
+    this.food = food
   }
   eat() {
-    return this.type + " eat " + this.food;
+    return this.type + ' eat ' + this.food
   }
 }
 class Cat extends Animal {
   constructor(food) {
-    super("cat", food);
+    super('cat', food)
   }
 }
-const cat = new Cat("fish");
-console.log(cat.eat()); //cat eat fish
+const cat = new Cat('fish')
+console.log(cat.eat()) //cat eat fish
 ```

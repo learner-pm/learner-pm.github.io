@@ -10,8 +10,8 @@
 
 ```javascript
 module.exports = {
-  entry: "./src/index.js",
-};
+  entry: './src/index.js'
+}
 ```
 
 ### Output
@@ -20,9 +20,9 @@ module.exports = {
 
 ```js
 module.exports = {
-  filename: "[name].js",
-  path: __dirname + "/dist",
-};
+  filename: '[name].js',
+  path: __dirname + '/dist'
+}
 ```
 
 ### loader
@@ -36,10 +36,10 @@ module.exports = {
   rules: [
     {
       test: /\.css/,
-      use: [{ loader: "style-loader" }, { loader: "css-loader" }],
-    },
-  ],
-};
+      use: [{ loader: 'style-loader' }, { loader: 'css-loader' }]
+    }
+  ]
+}
 ```
 
 ### Plugin
@@ -65,10 +65,10 @@ module.exports = {
 ```js
 module.exports = {
   devServer: {
-    static: "./dist",
-    hot: true,
-  },
-};
+    static: './dist',
+    hot: true
+  }
+}
 ```
 
 ## Demo
@@ -86,61 +86,61 @@ npm i -D webpack webpack-cli webpack-merge webpack-dev-server html-webpack-plugi
 webpack.common.js
 
 ```js
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: './src/index.js',
   output: {
-    filename: "[name].[contenthash].js",
-    path: path.resolve(__dirname, "dist"),
-    clean: true,
+    filename: '[name].[contenthash].js',
+    path: path.resolve(__dirname, 'dist'),
+    clean: true
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "farme",
-      template: "./src/index.html",
-    }),
+      title: 'farme',
+      template: './src/index.html'
+    })
   ],
   module: {
     rules: [
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader']
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: "asset/resource",
-      },
-    ],
-  },
-};
+        type: 'asset/resource'
+      }
+    ]
+  }
+}
 ```
 
 webpack.dev.js
 
 ```js
-const { merge } = require("webpack-merge");
-const common = require("./webpack.common.js");
+const { merge } = require('webpack-merge')
+const common = require('./webpack.common.js')
 
 module.exports = merge(common, {
-  mode: "development",
-  devtool: "inline-source-map",
+  mode: 'development',
+  devtool: 'inline-source-map',
   devServer: {
-    static: "./dist",
-  },
-});
+    static: './dist'
+  }
+})
 ```
 
 webpack.prod.js
 
 ```js
-const { merge } = require("webpack-merge");
-const common = require("./webpack.common.js");
+const { merge } = require('webpack-merge')
+const common = require('./webpack.common.js')
 
 module.exports = merge(common, {
-  mode: "production",
-});
+  mode: 'production'
+})
 ```
 
 接下来创建文件，目录如下
@@ -172,36 +172,36 @@ module.exports = merge(common, {
 在之前的 Index.js 写入：
 
 ```js
-import MiniV from "./mini-v";
-import App from "./App";
+import MiniV from './mini-v'
+import App from './App'
 
-const { createRoot } = MiniV;
+const { createRoot } = MiniV
 
-createRoot(document.getElementById("app")).render(App);
+createRoot(document.getElementById('app')).render(App)
 ```
 
 现在来编写下 Mini-v 中的内容，按照目前的样子来说，主要是提供`createRoot`和 `render` 方法
 
 ```js
 class MiniV {
-  #root = undefined;
-  #children = undefined;
+  #root = undefined
+  #children = undefined
   constructor() {}
 
-  createRoot = (root) => {
-    this.#root = root;
-    return this;
-  };
-  render = (children) => {
-    this.#root.appendChild(this.#app());
-  };
+  createRoot = root => {
+    this.#root = root
+    return this
+  }
+  render = children => {
+    this.#root.appendChild(this.#app())
+  }
 }
-const _MiniV = new MiniV();
-const { useState } = _MiniV;
+const _MiniV = new MiniV()
+const { useState } = _MiniV
 
-export { useState };
+export { useState }
 
-export default _MiniV;
+export default _MiniV
 ```
 
 createRoot 方法主要用来保留根节点，render 即是渲染，将子组件的内容添加到页面上
@@ -210,12 +210,12 @@ createRoot 方法主要用来保留根节点，render 即是渲染，将子组�
 
 ```js
 const App = () => {
-  const dom = document.createElement("p");
-  p.innerHTML = "Hello";
-  return dom;
-};
+  const dom = document.createElement('p')
+  p.innerHTML = 'Hello'
+  return dom
+}
 
-export default App;
+export default App
 ```
 
 保存后查看页面，应该多了个`Hello`字符。
@@ -223,27 +223,27 @@ export default App;
 实现一下`useState`，先把我们期望的例子写出来。
 
 ```js
-import { useState } from "./mini-v";
+import { useState } from './mini-v'
 
 const App = () => {
-  const [num, setNum] = useState(0);
+  const [num, setNum] = useState(0)
   const click1 = () => {
-    setNum((pre) => pre + 1);
-  };
-  const div = document.createElement("div");
-  const p = document.createElement("p");
-  const button = document.createElement("p");
-  button.innerHTML = "num++";
-  p.innerHTML = `num的值是：${num}`;
-  button.addEventListener("click", () => {
-    click1();
-  });
-  div.appendChild(p);
-  div.appendChild(button);
-  return div;
-};
+    setNum(pre => pre + 1)
+  }
+  const div = document.createElement('div')
+  const p = document.createElement('p')
+  const button = document.createElement('p')
+  button.innerHTML = 'num++'
+  p.innerHTML = `num的值是：${num}`
+  button.addEventListener('click', () => {
+    click1()
+  })
+  div.appendChild(p)
+  div.appendChild(button)
+  return div
+}
 
-export default App;
+export default App
 ```
 
 期望是点击按钮`num++`后，num 的值会自增。
@@ -251,15 +251,15 @@ export default App;
 接下来实现一下`useState`。
 
 ```js
-useState = (v) => {
-  this.#v = this.#v || v;
+useState = v => {
+  this.#v = this.#v || v
 
-  const updated = (fu) => {
-    this.#v = typeof fu === "function" ? fu(this.#v) : fu;
-    this.render();
-  };
-  return [currentV, updated];
-};
+  const updated = fu => {
+    this.#v = typeof fu === 'function' ? fu(this.#v) : fu
+    this.render()
+  }
+  return [currentV, updated]
+}
 ```
 
 简单来说是组件首次渲染的时候拿到初始值，后续渲染则采用 store 中的值，updated 方法在执行入参后再次调用 render，重新渲染组件，返回最新的值，从而达到页面的更新。
@@ -267,11 +267,11 @@ useState = (v) => {
 所以在修改下 render 方法
 
 ```js
-render = (app) => {
-  this.#app = app || this.#app;
-  this.#root.innerHTML = "";
-  this.#root.appendChild(this.#app());
-};
+render = app => {
+  this.#app = app || this.#app
+  this.#root.innerHTML = ''
+  this.#root.appendChild(this.#app())
+}
 ```
 
 现在在页面上点击按钮即可看到 num 值的更新。
@@ -283,18 +283,18 @@ render = (app) => {
 先修改下例子
 
 ```js
-const [str, setStr] = useState("hi");
+const [str, setStr] = useState('hi')
 
 const click1 = () => {
-  setNum((pre) => pre + 1);
+  setNum(pre => pre + 1)
   if (num === 5) {
-    setStr("hello");
-    return;
+    setStr('hello')
+    return
   }
-  console.log(num);
-};
+  console.log(num)
+}
 
-p.innerHTML = `字符串str的值会在num的值为5的时候进行改变：${str}。num的值是：${num}`;
+p.innerHTML = `字符串str的值会在num的值为5的时候进行改变：${str}。num的值是：${num}`
 ```
 
 接下来修改 store 中的内容，增加一个 arr 来储存 state，再增加一个 key 用来做下位标识位，这个 key 主要是在函数执行时用来保证用 arr 中读取的数据的正确性。通过这里可以大致了解到 React 中的 hook 使用限制 ，也是异曲同工之妙。
@@ -328,11 +328,11 @@ p.innerHTML = `字符串str的值会在num的值为5的时候进行改变：${st
 由于这里没使用 babel 等，实现是这样的：
 
 ```js
-const map = new Map();
-map.set(click1.name, click1);
-const template = `<div>${num} <p>字符串str的值${str}</p> <button onclick-{click1}>num++</button> </div`;
-const dom = getDom(template, map);
-return dom;
+const map = new Map()
+map.set(click1.name, click1)
+const template = `<div>${num} <p>字符串str的值${str}</p> <button onclick-{click1}>num++</button> </div`
+const dom = getDom(template, map)
+return dom
 ```
 
 template 可以看成是我们写的 jsx，getDom 就是 babel 转换，map 存储方法，这样可以给到 getDom 中去使用，这里就模拟了 react 函数组件中的闭包。
@@ -341,71 +341,71 @@ template 可以看成是我们写的 jsx，getDom 就是 babel 转换，map 存�
 
 ```js
 const obj = {
-  type: "div",
-  value: "1",
+  type: 'div',
+  value: '1',
   children: [
     {
-      type: "p",
-      value: "2",
-      children: null,
-    },
-  ],
-};
+      type: 'p',
+      value: '2',
+      children: null
+    }
+  ]
+}
 ```
 
 再通过上面的结构来递归渲染 dom 节点，添加方法等，首先实现转换方法。
 
 ```js
-const transform = (htmlString) => {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(htmlString, "text/html");
-  console.log(doc);
+const transform = htmlString => {
+  const parser = new DOMParser()
+  const doc = parser.parseFromString(htmlString, 'text/html')
+  console.log(doc)
   function traverse(node) {
     const obj = {
       type: node.nodeName.toLowerCase(),
-      children: [],
-    };
+      children: []
+    }
 
     if (node.nodeType === Node.TEXT_NODE) {
-      obj.value = node.nodeValue.trim();
-      return obj;
+      obj.value = node.nodeValue.trim()
+      return obj
     }
 
     for (const childNode of node.childNodes) {
-      obj.children.push(traverse(childNode));
+      obj.children.push(traverse(childNode))
     }
 
-    return obj;
+    return obj
   }
 
-  return traverse(doc.body.firstChild);
-};
+  return traverse(doc.body.firstChild)
+}
 ```
 
 再反转义：
 
 ```js
 const getDom = (template, map) => {
-  const obj = transform(template);
-  console.log(obj);
-  const dom = document.createElement(obj.type);
+  const obj = transform(template)
+  console.log(obj)
+  const dom = document.createElement(obj.type)
 
-  obj.children.forEach((e) => {
-    const childNode = document.createElement(e.type.replace("#", ""));
-    if (e.type === "button") {
-      childNode.innerHTML = e.children[0].value;
-      childNode.addEventListener("click", () => {
-        map.get("click1")();
-      });
-    } else if (e.type === "p") {
-      childNode.innerHTML = e.children[0].value;
+  obj.children.forEach(e => {
+    const childNode = document.createElement(e.type.replace('#', ''))
+    if (e.type === 'button') {
+      childNode.innerHTML = e.children[0].value
+      childNode.addEventListener('click', () => {
+        map.get('click1')()
+      })
+    } else if (e.type === 'p') {
+      childNode.innerHTML = e.children[0].value
     } else {
-      childNode.innerHTML = e.value;
+      childNode.innerHTML = e.value
     }
-    dom.appendChild(childNode);
-  });
-  return dom;
-};
+    dom.appendChild(childNode)
+  })
+  return dom
+}
 ```
 
 这样就可以写模板和添加需要使用的方法使用。

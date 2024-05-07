@@ -26,16 +26,16 @@ export default {
   data() {
     return {
       author: {
-        name: "1",
-      },
-    };
-  },
-};
+        name: '1'
+      }
+    }
+  }
+}
 // 3.x
-import { reactive } from "vue";
+import { reactive } from 'vue'
 const author = reactive({
-  name: "1",
-});
+  name: '1'
+})
 ```
 
 ### style

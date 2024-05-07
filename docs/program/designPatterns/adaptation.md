@@ -5,34 +5,34 @@
 ```js
 class Mp4 {
   play() {
-    console.log("it is mp4");
+    console.log('it is mp4')
   }
 }
 class Video {
   play() {
-    console.log("is is video");
+    console.log('is is video')
   }
 }
 class Media {
   constructor(type) {
-    if (type === "mp4") this.type = new Mp4();
-    else if (type === "video") this.type = new Video();
+    if (type === 'mp4') this.type = new Mp4()
+    else if (type === 'video') this.type = new Video()
   }
   play() {
-    this.type.play();
+    this.type.play()
   }
 }
 class AudioPlayer {
   play(type) {
-    if (type === "mp3") {
-      console.log("it is mp3");
-    } else if (type === "mp4" || type === "video") {
-      new Media(type).play();
+    if (type === 'mp3') {
+      console.log('it is mp3')
+    } else if (type === 'mp4' || type === 'video') {
+      new Media(type).play()
     }
   }
 }
-const audio = new AudioPlayer();
-audio.play("mp4");
+const audio = new AudioPlayer()
+audio.play('mp4')
 //it is mp4
 ```
 

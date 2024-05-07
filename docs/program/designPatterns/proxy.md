@@ -7,26 +7,26 @@
 ```js
 class Date {
   constructor(url) {
-    this.url = url;
+    this.url = url
   }
   getDate() {
-    console.log(`这是从${this.url}请求的数据`);
+    console.log(`这是从${this.url}请求的数据`)
   }
 }
 class ProxyDate {
-  #Date;
+  #Date
   constructor(url) {
-    this.url = url;
+    this.url = url
   }
   getDate() {
     if (!this.#Date) {
-      this.#Date = new Date(this.url);
+      this.#Date = new Date(this.url)
     }
-    this.#Date.getDate();
+    this.#Date.getDate()
   }
 }
-const proxyD = new ProxyDate("www.xxxx.com/getDate");
-proxyD.getDate();
+const proxyD = new ProxyDate('www.xxxx.com/getDate')
+proxyD.getDate()
 ```
 
 ## 应用场景

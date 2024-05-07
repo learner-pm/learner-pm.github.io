@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: docs-8-test
-          image: localhost:5000/docs-8
+          image: pengmmm/docs:latest
           ports:
-            - containerPort: 80
+            - containerPort: 80 ## 暴露的端口

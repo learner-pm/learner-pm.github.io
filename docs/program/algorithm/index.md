@@ -10,16 +10,16 @@
 
 ```js
 const narcissisticNumber = () => {
-  let bit, ten, hundred;
+  let bit, ten, hundred
   for (let i = 100; i < 1000; i++) {
-    bit = i % 10;
-    ten = ((i - bit) / 10) % 10; //js/运算有余
-    hundred = (i - ten * 10 - bit) / 100;
+    bit = i % 10
+    ten = ((i - bit) / 10) % 10 //js/运算有余
+    hundred = (i - ten * 10 - bit) / 100
     if (hundred * hundred * hundred + ten * ten * ten + bit * bit * bit === i)
-      console.log(i);
+      console.log(i)
   }
-};
-narcissisticNumber(); // 153 370 371 407
+}
+narcissisticNumber() // 153 370 371 407
 ```
 
 ## 杨辉三角
@@ -29,31 +29,31 @@ narcissisticNumber(); // 153 370 371 407
 **The problem**：给出 n 的杨辉三角。
 
 ```js
-const triangle = (n) => {
-  const arr = [];
-  let i, j;
-  let str = "";
+const triangle = n => {
+  const arr = []
+  let i, j
+  let str = ''
   for (i = 0; i < n; i++) {
-    arr[i] = [];
+    arr[i] = []
     for (j = 0; j < n; j++) {
-      arr[i][j] = 0;
+      arr[i][j] = 0
     }
-    arr[i][0] = 1; //生成基于n的二维数组
+    arr[i][0] = 1 //生成基于n的二维数组
   }
   for (i = 1; i < n; i++) {
     for (j = 1; j <= i; j++) {
-      arr[i][j] = arr[i - 1][j] + arr[i - 1][j - 1]; //规程填充
+      arr[i][j] = arr[i - 1][j] + arr[i - 1][j - 1] //规程填充
     }
   }
   for (i = 0; i < n; i++) {
     for (j = 0; j <= i; j++) {
-      str += arr[i][j] + " ";
+      str += arr[i][j] + ' '
     }
-    console.log(str); //打印
-    str = "";
+    console.log(str) //打印
+    str = ''
   }
-};
-triangle(10);
+}
+triangle(10)
 ```
 
 ## 斐波拉契
@@ -67,19 +67,19 @@ triangle(10);
 首先使用递归，下方法能求出 n 位下的斐波拉契的值。
 
 ```js
-const fib = (n) => {
-  if (n <= 2) return 1;
+const fib = n => {
+  if (n <= 2) return 1
   //结束条件
-  else return fib(n - 1) + fib(n - 2); //规则就是 通项公式
-};
-console.log(fib(7));
+  else return fib(n - 1) + fib(n - 2) //规则就是 通项公式
+}
+console.log(fib(7))
 ```
 
 若要打印 n 位下的斐波拉契数列，加个循环即可：
 
 ```js
 for (let i = 1; i < 7; i++) {
-  console.log(fib(i));
+  console.log(fib(i))
 }
 ```
 
@@ -90,22 +90,22 @@ for (let i = 1; i < 7; i++) {
 以下函数能打印出给定 n 下的数列：
 
 ```js
-const fibF = (n) => {
-  let last1 = undefined; //记录
-  let last2 = undefined;
-  let nowNumber = 1;
+const fibF = n => {
+  let last1 = undefined //记录
+  let last2 = undefined
+  let nowNumber = 1
   for (let i = 0; i < n; i++) {
     if (i < 2) {
-      nowNumber = last2 = last1 = 1;
+      nowNumber = last2 = last1 = 1
     } else {
-      nowNumber = last2 + last1;
-      last2 = last1;
-      last1 = nowNumber;
+      nowNumber = last2 + last1
+      last2 = last1
+      last1 = nowNumber
     }
-    console.log(nowNumber);
+    console.log(nowNumber)
   }
-};
-fibF(7);
+}
+fibF(7)
 ```
 
 ## 回文字符串
@@ -119,33 +119,33 @@ fibF(7);
 采用 for 循环遍历判断，字符串长度为偶数只需要比较长度一半即可，为奇数除开中间字符：
 
 ```js
-const isPalindromeString = (str) => {
-  if (str.length === 1) return true;
-  let num = str.length % 2 !== 0 ? str.length / 2 + 0.5 : str.length / 2; //js没有整除，需要处理一下
+const isPalindromeString = str => {
+  if (str.length === 1) return true
+  let num = str.length % 2 !== 0 ? str.length / 2 + 0.5 : str.length / 2 //js没有整除，需要处理一下
   for (let i = 0; i < num; i++) {
-    if (str[i] !== str[str.length - 1 - i]) return false;
+    if (str[i] !== str[str.length - 1 - i]) return false
   }
-  return true;
-};
-const str = "aassaa";
-console.log(isPalindromeString(str));
+  return true
+}
+const str = 'aassaa'
+console.log(isPalindromeString(str))
 ```
 
 也可以采用双指针来进行判断，就不需要计算中间位置：
 
 ```js
-const isPalindromeString = (str) => {
-  let low = 0;
-  let high = str.length - 1;
+const isPalindromeString = str => {
+  let low = 0
+  let high = str.length - 1
   while (low <= high) {
-    if (str[low] !== str[high]) return false;
-    low++;
-    high--;
+    if (str[low] !== str[high]) return false
+    low++
+    high--
   }
-  return true;
-};
-const str = "vassav";
-console.log(isPalindromeString(str));
+  return true
+}
+const str = 'vassav'
+console.log(isPalindromeString(str))
 ```
 
 对于类似的回文数也是一样的思路：前后同时遍历是否相同。
@@ -161,29 +161,29 @@ leetcode 真题
 第一种方式，直接暴力求解，第一层循环意为循环子字符串的长度，第二层为找出字符串长度为 i 时候的所以子字符串，最里面循环来进行比较判断当前字符串是否符合回文的要求。
 
 ```js
-const longestPalindrome = (s) => {
-  let left = undefined;
-  let right = undefined;
-  let isPal = false;
+const longestPalindrome = s => {
+  let left = undefined
+  let right = undefined
+  let isPal = false
   for (let i = 0; i < s.length; i++) {
     //i: 0 1 2 ...
     for (let j = 0; j <= i; j++) {
       //j: s.length -1  s.length - 2 ...
-      (left = j), (right = s.length - i + j - 1);
-      let str = s.substring(left, right + 1); //js截取字符串的方法，左闭右开，right+1;
+      ;(left = j), (right = s.length - i + j - 1)
+      let str = s.substring(left, right + 1) //js截取字符串的方法，左闭右开，right+1;
       while (left <= right) {
         if (s[left] !== s[right]) {
-          isPal = false;
-          break;
+          isPal = false
+          break
         }
-        isPal = true;
-        left++;
-        right--;
+        isPal = true
+        left++
+        right--
       }
-      if (isPal) return str;
+      if (isPal) return str
     }
   }
-};
+}
 ```
 
 这种方法，空间复杂度为`O(n*n*n)`,复杂度太高。
@@ -192,40 +192,40 @@ const longestPalindrome = (s) => {
 
 ```js
 const longestPalindrome = function (s) {
-  let left = undefined;
-  let right = undefined;
-  let isPal = false;
-  let number = [0]; //维护一个判断数组
-  let i = 0;
-  let j = 0;
+  let left = undefined
+  let right = undefined
+  let isPal = false
+  let number = [0] //维护一个判断数组
+  let i = 0
+  let j = 0
   while (i <= number.length) {
     if (i > number.length - 1) {
       //增加循环次数0; 0 1; ...
-      number.push(number.length);
-      i = 0;
-      j++;
+      number.push(number.length)
+      i = 0
+      j++
     }
     if (number.length - 1 >= s.length) {
       //超出输入字符最大长度就结束循环
-      break;
+      break
     }
-    left = i;
-    right = s.length - 1 - j + i;
-    let str = s.substring(left, right + 1);
+    left = i
+    right = s.length - 1 - j + i
+    let str = s.substring(left, right + 1)
     while (left <= right) {
       //判断当前字符串
       if (s[left] !== s[right]) {
-        isPal = false;
-        break;
+        isPal = false
+        break
       }
-      isPal = true;
-      left++;
-      right--;
+      isPal = true
+      left++
+      right--
     }
-    if (isPal) return str; //从大到小判断，找到就return
-    i++;
+    if (isPal) return str //从大到小判断，找到就return
+    i++
   }
-};
+}
 ```
 
 外层循环控制次数，内层循环来进行比较。外层循环的 i 就是子字符串的长度固定时候需要的次数，j 为当前字符串的长度补值。
@@ -244,10 +244,10 @@ const longestPalindrome = function (s) {
 
 ```js
 for (i = 0; i < sLength; i++) {
-  arr[i] = [];
+  arr[i] = []
   for (j = 0; j < sLength; j++) {
-    if (i === j) arr[i][j] = true;
-    else arr[i][j] = false;
+    if (i === j) arr[i][j] = true
+    else arr[i][j] = false
   }
 }
 ```
@@ -261,11 +261,11 @@ for (let i = 0; i < sLength; i++) {
   for (let j = 0; j < sLength; j++) {
     if (s[i] === s[j]) {
       if (j - i < 2 || arr[i - 1][j + 1] == true) {
-        arr[i][j] = true;
+        arr[i][j] = true
         if (length < j - i) {
-          start = i;
-          end = j;
-          length = j - i;
+          start = i
+          end = j
+          length = j - i
         }
       }
     }
@@ -279,16 +279,16 @@ for (let i = 0; i < sLength; i++) {
 
 ```js
 const longestPalindrome = function (s) {
-  let start = 0;
-  let end = 0;
-  let length = 0;
-  let sLength = s.length;
-  const arr = [];
+  let start = 0
+  let end = 0
+  let length = 0
+  let sLength = s.length
+  const arr = []
   for (i = 0; i < sLength; i++) {
-    arr[i] = [];
+    arr[i] = []
     for (j = 0; j < sLength; j++) {
-      if (i === j) arr[i][j] = true;
-      else arr[i][j] = false;
+      if (i === j) arr[i][j] = true
+      else arr[i][j] = false
     }
   } // 生成二维数组
   for (let i = 0; i < sLength; i++) {
@@ -296,19 +296,19 @@ const longestPalindrome = function (s) {
       if (s[i] === s[j]) {
         if (i - j < 2 || arr[i - 1][j + 1] == true) {
           // i -j,j-> start
-          arr[i][j] = true;
+          arr[i][j] = true
           if (length < i - j) {
-            start = j;
-            end = i;
-            length = i - j;
+            start = j
+            end = i
+            length = i - j
           }
         }
       }
     }
   }
-  return s.substring(start, end + 1);
-};
-console.log(longestPalindrome("daaaa"));
+  return s.substring(start, end + 1)
+}
+console.log(longestPalindrome('daaaa'))
 ```
 
 ::: tip 提示
