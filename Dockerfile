@@ -13,6 +13,9 @@ RUN npm install
 # 复制所有文件到工作目录
 COPY . .
 
+# 清空 ./vitepress/dist 目录下的内容
+RUN rm -rf /app/docs/vitepress/dist/*
+
 # 构建项目
 RUN npm run docs:build
 

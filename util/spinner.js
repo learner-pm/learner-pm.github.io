@@ -14,4 +14,4 @@ const stopSpinner = () => {
   process.stdout.write('\r\x1b[K') // Clear line
 }
 
-export { startSpinner, stopSpinner }
+module.exports= { startSpinner, stopSpinner }
