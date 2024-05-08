@@ -11,7 +11,7 @@ const url = () => {
   footer[0].appendChild(a)
 }
 const setText = () => {
-  const p = document.createElement('P')
+  const p = document.body.createElement('P')
   p.textContent = '山不在高，有仙则灵    水不在深，有龙则灵'
   p.setAttribute('class', 'home-add-text')
   footer[0].insertBefore(p, footer[0].getElementsByClassName('container')[0])

@@ -1,19 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: docs-8
+  name: docs
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: docs-8
+      app: docs
   template:
     metadata:
       labels:
-        app: docs-8
+        app: docs
     spec:
       containers:
-        - name: docs-8-test
+        - name: docs-container
           image: pengmmm/docs:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 80 ## 暴露的端口
