@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-frontend-app
+spec:
+  selector:
+    matchLabels:
+      app: node-frontend-app
+  template:
+    metadata:
+      labels:
+        app: node-frontend-app
+    spec:
+      containers:
+      - name: node-frontend-app
+        image: pengmmm/node-frontend:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80

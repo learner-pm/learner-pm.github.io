@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: docs
+  template:
+    metadata:
+      labels:
+        app: docs
+    spec:
+      containers:
+        - name: docs-container
+          image: pengmmm/docs:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80 ## 暴露的端口
+          livenessProbe:
+            httpGet:
+              path: /getInfo
+              port: 3000
+            initialDelaySeconds: 3
+            periodSeconds: 3

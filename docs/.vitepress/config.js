@@ -107,7 +107,10 @@ export default {
         },
         {
           text: 'Kuberentes',
-          items: [{ text: 'Kuberentes', link: '/program/Kuberentes/' }]
+          items: [
+            { text: 'Kuberentes', link: '/program/Kuberentes/' },
+            { text: '部署前后端', link: '/program/Kuberentes/demoOne' }
+          ]
         },
         {
           text: 'Vite',
