@@ -1,4 +1,4 @@
-const  { exec, spawn } = require('child_process')
+const  { exec, spawn, execSync } = require('child_process')
 const { startSpinner, stopSpinner }=  require('../util/spinner.js')
 const {getValueFromJson} =  require('../util/getValueFromJson.js')
 
@@ -86,4 +86,16 @@ const start = async () => {
   build(version)
 }
 
-start()
+// start()
+
+const test = async () => {
+  // const output = execSync('ls -l -a')
+  // console.log(output.toString())
+  // console.log('最后执行的结果')
+  const child = spawn('ls',['-l','-a'])
+  child.stdout.on('data', data => {
+    console.log(`stdout: ${data}`)
+  })
+}
+
+test()
