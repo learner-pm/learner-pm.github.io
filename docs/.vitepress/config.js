@@ -129,6 +129,10 @@ export default {
           items: [{ text: 'Webpack', link: '/program/Webpack/' }]
         },
         {
+          text: '命令行',
+          items: [{ text: 'Sh', link: '/program/sh/' }]
+        },
+        {
           text: '数据结构',
           items: [
             { text: '链表', link: '/program/dataStructure/' },

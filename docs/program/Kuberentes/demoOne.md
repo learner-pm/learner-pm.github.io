@@ -313,7 +313,7 @@ kubectl exec -it <pod-name>  sh
 curl podIp:3000
 ```
 
-其中podIp是后端容器的端口，可以通过如下命令查看
+其中podIp是后端容器的IP，可以通过如下命令查看
 
 ```bash
 kubectl get pod <pod-name> -o wide
