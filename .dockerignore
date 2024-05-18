@@ -5,3 +5,6 @@ dist
 .github
 .husky
 code
+example
+helm
+lint

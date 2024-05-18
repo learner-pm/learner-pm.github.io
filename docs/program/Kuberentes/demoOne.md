@@ -385,3 +385,96 @@ COPY nginx.conf /etc/nginx/nginx.conf
 然后进行前端服务的构建、上传、重建pod等操作，如果顺利，在页面上点击按钮即可显示用户名称。
 
 相比于直接修改api的方式，这种反向代理的方式比较稳定，优雅。
+
+## 使用 Ingress
+
+通过`Ingress`来进行服务的访问，不直接访问前端服务的地址
+
+编写如下文件，主要是使用前后端Service
+
+1、前端服务 (node-frontend-app):
+
+- URL: http://node.backend/
+- 服务: node-frontend-app
+- 端口: 8884
+
+2、后端服务 (node-backend):
+
+- URL: http://node.backend/backend
+- 服务: node-backend
+- 端口: 8448
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: node-backend-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: node.backend
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: node-frontend-app
+                port:
+                  number: 8884
+          - path: /backend
+            pathType: Prefix
+            backend:
+              service:
+                name: node-backend
+                port:
+                  number: 8448
+```
+
+执行文件
+
+```bash
+kubectl apply -f ingress.yaml
+```
+
+查看ingress
+
+```bash
+kubectl get ingress
+```
+
+接着修改本机host文件，增加一行映射
+
+```
+<ingressIp> node.backend
+```
+
+在浏览器输入`http://node.backend/`即可访问，但是windows上会提示访问失败，主要是`minikube`在非`Linux`上不能通过ip+端口进行访问。可这样改，看[这里](https://stackoverflow.com/questions/66275458/could-not-access-kubernetes-ingress-in-browser-on-windows-home-with-minikube)
+
+在windows上进行下修改以达到访问的目的：
+
+1、启动tunnel
+
+```bash
+minikube tunnel
+```
+
+2、通过ssh进行访问
+
+```bash
+minikube ssh
+```
+
+```bash
+# 正常下能够显示前端信息
+curl http://node.backend/
+```
+
+3、修改host文件，将之前的映射修改如下
+
+```
+127.0.0.1 node.backend
+```
+
+完成上面三步后即可在浏览器输入`http://node.backend/`进行服务的访问

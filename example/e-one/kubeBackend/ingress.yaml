@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: node-backend-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: node.backend
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: node-frontend-app
+            port:
+              number: 8884
+      - path: /backend
+        pathType: Prefix
+        backend:
+          service:
+            name: node-backend
+            port:
+              number: 8448

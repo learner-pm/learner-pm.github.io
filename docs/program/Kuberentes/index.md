@@ -238,6 +238,109 @@ spec:
               key: VERSION
 ```
 
+## Ingress
+
+Ingress 资源的主要组成部分：
+
+- apiVersion: 定义了 API 的版本。在您的配置中是 networking.k8s.io/v1。
+- kind: 指定资源类型。在您的配置中是 Ingress。
+- metadata: 包含 Ingress 的名称和其他元数据，比如标签和注释。
+- spec: 定义 Ingress 的具体配置，包括路由规则、主机名和路径等。
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: node-backend-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: node.backend
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: node-frontend-app
+                port:
+                  number: 8884
+          - path: /backend
+            pathType: Prefix
+            backend:
+              service:
+                name: node-backend
+                port:
+                  number: 8448
+```
+
+如上文件spec里面定义了主机名是`node.backend`,其中有两个访问路径
+
+1、前端服务 (node-frontend-app):
+
+- URL: http://node.backend/
+- 服务: node-frontend-app
+- 端口: 8884
+
+2、后端服务 (node-backend):
+
+- URL: http://node.backend/backend
+- 服务: node-backend
+- 端口: 8448
+
+实例可看[这里](demoOne.html#使用-ingress)
+
+## IngressClass
+
+在Kubernetes中，`IngressClass`是一个用于定义和管理Ingress控制器的自定义容器。它允许集群管理员指定特定的Ingress控制器，并控制其行为。通过使用IngressClass，可以在一个集群中运行多个不同类型的Ingress控制器，并让每个Ingress资源明确地指向其中一个控制器
+
+简单来说，IngressClass就好比面向对象语言中的类，每一个Ingress引用这个类就好比实例化这个类并使用它，以此来直接使用类中的方法什么的，在这里就是直接使用IngressClass中的配置。
+
+优点：
+
+- 配置简化：减少了在 Ingress 资源中配置控制器的细节，配置变得更加简洁和易读。
+- 集群一致性：通过集中配置 IngressClass，可以确保所有使用相同 IngressClass 的 Ingress 资源都遵循相同的控制器配置。
+- 易于维护：当需要修改 Ingress 控制器相关的配置时，只需更改 IngressClass，而不需要逐一修改所有的 Ingress 资源。
+
+IngressClass 的主要组成部分：
+
+- apiVersion: 定义 API 的版本，通常是 networking.k8s.io/v1。
+- kind: 指定资源类型，这里是 IngressClass。
+- metadata: 包含 IngressClass 的名称和其他元数据。
+- spec: 定义 IngressClass 的具体配置，包括控制器的名称和参数等。
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  name: nginxClass
+spec:
+  controller: k8s.io/ingress-nginx
+```
+
+使用
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: example-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: example-service
+                port:
+                  number: 80
+```
+
 ## 探针
 
 探针时k8s 用于检测容器健康状态，并且可以采取相应措施的一个方式。
