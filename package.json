@@ -35,6 +35,7 @@
     "url": "https://github.com/learner-pm/pengm.github.io/issues"
   },
   "homepage": "https://github.com/learner-pm/pengm.github.io#readme",
+  "packageManager": "pnpm@9.1.1",
   "devDependencies": {
     "@commitlint/cli": "^19.2.2",
     "@commitlint/config-conventional": "^19.2.2",
