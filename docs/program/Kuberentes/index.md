@@ -666,6 +666,26 @@ kubectl describe pod <pod-name> # 更详细的 Pod 信息
 kubectl get nodes
 ```
 
+暴露服务
+
+```bash
+kubectl expose RESOURCE TYPE NAME --port=PORT [--target-port=TARGET_PORT] [--TYPE=SERVICE_TYPE]
+
+# 暴露Deployment
+kubectl expose deployment my-deployment --port=80 --target-port=080
+# 暴露Pod
+kubectl expose pod my-pod --port=80 --target-port=8080
+# 暴露Service
+kubectl expose service my-service --port=80 --target-port=8080 --name=my-new-service
+
+```
+
+查看内置服务
+
+```bash
+kubectl cluster-info
+```
+
 查看Service
 
 ```bash
