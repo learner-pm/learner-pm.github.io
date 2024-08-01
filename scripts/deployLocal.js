@@ -86,16 +86,16 @@ const start = async () => {
   build(version)
 }
 
-// start()
+start()
 
-const test = async () => {
-  // const output = execSync('ls -l -a')
-  // console.log(output.toString())
-  // console.log('最后执行的结果')
-  const child = spawn('ls',['-l','-a'])
-  child.stdout.on('data', data => {
-    console.log(`stdout: ${data}`)
-  })
-}
+// const test = async () => {
+//   // const output = execSync('ls -l -a')
+//   // console.log(output.toString())
+//   // console.log('最后执行的结果')
+//   const child = spawn('ls',['-l','-a'])
+//   child.stdout.on('data', data => {
+//     console.log(`stdout: ${data}`)
+//   })
+// }
 
-test()
+// test()
