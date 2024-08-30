@@ -28,7 +28,10 @@ features:
 ---
 
 <Home />
+<Visits />
+<Confetti />
 
 <script setup>
 import Home from './src/components/Home.vue'
+import Visits from './src/components/Visits.vue'
 </script>

@@ -1,3 +1,7 @@
+<template>
+  <p class="home-add-text">山不在高，有仙则灵    水不在深，有龙则灵</p>
+</template>
+
 <script setup>
 import { onMounted } from 'vue'
 const footer = document.getElementsByClassName('VPFooter')
@@ -21,24 +25,25 @@ const setFooter = () => {
   footer[0].style = 'border-top:0px;padding-top:0px;'
 }
 onMounted(() => {
-  const footer = document.getElementsByClassName('home-add-text')
-  if (footer.length > 0) {
-    return
-  }
-  setFooter()
+  // const footer = document.getElementsByClassName('home-add-text')
+  // if (footer.length > 0) {
+  //   return
+  // }
+ // setFooter()
   // 部署在GitHub上后无备案号
   // url()
-  setText()
+  //setText()
 })
 </script>
 
-<style>
+<style scoped>
 .home-add-text {
   text-align: center;
   font-size: 18px;
   padding: 20px 0px;
   margin-bottom: 32px;
-  border-top: 1px solid var(--vp-c-gutter);
-  border-bottom: 1px solid var(--vp-c-gutter);
+  margin-top: 20px;
+  /* border-top: 1px solid var(--vp-c-gutter);
+  border-bottom: 1px solid var(--vp-c-gutter); */
 }
 </style>
