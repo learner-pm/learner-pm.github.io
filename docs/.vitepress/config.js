@@ -87,6 +87,15 @@ export default {
       ],
       '/frontEnd/frame/': [
         {
+          text: '进阶内容',
+          items: [
+            {
+              text: '性能优化',
+              link: '/frontEnd/frame/Front/performanceOptimization'
+            }
+          ]
+        },
+        {
           text: 'React',
           items: [{ text: 'React', link: '/frontEnd/frame/React/' }]
         },
@@ -101,6 +110,10 @@ export default {
       ],
 
       '/program/': [
+        {
+          text: 'Linux',
+          items: [{ text: '服务器', link: '/program/linux/basic' }]
+        },
         {
           text: 'Docker',
           items: [{ text: 'Docker', link: '/program/Docker/' }]
