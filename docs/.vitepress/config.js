@@ -97,7 +97,10 @@ export default {
         },
         {
           text: 'React',
-          items: [{ text: 'React', link: '/frontEnd/frame/React/' }]
+          items: [
+            { text: 'React', link: '/frontEnd/frame/React/' },
+            { text: 'Fiber', link: '/frontEnd/frame/React/Fiber' }
+          ]
         },
         {
           text: 'Vue',
