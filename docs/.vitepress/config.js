@@ -99,6 +99,7 @@ export default {
           text: 'React',
           items: [
             { text: 'React', link: '/frontEnd/frame/React/' },
+            { text: '深入React', link: '/frontEnd/frame/React/Learn' },
             { text: 'Fiber', link: '/frontEnd/frame/React/Fiber' }
           ]
         },
@@ -108,7 +109,10 @@ export default {
         },
         {
           text: '其他',
-          items: [{ text: '表单', link: '/frontEnd/frame/Other/form' }]
+          items: [
+            { text: '表单', link: '/frontEnd/frame/Other/form' },
+            { text: '项目搭建', link: '/frontEnd/frame/Other/build' }
+          ]
         }
       ],
 
