@@ -109,14 +109,19 @@ export default {
         },
         {
           text: '其他',
-          items: [
-            { text: '表单', link: '/frontEnd/frame/Other/form' },
-            { text: '项目搭建', link: '/frontEnd/frame/Other/build' }
-          ]
+          items: [{ text: '表单', link: '/frontEnd/frame/Other/form' }]
         }
       ],
 
       '/program/': [
+        {
+          text: '项目搭建',
+          items: [{ text: '项目搭建', link: '/program/build' }]
+        },
+        {
+          text: 'CLI',
+          items: [{ text: 'CLI', link: '/program/cli' }]
+        },
         {
           text: 'Linux',
           items: [{ text: '服务器', link: '/program/linux/basic' }]
