@@ -116,7 +116,10 @@ export default {
       '/program/': [
         {
           text: '项目搭建',
-          items: [{ text: '项目搭建', link: '/program/build' }]
+          items: [
+            { text: '项目搭建', link: '/program/build' },
+            { text: '微前端', link: '/program/build/microApp' }
+          ]
         },
         {
           text: 'CLI',
