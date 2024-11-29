@@ -39,6 +39,10 @@ export default {
         ]
       },
       {
+        text: 'Rust',
+        link: '/rust/'
+      },
+      {
         text: '工具和技术',
         link: '/program/'
       },
@@ -112,7 +116,12 @@ export default {
           items: [{ text: '表单', link: '/frontEnd/frame/Other/form' }]
         }
       ],
-
+      '/rust/': [
+        {
+          text: '所有权',
+          link: '/rust/index'
+        }
+      ],
       '/program/': [
         {
           text: '项目搭建',
