@@ -855,3 +855,313 @@ impl AdvancedDisplay for Item {
    用于迭代器实现
 
 ## 集合
+
+### Vec<T>
+
+`Vec<T>` 是`Rust`中最常见的动态数组类型，允许你存储一系列的元素，元素可以是任何类型`T`。
+
+特点：
+
+- 存储在堆上
+- 可动态增长
+- 支持索引操作
+- 支持添加、删除元素
+
+创建和使用：
+
+```rust
+fn main(){
+    let mut v:Vec<i32> = Vec::new();
+    v.push(1); // 向 Vec 中添加元素
+    v.push(2);
+    v.push(3);
+
+    println!("{:?}", v); // 打印 [1, 2, 3]
+
+    // 通过索引访问元素
+    println!("{}", v[0]); // 输出: 1
+
+    // 遍历元素
+    for i in &v {
+        println!("{}", i);
+    }
+}
+```
+
+切片访问：
+
+```rust
+let v = vec![1, 2, 3, 4];
+let slice = &v[1..3];
+```
+
+安全性：
+
+- `Rust`会运行时保证对Vec的越界访问时非法的
+- `Vec`支持按值传递，因此可以方便的转移所有权
+
+### String
+
+`String` 是一个可扩展的、动态分配的字符串类型。它与`&str`不同，后者是一个不可变 引用，前者是一个拥有所有权的可变字符串
+
+创建和使用
+
+```rust
+fn main() {
+    let mut s = String::new(); // 创建空字符串
+
+    s.push_str("Hello"); // 向 String 中追加字符串
+    s.push(' ');         // 追加字符
+    s.push_str("World!");
+
+    println!("{}", s); // 输出: Hello World!
+}
+
+```
+
+从切片创建字符串
+
+```rust
+let s = String::from("Hello, Rust!");
+println!("{}", s); // 输出: Hello, Rust!
+```
+
+与`&str`的转换
+
+- `&String` 可以转换为`&str`，因为`String`包含了一个`&str`
+- `&str`无法直接转换为`String`，需要使用`to_string()`或`String::from()`
+
+### HashMap<K, V>
+
+`HashMap`是一个经典集合类型，在`Rust`中也是如此。
+
+特点：
+
+- 储存正在堆上
+- 键值对（`K`，`V`）是任意类型，通常用于储存数据对
+- 键必须实现`Eq`和`Hash`特征，值没有这些要求
+
+```rust
+use std::collections::HashMap;
+
+fn main() {
+    let mut map = HashMap::new(); // 创建空的 HashMap
+
+    map.insert("key1", 10);
+    map.insert("key2", 20);
+
+    // 访问值
+    if let Some(value) = map.get("key1") {
+        println!("The value for 'key1' is {}", value); // 输出: The value for 'key1' is 10
+    }
+
+    // 遍历键值对
+    for (key, value) in &map {
+        println!("{}: {}", key, value);
+    }
+}
+```
+
+常用方法：
+
+- `insert(key, value)`：插入键值对
+- `get(key)`：获取键对应的值
+- `remove(key)`：删除键对应的值
+- `contains_key(key)`：检查键是否存在
+- `keys()`和`values()`：返回所有的键和值
+
+自动处理哈希冲突：
+
+- 哈希表通过哈希函数将键映射到一个索引位置，处理冲突的一种方法是链表法
+
+### HashSet<T>
+
+`HashSet`是一个无重复元素的集合，基于哈希映射实现，它的作用是储存不重复的值，类似于数学中的集合。
+
+特点：
+
+- 元素是无序的
+- 元素必须实现`Eq`和`Hash`特征
+- 不允许重复元素
+
+使用
+
+```rust
+use std::collections::HashSet;
+
+fn main() {
+    let mut set = HashSet::new(); // 创建空的 HashSet
+
+    set.insert(1);
+    set.insert(2);
+    set.insert(3);
+
+    // 尝试插入重复元素
+    set.insert(2); // 返回 false，因为 2 已经存在
+
+    // 遍历元素
+    for val in &set {
+        println!("{}", val);
+    }
+}
+
+```
+
+常用方法：
+
+- `insert(value)`：插入元素
+- `remove(value)`：删除元素
+- `contains(value)`：检查是否包含某元素
+- `len()`：放回集合中元素的数量
+
+### BTreeMap<K, V>
+
+`BTreeMap`是另一种映射类型，和`HashMap`不同，它按键的顺序储存元素（基于红黑树实现）
+
+特点：
+
+- 键值对按键顺序
+- 性能上，`BTreeMap`比`HashMap`适合进行范围查询
+
+使用：
+
+```rust
+use std::collections::BTreeMap;
+
+fn main() {
+    let mut map = BTreeMap::new();
+
+    map.insert(2, "two");
+    map.insert(1, "one");
+    map.insert(3, "three");
+
+    // 遍历元素，按键排序
+    for (key, value) in &map {
+        println!("{}: {}", key, value);
+    }
+}
+
+```
+
+### BTreeSet<T>
+
+`BTreeSet` 用于储存唯一元素的集合，与`HashSet`类似，但是基于 二叉树实现的，元素按顺序排列
+
+特点：
+
+- 元素是有序的
+- 不允许有重复的元素
+
+使用：
+
+```rust
+use std::collections::BTreeSet;
+
+fn main() {
+    let mut set = BTreeSet::new();
+
+    set.insert(2);
+    set.insert(1);
+    set.insert(3);
+
+    // 遍历元素，按顺序排序
+    for val in &set {
+        println!("{}", val);
+    }
+}
+
+```
+
+## 生命周期
+
+`Rust`的生命周期是其内存管理系统的一部分，目的是确保内存安全而不需要垃圾回收器。生命周期用于描述引用的有效范围，确保在程序运行时引用指向有效的内存地址，避免出现悬空引用和数据竞争等错误
+
+在`Rust`中，生命周期由编译器静态推断，大部分情况下开发者不需要手动显示声明声明周期，但理解它的基本概念是学习`Rust`的一个重要部分。
+
+### 什么是生命周期
+
+生命周期是`Rust`编译器用来跟踪每个引用（`&T`）的有效范围的方式。`Rust`编译器确保在程序运行时，任何引用都不能指向无效内存，从而避免了`悬空引用`和`内存泄漏`
+
+- 悬空引用：指向已释放内存的引用
+- 内存泄漏：指分配的内存未被正确释放
+
+总体来说，为了确保每一个引用都是有意义的
+
+### 生命周期的基本规则
+
+1. 每个引用都有一个生命周期
+2. 引用必须始终指向有效的数据
+3. 编译器会通过生命周期推断来确引用在其生命周期内有效，不会出现悬空引用
+
+### 生命周期的标注
+
+`Rust`使用生命周期标注来显示的指定引用的生命周期。当一个函数接受或返回引用时，生命周期标注告诉编译器引用的生命周期是如何传递的。
+
+生命周期标注的语法是：`'a`，`'a`是生命周期的名称。生命周期标注一般出现在函数签名中
+
+```rust
+fn example<'a>(x: &'a str) -> &'a str{
+    x
+}
+```
+
+- `x: &'a str` 表示x是一个生命周期为`'a`的引用，类型为`str`
+- `-> &'a str` 表示返回一个生命周期为`'a`的引用，类型为`str`
+- `<'a>` 为函数的生命周期生命
+- `'a` 就是生命周期标注，告诉编译器`x`的返回的引用有相同的生命周期
+
+### 为什么需要生命周期标注
+
+生命周期标注用于告诉`Rust`编译器，哪些引用的生命周期是相同的，哪些是不同的。如下，编译器无法推断`y`和`x`的生命周期直接的关系，如果x或者y的生命周期比这个函数的生命周期还短，就会返回一个`空指针`，又或者x和y不对等就会从一个空指针处取值，都会造成异常
+
+```rust
+fn longest(x: &str, y: &str) -> &str {
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
+}
+```
+
+使用生命周期标注后就可以正常运行
+
+```rust
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
+}
+```
+
+### 生命周期和结构体
+
+结构体中也有这个概念，在一定情况下也需要进行生命周期标注，告诉`Rust`该引用的生命周期与结构体实例的生命周期之间的关系：只要为结构体中的`每一个引用标注上生命周期即可`。
+
+```rust
+struct Book<'a>{
+    title: &'a str,
+    author: &'a str
+}
+```
+
+### 静态生命周期
+
+在`Rust`中，静态生命周期（`'static`）是一个特殊的生命周期，它表示一个引用的有效范围跨越整个程序的生命周期，即从程序的开始到程序结束。静态生命周期的引用通常用于表示程序的常量数据或全局数据
+
+特点：
+
+1. 全局有效性：`'static`生命周期的引用时全局有效的，从程序开始到结束
+2. 常量和静态变量： `Rust`中的常量（`const`）和静态变量（`static`）总是具有`'static`生命周期
+3. 内存分配：具有`'static`生命周期的引用通常指向程序的常量池或全局数据区域，不会随函数或作用域的结束而释放
+
+下面的字符切片`s`将会在程序的整个生命周期内都是有效的
+
+```rust
+fn main() {
+    let s: &'static str = "Hello, Rust!";
+    println!("{}", s);
+}
+```
