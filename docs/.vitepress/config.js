@@ -118,8 +118,69 @@ export default {
       ],
       '/rust/': [
         {
-          text: '所有权',
-          link: '/rust/index'
+          text: '基础',
+          items: [
+            {
+              text: '类型',
+              link: '/rust/basic/type.md'
+            },
+            {
+              text: '变量',
+              link: '/rust/basic/var.md'
+            },
+            {
+              text: '枚举',
+              link: '/rust/basic/enum.md'
+            },
+            {
+              text: '模式匹配',
+              link: '/rust/basic/match.md'
+            },
+            {
+              text: '特征',
+              link: '/rust/basic/trait.md'
+            },
+            {
+              text: '方法',
+              link: '/rust/basic/impl.md'
+            },
+            {
+              text: '循环',
+              link: '/rust/basic/loop.md'
+            },
+            {
+              text: '泛型',
+              link: '/rust/basic/T.md'
+            },
+            {
+              text: '集合',
+              link: '/rust/basic/map.md'
+            },
+            {
+              text: '生命周期',
+              link: '/rust/basic/life.md'
+            },
+            {
+              text: '格式化输出',
+              link: '/rust/basic/print.md'
+            },
+            {
+              text: '错误',
+              link: '/rust/basic/panic.md'
+            },
+            {
+              text: '注释',
+              link: '/rust/basic/comments.md'
+            },
+            {
+              text: '模块',
+              link: '/rust/basic/module.md'
+            }
+          ]
+        },
+        {
+          text: '深入',
+          items: []
         }
       ],
       '/program/': [
