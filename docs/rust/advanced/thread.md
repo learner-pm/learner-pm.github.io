@@ -396,3 +396,129 @@ fn main() {
 - Lazy 提供了延迟初始化的功能，适合懒加载的场景，且只有第一次访问时才会初始化。
 - Mutex 或 RwLock 可以手动管理对标志的访问，适用于需要显式控制锁的场景。
 - AtomicBool 提供了轻量级的原子性检查，适用于无需加锁的场景。
+
+## 消息传递
+
+在Rust中，线程间的消息传递是一种常见的并发编程方式，通常用于在多个线程之间共享数据或协调操作。Rust提供了多种机制
+来进行线程间的消息传递，其中最常用的是通道（Channel）
+
+### std::sync::mpsc::channel
+
+标准库提供了一个名为`std::sync::mpsc`的模块，其中`channel`函数用来创建一个通道。`mpsc`是“multiple producer, single consumer”
+（多个生产者，单个消费者）的缩写，意味着多个发送者可以向同一个接收者发送消息
+
+例子：
+
+```rust
+use std::sync::mpsc;
+use std::thread;
+
+fn main() {
+    // 创建一个通道
+    let (tx, rx) = mpsc::channel();
+
+    // 启动一个线程发送消息
+    thread::spawn(move || {
+        let msg = String::from("Hello from the thread!");
+        tx.send(msg).unwrap();  // 发送消息
+    });
+
+    // 主线程接收消息并打印
+    let received = rx.recv().unwrap();  // 阻塞直到接收到消息
+    println!("Received: {}", received);
+}
+
+```
+
+- `mpsc::channel()`创建了一个通道，它返回一个元组`（tx, rx）`，其中`tx`是发送者（transmitter），`rx`是接收者
+  （receiver）
+- tx.send(msg)发送消息到通道
+- rx.recv()用于接收消息，recv()会阻塞当前线程，直到接收到来自发送者的消息
+
+### 多个发送者和单个接收者
+
+```rust
+use std::sync::mpsc;
+use std::thread;
+
+fn main() {
+    let (tx, rx) = mpsc::channel();
+
+    // 克隆发送者以便多个线程使用
+    let tx1 = tx.clone();
+    let tx2 = tx.clone();
+
+    // 启动第一个线程发送消息
+    thread::spawn(move || {
+        let msg = String::from("Message from thread 1");
+        tx1.send(msg).unwrap();
+    });
+
+    // 启动第二个线程发送消息
+    thread::spawn(move || {
+        let msg = String::from("Message from thread 2");
+        tx2.send(msg).unwrap();
+    });
+
+    // 接收消息
+    for received in rx {
+        println!("Received: {}", received);
+    }
+}
+
+```
+
+- tx.clone：为了让多个线程共享发送通道，必须克隆发送者tx。每个发送者都会拥有通道的一部分，并且它们共享同一个
+  接收者
+- rx通过`for received in rx`来接收所有发送的消息。该语法会自动处理迭代，直到所有发送者都关闭通道
+
+### 传递原理
+
+- 发送者（tx）负责将消息放入通道。
+- 接收者（rx）负责从通道中取出消息。当接收者没有消息可读时，它会被阻塞，直到收到来自发送者的消息。
+- 如果所有发送者都已经发送完消息并且通道被关闭，recv() 方法会返回 Err，表示通道已关闭。
+
+### try_recv
+
+send将消息发送到通道。如果发送失败，send会返回一个错误。try_recv是一个非阻塞的版本，尝试从通道中接收消息
+。如果没有消息可接收，它会立即返回Err，而不会阻塞线程，适用于需要非阻塞操作的场景
+
+```rust
+use std::sync::mpsc;
+use std::thread;
+use std::time::Duration;
+
+fn main() {
+    let (tx, rx) = mpsc::channel();
+
+    // 启动一个线程，发送消息
+    thread::spawn(move || {
+        thread::sleep(Duration::from_secs(1));  // 模拟延迟
+        tx.send(String::from("Hello after 1 second")).unwrap();
+    });
+
+    // 主线程使用 try_recv 非阻塞接收消息
+    loop {
+        match rx.try_recv() {
+            Ok(msg) => {
+                println!("Received: {}", msg);
+                break;
+            }
+            Err(_) => {
+                println!("No message yet...");
+                thread::sleep(Duration::from_millis(500));  // 等待一段时间后再次尝试
+            }
+        }
+    }
+}
+
+```
+
+- try_recv() 尝试从通道接收消息，如果没有消息，它会返回一个Err，并且不阻塞当前线程。
+- 主线程通过循环不断尝试接收消息，直到接收到消息为止
+
+### 通道多种用法
+
+- 传递基本数据类型：通道可以传递任何类型的数据，只要它们实现了Send和Sync。例如，可以传递 String、Vec<T>、Box<T> 等。
+- 传递复杂数据：如果需要传递复杂的数据结构，可以通过智能指针（例如 Arc<Mutex<T>>）来共享可变数据。
+
