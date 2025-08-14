@@ -263,6 +263,7 @@ export default {
         {
           text: '记录',
           items: [
+            { text: '当前', link: '/learn/level.md' },
             { text: '总结', link: '/learn/result.md' },
             { text: '杂类', link: '/learn/miscellaneous.md' },
             { text: '被讨厌的勇气', link: '/learn/theCourageToBeHated.md' }
